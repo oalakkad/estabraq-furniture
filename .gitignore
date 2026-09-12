@@ -1,0 +1,9 @@
+# ملفات النظام
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ملفات مؤقتة
+__preview.html
+*.tmp
+*.log
