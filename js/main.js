@@ -42,11 +42,13 @@
   }
 
   // صورة فوق بديل خشبي — البديل يظهر تلقائياً إن لم تكن الصورة موجودة
-  function img(src, alt, label) {
+  function img(src, alt, label, pos) {
     const file = String(src || "").split("/").pop();
+    const style = pos ? ' style="object-position:' + esc(pos) + '"' : "";
     return (
       placeholder(label || alt, file) +
-      '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async">'
+      '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async"' +
+      style + ">"
     );
   }
 
@@ -169,7 +171,7 @@
           '<article class="card" style="animation-delay:' + (i % 8) * 0.05 + 's">' +
             '<div class="card__media" data-lb-product="' + p.id + '">' +
               (p.badge ? '<span class="card__tag' + badgeCls + '">' + esc(p.badge) + "</span>" : "") +
-              img(p.img, p.name, p.name) +
+              img(p.img, p.name, p.name, p.pos) +
               '<span class="card__zoom"><span>عرض الصورة</span></span>' +
             "</div>" +
             '<div class="card__body">' +
@@ -177,7 +179,10 @@
               '<h3 class="card__title">' + esc(p.name) + "</h3>" +
               '<p class="card__desc">' + esc(p.desc) + "</p>" +
               '<div class="card__meta">' +
-                '<span class="card__price">' + esc(p.price) + "</span>" +
+                // السعر النصي (مثل "السعر عند الطلب") يُعرض بخط أصغر
+                '<span class="card__price' +
+                  (/[0-9٠-٩]/.test(p.price || "") ? "" : " card__price--ask") +
+                '">' + esc(p.price) + "</span>" +
                 '<a class="card__ask" href="' + waLink(msg) + '" target="_blank" rel="noopener">' +
                   WA_ICON + "اسأل عن السعر</a>" +
               "</div>" +

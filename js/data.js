@@ -36,38 +36,34 @@ const STORE = {
 };
 
 /* ---------- التصنيفات ---------- */
-/* id يجب أن يطابق حقل cat في المنتجات بالأسفل */
+/* id يجب أن يطابق حقل cat في المنتجات بالأسفل
+   wide: true تجعل بطاقة القسم تأخذ عرض مضاعف */
 const CATEGORIES = [
   {
-    id: "coffee",
-    name: "ركنات القهوة",
-    desc: "ركن دافئ لقهوتك العربية وجلسات الضيوف",
-    img: "assets/images/products/coffee-1.jpg",
+    id: "sofas",
+    name: "الكنب",
+    desc: "كنب بهياكل خشبية متينة وأقمشة مخملية فاخرة",
+    img: "assets/images/products/sofa-curved.jpg",
     wide: true
   },
   {
-    id: "sofas",
-    name: "الكنب والجلسات",
-    desc: "كنب مريح بأقمشة فاخرة وهيكل خشبي متين",
-    img: "assets/images/products/sofa-1.jpg"
-  },
-  {
-    id: "dining",
-    name: "طاولات الطعام",
-    desc: "طاولات عائلية تجمع الأحبة حول مائدة واحدة",
-    img: "assets/images/products/dining-1.jpg"
+    id: "chairs",
+    name: "الفوتيهات والكراسي",
+    desc: "قطع مفردة بإطارات جوز طبيعي تكمّل مجلسك",
+    img: "assets/images/products/chair-tub.jpg"
   },
   {
     id: "tables",
     name: "الطاولات الجانبية",
-    desc: "طاولات وسط وجانبية تكمّل تفاصيل مجلسك",
-    img: "assets/images/products/table-1.jpg"
+    desc: "طاولات بالحجر الطبيعي والزجاج المصقول",
+    img: "assets/images/products/table-slate.jpg"
   },
   {
-    id: "bedroom",
-    name: "غرف النوم",
-    desc: "سرير ودواليب بخشب طبيعي يبعث على الراحة",
-    img: "assets/images/products/bed-1.jpg"
+    id: "sets",
+    name: "الأطقم والجلسات",
+    desc: "أطقم متكاملة للمجالس والدواوين بتنسيق واحد",
+    img: "assets/images/products/set-majlis.jpg",
+    wide: true
   }
 ];
 
@@ -76,169 +72,164 @@ const CATEGORIES = [
    cat   : معرّف التصنيف من القائمة أعلاه
    img   : مسار الصورة داخل مجلد assets/images/products/
    badge : "جديد" أو "الأكثر طلباً" — أو احذف السطر
-   price : اكتب السعر أو اترك "السعر عند الطلب"
+   price : اكتب السعر مثل "٣٢٠ د.ك" أو اترك "السعر عند الطلب"
+   pos   : (اختياري) موضع قص الصورة داخل البطاقة، مثل "center 80%"
+           مفيد إذا كانت القطعة في أسفل الصورة أو أعلاها
 -------------------------------------------------- */
 const PRODUCTS = [
+  /* ===== الكنب ===== */
   {
     id: 1,
-    name: "ركنة قهوة «دلة»",
-    cat: "coffee",
-    desc: "ركن قهوة بخشب البلوط الطبيعي مع رفوف مفتوحة لعرض الدلال والفناجيل، وإضاءة دافئة مدمجة.",
-    price: "١٨٥ د.ك",
-    img: "assets/images/products/coffee-1.jpg",
+    name: "كنبة «عنبر»",
+    cat: "sofas",
+    desc: "مخمل بلون العنبر الدافئ على إطار جوز طبيعي بخطوط مائلة، مع ثلاث وسائد ساتان كريمية.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-amber.jpg",
+    pos: "center 80%",
     badge: "الأكثر طلباً",
     badgeType: "hot"
   },
   {
     id: 2,
-    name: "ركنة قهوة «سدرة»",
-    cat: "coffee",
-    desc: "تصميم مدمج يناسب المساحات الصغيرة، سطح رخامي مقاوم للحرارة ودرج سفلي للتخزين.",
-    price: "١٤٠ د.ك",
-    img: "assets/images/products/coffee-2.jpg"
+    name: "كنبة «مشربية»",
+    cat: "sofas",
+    desc: "قاعدة خشبية مصمتة بنقش هندسي محفور مستوحى من المشربيات، مع مقاعد مخمل رمادي عريضة.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-mashrabiya.jpg",
+    badge: "جديد",
+    badgeType: "new"
   },
   {
     id: 3,
-    name: "ركنة قهوة «ضيافة»",
-    cat: "coffee",
-    desc: "وحدة ضيافة كاملة بخزائن سفلية وواجهة خشبية محفورة يدوياً، مثالية للدواوين.",
-    price: "٢٦٠ د.ك",
-    img: "assets/images/products/coffee-3.jpg",
-    badge: "جديد",
-    badgeType: "new"
+    name: "كنبة «حرير»",
+    cat: "sofas",
+    desc: "ظهر منحني بمخمل كريمي ناعم وتنورة شراشيب كلاسيكية، مع وسائد حريرية لامعة.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-fringe.jpg",
+    pos: "center 70%"
   },
   {
     id: 4,
-    name: "كنبة «راحة» ٣ مقاعد",
+    name: "كنبة «سلطان»",
     cat: "sofas",
-    desc: "قماش مخملي بلون الرمل مع قاعدة خشب زان صلب، وسائد إسفنج عالي الكثافة لا يهبط.",
-    price: "٣٢٠ د.ك",
-    img: "assets/images/products/sofa-1.jpg",
-    badge: "الأكثر طلباً",
-    badgeType: "hot"
+    desc: "كنبة واسعة بحواف جوز داكنة وظهر مستقيم، تتسع لصف كامل من الوسائد المنقوشة.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-cushions.jpg"
   },
   {
     id: 5,
-    name: "جلسة أرضية «ديوانية»",
+    name: "كنبة «هلال»",
     cat: "sofas",
-    desc: "جلسة عربية أصيلة بمساند ظهر ومخدات جانبية، تفصيل حسب أبعاد مجلسك.",
-    price: "السعر حسب القياس",
-    img: "assets/images/products/sofa-2.jpg"
+    desc: "خط منحني أنيق بإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-curved.jpg"
   },
   {
     id: 6,
-    name: "كنبة زاوية «واحة»",
+    name: "كنبة «موجة»",
     cat: "sofas",
-    desc: "كنبة زاوية L بمساحة جلوس واسعة، قماش مقاوم للبقع وسهل التنظيف.",
-    price: "٤٧٥ د.ك",
-    img: "assets/images/products/sofa-3.jpg"
+    desc: "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/sofa-wave.jpg"
   },
+
+  /* ===== الفوتيهات والكراسي ===== */
   {
     id: 7,
-    name: "طاولة طعام «مائدة» ٦ أشخاص",
-    cat: "dining",
-    desc: "خشب جوز طبيعي بسطح مصقول، أرجل مخروطية ثابتة، مع ٦ كراسي منجدة.",
-    price: "٣٩٠ د.ك",
-    img: "assets/images/products/dining-1.jpg"
-  },
-  {
-    id: 8,
-    name: "طاولة طعام «عائلة» ٨ أشخاص",
-    cat: "dining",
-    desc: "طاولة كبيرة للعزائم العائلية، إمكانية التمديد حتى ١٠ مقاعد، تشطيب مقاوم للخدش.",
-    price: "٥٤٠ د.ك",
-    img: "assets/images/products/dining-2.jpg",
+    name: "فوتيه «نقش»",
+    cat: "chairs",
+    desc: "إطار جوز بزوايا حادة يحتضن جانباً منقوشاً بقماش جاكار، ومقعد كتان كريمي مريح.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/chair-walnut.jpg",
     badge: "جديد",
     badgeType: "new"
   },
   {
+    id: 8,
+    name: "فوتيه «ديوان»",
+    cat: "chairs",
+    desc: "كرسي بظهر مقوّس وإطار خشب داكن لامع، قماش جاكار رمادي وقاعدة بلمسة ذهبية.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/chair-tub.jpg"
+  },
+  {
     id: 9,
-    name: "طقم فطور «صباح»",
-    cat: "dining",
-    desc: "طاولة صغيرة بأربعة كراسي، مناسبة لركن المطبخ أو الشقق الصغيرة.",
-    price: "١٧٥ د.ك",
-    img: "assets/images/products/dining-3.jpg"
+    name: "فوتيه «حرير»",
+    cat: "chairs",
+    desc: "الفوتيه المرافق لكنبة «حرير» — ظهر منحني وتنورة شراشيب بنفس المخمل الكريمي.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/chair-fringe.jpg"
   },
   {
     id: 10,
-    name: "طاولة وسط «نخيل»",
-    cat: "tables",
-    desc: "طاولة وسط دائرية بخشب طبيعي وحواف ناعمة، سطح مزدوج للمجلات والضيافة.",
-    price: "٨٥ د.ك",
-    img: "assets/images/products/table-1.jpg"
+    name: "فوتيه «حديقة»",
+    cat: "chairs",
+    desc: "قماش بنقشة أوراق استوائية بألوان زاهية على إطار بلون الشمبانيا — قطعة تلفت النظر.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/chair-floral.jpg"
   },
+
+  /* ===== الطاولات الجانبية ===== */
   {
     id: 11,
-    name: "طاولة جانبية «ظل»",
+    name: "طاولة جانبية «صخر»",
     cat: "tables",
-    desc: "طاولة جانبية نحيفة بجانب الكنبة، ارتفاع مثالي للكوب والكتاب.",
-    price: "٤٥ د.ك",
-    img: "assets/images/products/table-2.jpg"
-  },
-  {
-    id: 12,
-    name: "طاولة مكتب «هدوء»",
-    cat: "tables",
-    desc: "مكتب منزلي بسطح واسع ودرجين جانبيين، تشطيب خشبي دافئ يريح العين.",
-    price: "١٢٠ د.ك",
-    img: "assets/images/products/table-3.jpg"
-  },
-  {
-    id: 13,
-    name: "غرفة نوم «سكينة»",
-    cat: "bedroom",
-    desc: "سرير كينج بظهرية منجدة، كومودينو مزدوج، وتسريحة بمرآة — خشب طبيعي كامل.",
-    price: "٦٨٠ د.ك",
-    img: "assets/images/products/bed-1.jpg",
+    desc: "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية — تصميم نحتي بسيط.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/table-slate.jpg",
     badge: "الأكثر طلباً",
     badgeType: "hot"
   },
+
+  /* ===== الأطقم والجلسات ===== */
   {
-    id: 14,
-    name: "دولاب «مساحة»",
-    cat: "bedroom",
-    desc: "دولاب بأربعة أبواب ومرآة داخلية، تقسيمات داخلية قابلة للتعديل.",
-    price: "٣١٠ د.ك",
-    img: "assets/images/products/wardrobe-1.jpg"
+    id: 12,
+    name: "طقم «فيروز»",
+    cat: "sets",
+    desc: "طقم كنب كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة تجمع بين الهدوء والحيوية.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/set-teal.jpg"
   },
   {
-    id: 15,
-    name: "مكتبة «رفوف»",
-    cat: "tables",
-    desc: "مكتبة خشبية مفتوحة بخمسة رفوف، تصلح للكتب أو لعرض قطع الديكور.",
-    price: "٩٥ د.ك",
-    img: "assets/images/products/shelf-1.jpg"
+    id: 13,
+    name: "جلسة «مجلس»",
+    cat: "sets",
+    desc: "جلسة متكاملة من ثلاث كنبات كريمية بحواف جوز، مصممة للدواوين والمجالس الواسعة.",
+    price: "السعر عند الطلب",
+    img: "assets/images/products/set-majlis.jpg"
   }
 ];
 
 /* ---------- صور المعرض ---------- */
+/* الصورة الأولى تظهر بحجم كبير، والسادسة بعرض مضاعف */
 const GALLERY = [
-  { img: "assets/images/gallery/g1.jpg", cap: "ركن قهوة بإضاءة دافئة" },
-  { img: "assets/images/gallery/g2.jpg", cap: "مجلس عائلي بخشب الجوز" },
-  { img: "assets/images/gallery/g3.jpg", cap: "طاولة طعام لثمانية أشخاص" },
-  { img: "assets/images/gallery/g4.jpg", cap: "تفاصيل النقش اليدوي" },
-  { img: "assets/images/gallery/g5.jpg", cap: "جلسة أرضية عربية" },
-  { img: "assets/images/gallery/g6.jpg", cap: "معرضنا في الشويخ" },
-  { img: "assets/images/gallery/g7.jpg", cap: "غرفة نوم بخشب طبيعي" },
-  { img: "assets/images/gallery/g8.jpg", cap: "طاولات جانبية بتشطيب مصقول" }
+  { img: "assets/images/gallery/g1.jpg", cap: "كنبة «مشربية» بقاعدة خشبية محفورة" },
+  { img: "assets/images/gallery/g2.jpg", cap: "تفاصيل قماش الجاكار على فوتيه «نقش»" },
+  { img: "assets/images/gallery/g3.jpg", cap: "كنبة «حرير» بالشراشيب الكلاسيكية" },
+  { img: "assets/images/gallery/g4.jpg", cap: "فوتيه «حرير» — القطعة المرافقة" },
+  { img: "assets/images/gallery/g5.jpg", cap: "ملمس حجر الأردواز الطبيعي" },
+  { img: "assets/images/gallery/g6.jpg", cap: "كنبة منحنية بقاعدة جوز" },
+  { img: "assets/images/gallery/g7.jpg", cap: "فوتيه «حديقة» بنقشة الأوراق" },
+  { img: "assets/images/gallery/g8.jpg", cap: "طاولة «صخر» من الأعلى" }
 ];
 
 /* ---------- آراء العملاء ---------- */
+/* ⚠️ هذه أمثلة توضيحية — استبدلها بآراء حقيقية أو احذفها */
 const REVIEWS = [
   {
-    text: "طلبت ركنة قهوة بمقاس خاص لمجلسنا، وطلعت أحلى من الصورة. الخشب أصلي وثقيل، والتوصيل كان بالموعد بالضبط.",
+    text: "طلبت الكنبة بمقاس خاص لمجلسنا، وطلعت أحلى من الصورة. الخشب أصلي وثقيل، والتوصيل كان بالموعد بالضبط.",
     name: "أم عبدالله",
     from: "السالمية",
     initial: "ع"
   },
   {
-    text: "اشتريت كنب الزاوية من سنة ونص، ولين اليوم ما هبط الإسفنج ولا تغير لون القماش. صراحة يستاهلون.",
+    text: "اشتريت الفوتيهات من سنة ونص، ولين اليوم ما هبط الإسفنج ولا تغير لون القماش. صراحة يستاهلون.",
     name: "فهد الرشيدي",
     from: "الجهراء",
     initial: "ف"
   },
   {
-    text: "أفضل شي عندهم إنهم ينصحونك بالصدق. قالوا لي الطاولة الكبيرة ما تناسب مساحتي واقترحوا غيرها. تعامل محترم.",
+    text: "أفضل شي عندهم إنهم ينصحونك بالصدق. قالوا لي الطقم الكبير ما يناسب مساحتي واقترحوا غيره. تعامل محترم.",
     name: "نورة السالم",
     from: "الفنطاس",
     initial: "ن"

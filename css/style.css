@@ -445,6 +445,13 @@ p { margin: 0 0 1em; }
 .hero__visual .ph { width: 100%; height: 100%; object-fit: cover; }
 .hero__visual img { transition: transform 0.7s var(--ease); }
 .hero__visual figure:hover img { transform: scale(1.06); }
+/* الصورة الطولية: تكبير نحو الأسفل حيث تقع القطعة في الصورة */
+.hero__visual figure:nth-child(1) > img {
+  inset: auto 0 0 0;
+  height: 128%;
+  object-position: center bottom;
+}
+.hero__visual figure { background: #fff; }
 
 /* شارة عائمة */
 .hero__badge {
@@ -642,7 +649,7 @@ p { margin: 0 0 1em; }
 
 .card__media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;   /* مربع — يناسب الصور الطولية والعرضية معاً */
   overflow: hidden;
   background: var(--sand-200);
   cursor: zoom-in;
@@ -710,6 +717,13 @@ p { margin: 0 0 1em; }
   color: var(--walnut-700);
   line-height: 1.35;
   min-width: 0;
+}
+.card__price--ask {
+  font-family: "Tajawal", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
 }
 .card__price small { font-size: 0.72rem; color: var(--ink-soft); font-family: "Tajawal", sans-serif; font-weight: 500; }
 .card__ask {
