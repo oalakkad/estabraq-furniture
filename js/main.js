@@ -80,15 +80,20 @@
 
     grid.innerHTML = CATEGORIES.map(function (c, i) {
       const count = PRODUCTS.filter((p) => p.cat === c.id).length;
+      // القسم الفارغ يحمل شارة «قريباً» بدل العدد
+      const countTag = count
+        ? '<div class="cat__count">' + count + " قطعة</div>"
+        : '<div class="cat__count cat__count--soon">قريباً</div>';
       return (
         '<a href="#products" class="cat' + (c.wide ? " cat--wide" : "") +
+        (count ? "" : " cat--soon") +
         ' reveal" data-d="' + ((i % 4) + 1) + '" data-cat-jump="' + esc(c.id) + '">' +
           '<div class="cat__media">' + img(c.img, c.name, c.name) + "</div>" +
-          '<div class="cat__count">' + count + " قطعة</div>" +
+          countTag +
           '<div class="cat__body">' +
             "<h3>" + esc(c.name) + "</h3>" +
             "<p>" + esc(c.desc) + "</p>" +
-            '<span class="cat__link">شوف القسم ' + ARROW_ICON + "</span>" +
+            '<span class="cat__link">' + (count ? "شوف القسم " : "اسأل عن المتوفر ") + ARROW_ICON + "</span>" +
           "</div>" +
         "</a>"
       );
@@ -149,8 +154,14 @@
         : PRODUCTS.filter((p) => p.cat === activeFilter);
 
     if (!list.length) {
+      const catName = (CATEGORIES.find((c) => c.id === activeFilter) || {}).name || "";
+      const msg = "السلام عليكم، أبي أستفسر عن قسم " + catName + " — شنو المتوفر عندكم؟";
       grid.innerHTML =
-        '<p class="empty-note">لا توجد قطع في هذا القسم حالياً — راسلنا ونوفّرها لك.</p>';
+        '<div class="empty-note">' +
+          "<p>صور قسم <b>" + esc(catName) + "</b> قادمة قريباً — راسلنا وبنرسل لك المتوفر حالياً.</p>" +
+          '<a class="btn btn--wa" href="' + waLink(msg) + '" target="_blank" rel="noopener">' +
+            WA_ICON + "اسأل عن " + esc(catName) + "</a>" +
+        "</div>";
       return;
     }
 
@@ -345,7 +356,7 @@
     const cp = $("#copyright");
     if (cp) {
       cp.textContent =
-        "© " + new Date().getFullYear() + " " + STORE.name + " " + STORE.tagline +
+        "© " + new Date().getFullYear() + " " + (STORE.brandLatin || STORE.name) +
         " — جميع الحقوق محفوظة";
     }
   }

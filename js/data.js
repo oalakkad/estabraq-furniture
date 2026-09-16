@@ -6,7 +6,7 @@
 /* ---------- معلومات المحل ---------- */
 const STORE = {
   name: "إستبرق",
-  tagline: "للأثاث المنزلي",
+  brandLatin: "ESTBRAQ Interiors",   // كما في الشعار — يظهر في سطر الحقوق
 
   // ⚠️ ضع رقم الواتساب هنا بالصيغة الدولية بدون + وبدون مسافات
   // مثال للكويت: 96512345678
@@ -36,34 +36,57 @@ const STORE = {
 };
 
 /* ---------- التصنيفات ---------- */
-/* id يجب أن يطابق حقل cat في المنتجات بالأسفل
-   wide: true تجعل بطاقة القسم تأخذ عرض مضاعف */
+/* id يجب أن يطابق حقل cat في المنتجات بالأسفل.
+   القسم الذي لا يحتوي منتجات يظهر بشارة «قريباً» تلقائياً —
+   أضف منتجات إليه وستختفي الشارة. */
 const CATEGORIES = [
   {
-    id: "sofas",
-    name: "الكنب",
-    desc: "كنب بهياكل خشبية متينة وأقمشة مخملية فاخرة",
-    img: "assets/images/products/sofa-curved.jpg",
-    wide: true
+    id: "diwaniya",
+    name: "ديوانيات",
+    desc: "جلسات عربية طويلة للدواوين ومجالس الضيوف",
+    img: "assets/images/products/set-majlis.jpg"
+  },
+  {
+    id: "living",
+    name: "صالات",
+    desc: "كنب وأطقم صالات بأقمشة فاخرة وهياكل خشبية",
+    img: "assets/images/products/sofa-fringe.jpg"
   },
   {
     id: "chairs",
-    name: "الفوتيهات والكراسي",
-    desc: "قطع مفردة بإطارات جوز طبيعي تكمّل مجلسك",
-    img: "assets/images/products/chair-tub.jpg"
+    name: "كراسي",
+    desc: "فوتيهات وكراسي مفردة تكمّل مجلسك",
+    img: "assets/images/products/chair-walnut.jpg"
   },
   {
-    id: "tables",
-    name: "الطاولات الجانبية",
-    desc: "طاولات بالحجر الطبيعي والزجاج المصقول",
+    id: "console",
+    name: "كونسولات",
+    desc: "طاولات كونسول أنيقة للمداخل والممرات",
+    img: "assets/images/products/console-1.jpg"
+  },
+  {
+    id: "coffee",
+    name: "طاولات وسط",
+    desc: "طاولات وسط تتصدر الصالة وتجمع التفاصيل",
+    img: "assets/images/products/coffee-1.jpg"
+  },
+  {
+    id: "serving",
+    name: "طاولات تقديم",
+    desc: "طاولات جانبية وتقديم للضيافة",
     img: "assets/images/products/table-slate.jpg"
   },
   {
-    id: "sets",
-    name: "الأطقم والجلسات",
-    desc: "أطقم متكاملة للمجالس والدواوين بتنسيق واحد",
-    img: "assets/images/products/set-majlis.jpg",
-    wide: true
+    id: "dining",
+    name: "طاولات طعام",
+    desc: "طاولات تجمع العائلة حول مائدة واحدة",
+    img: "assets/images/products/dining-1.jpg"
+  },
+  {
+    id: "diningchairs",
+    name: "كراسي طعام",
+    desc: "كراسي طعام مريحة بتصاميم متنوعة",
+    img: "assets/images/products/dining-chair-1.jpg"
   }
 ];
 
@@ -77,11 +100,11 @@ const CATEGORIES = [
            مفيد إذا كانت القطعة في أسفل الصورة أو أعلاها
 -------------------------------------------------- */
 const PRODUCTS = [
-  /* ===== الكنب ===== */
+  /* ===== صالات ===== */
   {
     id: 1,
     name: "كنبة «عنبر»",
-    cat: "sofas",
+    cat: "living",
     desc: "مخمل بلون العنبر الدافئ على إطار جوز طبيعي بخطوط مائلة، مع ثلاث وسائد ساتان كريمية.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-amber.jpg",
@@ -92,7 +115,7 @@ const PRODUCTS = [
   {
     id: 2,
     name: "كنبة «مشربية»",
-    cat: "sofas",
+    cat: "living",
     desc: "قاعدة خشبية مصمتة بنقش هندسي محفور مستوحى من المشربيات، مع مقاعد مخمل رمادي عريضة.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-mashrabiya.jpg",
@@ -102,7 +125,7 @@ const PRODUCTS = [
   {
     id: 3,
     name: "كنبة «حرير»",
-    cat: "sofas",
+    cat: "living",
     desc: "ظهر منحني بمخمل كريمي ناعم وتنورة شراشيب كلاسيكية، مع وسائد حريرية لامعة.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-fringe.jpg",
@@ -110,30 +133,30 @@ const PRODUCTS = [
   },
   {
     id: 4,
-    name: "كنبة «سلطان»",
-    cat: "sofas",
-    desc: "كنبة واسعة بحواف جوز داكنة وظهر مستقيم، تتسع لصف كامل من الوسائد المنقوشة.",
+    name: "ديوانية «سلطان»",
+    cat: "diwaniya",
+    desc: "ديوانية طويلة بحواف جوز داكنة وظهر مستقيم، تتسع لصف كامل من الوسائد المنقوشة.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-cushions.jpg"
   },
   {
     id: 5,
-    name: "كنبة «هلال»",
-    cat: "sofas",
-    desc: "خط منحني أنيق بإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
+    name: "ديوانية «هلال»",
+    cat: "diwaniya",
+    desc: "ديوانية بخط منحني أنيق وإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-curved.jpg"
   },
   {
     id: 6,
     name: "كنبة «موجة»",
-    cat: "sofas",
+    cat: "living",
     desc: "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
     price: "السعر عند الطلب",
     img: "assets/images/products/sofa-wave.jpg"
   },
 
-  /* ===== الفوتيهات والكراسي ===== */
+  /* ===== كراسي ===== */
   {
     id: 7,
     name: "فوتيه «نقش»",
@@ -169,11 +192,11 @@ const PRODUCTS = [
     img: "assets/images/products/chair-floral.jpg"
   },
 
-  /* ===== الطاولات الجانبية ===== */
+  /* ===== طاولات تقديم ===== */
   {
     id: 11,
-    name: "طاولة جانبية «صخر»",
-    cat: "tables",
+    name: "طاولة تقديم «صخر»",
+    cat: "serving",
     desc: "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية — تصميم نحتي بسيط.",
     price: "السعر عند الطلب",
     img: "assets/images/products/table-slate.jpg",
@@ -181,20 +204,20 @@ const PRODUCTS = [
     badgeType: "hot"
   },
 
-  /* ===== الأطقم والجلسات ===== */
+  /* ===== أطقم متكاملة ===== */
   {
     id: 12,
     name: "طقم «فيروز»",
-    cat: "sets",
-    desc: "طقم كنب كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة تجمع بين الهدوء والحيوية.",
+    cat: "living",
+    desc: "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة تجمع بين الهدوء والحيوية.",
     price: "السعر عند الطلب",
     img: "assets/images/products/set-teal.jpg"
   },
   {
     id: 13,
-    name: "جلسة «مجلس»",
-    cat: "sets",
-    desc: "جلسة متكاملة من ثلاث كنبات كريمية بحواف جوز، مصممة للدواوين والمجالس الواسعة.",
+    name: "ديوانية «مجلس»",
+    cat: "diwaniya",
+    desc: "ديوانية متكاملة من ثلاث قطع كريمية بحواف جوز، مصممة للدواوين والمجالس الواسعة.",
     price: "السعر عند الطلب",
     img: "assets/images/products/set-majlis.jpg"
   }
