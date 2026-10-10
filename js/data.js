@@ -87,14 +87,9 @@ const CONTENT = {
       "title": "أقسام المعرض",
       "sub": "كل ما يحتاجه بيتك — من الديوانية إلى غرفة الطعام، بصناعة متقنة وتفصيل حسب الطلب."
     },
-    "products": {
-      "eyebrow": "معروضاتنا",
-      "title": "قطع مختارة من المعرض",
-      "sub": "اضغط على «اسأل عن السعر» لترسل لنا استفسارك مباشرة على واتساب مع اسم القطعة."
-    },
     "gallery": {
       "eyebrow": "من أعمالنا",
-      "title": "لقطات من المعرض",
+      "title": "لقطات من المصنع",
       "sub": "اضغط على أي صورة لعرضها بالحجم الكامل."
     },
     "reviews": {
@@ -285,10 +280,7 @@ const PRODUCTS = [
     "name": "كنبة «لؤلؤ»",
     "desc": "خطوط ناعمة مع لمسة جوز على الذراعين — متوفرة بالأبيض والرمادي.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-pearl.jpg",
-    "imgs": [
-      "assets/images/products/sofa-pearl-2.jpg"
-    ]
+    "img": "assets/images/products/sofa-pearl.jpg"
   },
   {
     "id": 22,

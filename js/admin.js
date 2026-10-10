@@ -670,7 +670,6 @@
       ["features." + i + ".text", "ميزة " + (i + 1) + " — النص"]
     ]) },
     { title: "قسم «الأقسام»", fields: SECTION_HEAD("categories", "القسم") },
-    { title: "قسم «المنتجات»", fields: SECTION_HEAD("products", "القسم") },
     { title: "من نحن", fields: [
       ["about.eyebrow", "السطر الصغير"],
       ["about.title", "العنوان"],
