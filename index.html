@@ -34,7 +34,6 @@
     <nav class="nav__links" id="navLinks" aria-label="القائمة الرئيسية">
       <a href="#home" class="is-active">الرئيسية</a>
       <a href="#categories">الأقسام</a>
-      <a href="#products">المنتجات</a>
       <a href="#about">من نحن</a>
       <a href="#gallery">المصنع</a>
       <a href="#contact">تواصل معنا</a>
@@ -58,7 +57,6 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#home">الرئيسية</a>
   <a href="#categories">الأقسام</a>
-  <a href="#products">المنتجات</a>
   <a href="#about">من نحن</a>
   <a href="#gallery">المصنع</a>
   <a href="#contact">تواصل معنا</a>
@@ -88,8 +86,8 @@
       </p>
 
       <div class="hero__actions reveal" data-d="3">
-        <a href="#products" class="btn btn--primary">
-          تصفّح المنتجات
+        <a href="#categories" class="btn btn--primary">
+          تصفّح الأقسام
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
         </a>
         <a href="#contact" class="btn btn--ghost">زورونا في المعرض</a>
@@ -169,27 +167,6 @@
   </div>
 </section>
 
-<!-- ==================== المنتجات ==================== -->
-<section class="section" id="products" style="background: var(--surface-2);">
-  <div class="container">
-
-
-    <div class="filters reveal" id="filters" role="tablist" aria-label="تصفية المنتجات"></div>
-
-    <div class="products" id="productsGrid"></div>
-
-    <div class="more-wrap" id="loadMoreWrap" hidden>
-      <button type="button" class="btn btn--primary" id="loadMore">عرض المزيد</button>
-    </div>
-
-    <div class="more-wrap">
-      <a href="#" class="btn btn--ghost" data-wa data-wa-msg="السلام عليكم، أبي أشوف باقي القطع المتوفرة عندكم.">
-        ما لقيت اللي تبي؟ راسلنا وبنوفره لك
-      </a>
-    </div>
-
-  </div>
-</section>
 
 <!-- ==================== من نحن ==================== -->
 <section class="section about" id="about">
@@ -369,7 +346,6 @@
         <h4>روابط سريعة</h4>
         <div class="footer__links">
           <a href="#categories">الأقسام</a>
-          <a href="#products">المنتجات</a>
           <a href="#about">من نحن</a>
           <a href="#gallery">المصنع</a>
           <a href="#contact">تواصل معنا</a>
@@ -394,6 +370,34 @@
     </div>
   </div>
 </footer>
+
+<!-- ==================== عرض القسم (يفتح عند الضغط على قسم) ==================== -->
+<div class="catview" id="catView" role="dialog" aria-modal="true" aria-labelledby="catViewTitle" hidden>
+  <header class="catview__head">
+    <div class="container catview__bar">
+      <button class="catview__back" id="catViewBack" aria-label="رجوع">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        <span>الأقسام</span>
+      </button>
+      <div class="catview__titles">
+        <h2 id="catViewTitle"></h2>
+        <span class="catview__count" id="catViewCount"></span>
+      </div>
+      <span class="catview__icon" id="catViewIcon" aria-hidden="true"></span>
+    </div>
+  </header>
+  <div class="container catview__body">
+    <div class="products" id="productsGrid"></div>
+    <div class="more-wrap" id="loadMoreWrap" hidden>
+      <button type="button" class="btn btn--primary" id="loadMore">عرض المزيد</button>
+    </div>
+    <div class="more-wrap">
+      <a href="#" class="btn btn--ghost" data-wa data-wa-msg="السلام عليكم، أبي أشوف باقي القطع المتوفرة عندكم.">
+        ما لقيت اللي تبي؟ راسلنا وبنوفره لك
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- الأزرار العائمة -->
 <a href="#" class="wa-float" data-wa data-wa-msg="السلام عليكم، حاب أستفسر عن الأثاث." aria-label="تواصل عبر واتساب">

@@ -1488,3 +1488,66 @@ body { background: #0A0A0A; color: var(--ink); }
 
 /* العناصر المخفية (مثلاً حقل محتوى فارغ) تبقى مخفية مهما كان نوع العرض */
 [hidden] { display: none !important; }
+
+/* ==========================================================
+   عرض القسم — صفحة كاملة بمنتجات القسم المختار
+   ========================================================== */
+.catview {
+  position: fixed;
+  inset: 0;
+  z-index: 950;                 /* فوق الصفحة، وتحت صندوق عرض الصور */
+  background: #0A0A0A;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: catviewIn 0.35s var(--ease) both;
+}
+@keyframes catviewIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.catview__head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.catview__bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 84px;
+}
+.catview__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.catview__back svg { width: 18px; height: 18px; }
+.catview__back:hover { background: #FFFFFF; color: #000000; }
+.catview__titles { flex: 1; display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.catview__titles h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.catview__count { color: #A6A6A6; font-size: 0.9rem; white-space: nowrap; }
+.catview__icon { color: #FFFFFF; flex-shrink: 0; }
+.catview__icon svg { width: 52px; height: 52px; stroke-width: 1.6; display: block; }
+.catview__body { padding: 36px 0 90px; }
+
+@media (max-width: 780px) {
+  .catview__bar { min-height: 66px; gap: 10px; }
+  .catview__back { padding: 8px 12px; }
+  .catview__back span { display: none; }
+  .catview__icon svg { width: 38px; height: 38px; }
+  .catview__body { padding: 20px 0 80px; }
+}
+
+/* داخل صفحة القسم لا حاجة لتكرار اسم القسم على كل بطاقة */
+.catview .card__cat { display: none; }

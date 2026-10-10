@@ -107,9 +107,9 @@
         ? '<div class="cat__count">' + count + " قطعة</div>"
         : '<div class="cat__count cat__count--soon">قريباً</div>';
       return (
-        '<a href="#products" class="cat' + (c.wide ? " cat--wide" : "") + fill +
+        '<a href="#c-' + encodeURIComponent(c.id) + '" class="cat' + (c.wide ? " cat--wide" : "") + fill +
         (count ? "" : " cat--soon") +
-        ' reveal" data-d="' + ((i % 4) + 1) + '" data-cat-jump="' + esc(c.id) + '">' +
+        ' reveal" data-d="' + ((i % 4) + 1) + '">' +
           '<div class="cat__icon">' + categoryIconSvg(c) + "</div>" +
           countTag +
           '<div class="cat__body">' +
@@ -121,12 +121,56 @@
       );
     }).join("");
 
-    // الضغط على القسم ينقلك للمنتجات مع تفعيل الفلتر
-    $$("[data-cat-jump]", grid).forEach(function (a) {
-      a.addEventListener("click", function () {
-        applyFilter(a.dataset.catJump);
-      });
+  }
+
+  /* ---------- عرض القسم: صفحة كاملة بمنتجات القسم ----------
+     يعتمد على رابط الصفحة (#c-معرّف القسم): زر الرجوع في الجوال يغلقه،
+     ويمكن مشاركة رابط قسم معيّن مباشرة. */
+  let pageNavigated = false;
+
+  function openCategoryView(id) {
+    const c = CATEGORIES.find((x) => x.id === id);
+    const view = $("#catView");
+    if (!c || !view) return;
+    applyFilter(id);
+    const n = PRODUCTS.filter((p) => p.cat === id).length;
+    $("#catViewTitle").textContent = c.name;
+    $("#catViewCount").textContent = n ? toArabicNum(n) + " قطعة" : "قريباً";
+    $("#catViewIcon").innerHTML = categoryIconSvg(c);
+    view.hidden = false;
+    view.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+    $("#catViewBack").focus({ preventScroll: true });
+  }
+
+  function hideCategoryView() {
+    const view = $("#catView");
+    if (!view || view.hidden) return;
+    view.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function leaveCategoryView() {
+    if (pageNavigated) history.back();
+    else location.hash = "#categories";
+  }
+
+  function routeFromHash() {
+    const mm = location.hash.match(/^#c-(.+)$/);
+    const id = mm && decodeURIComponent(mm[1]);
+    if (id && CATEGORIES.some((c) => c.id === id)) openCategoryView(id);
+    else hideCategoryView();
+  }
+
+  function bindCategoryView() {
+    window.addEventListener("hashchange", function () { pageNavigated = true; routeFromHash(); });
+    const back = $("#catViewBack");
+    if (back) back.addEventListener("click", leaveCategoryView);
+    document.addEventListener("keydown", function (e) {
+      const lbOpen = $("#lightbox") && $("#lightbox").classList.contains("is-open");
+      if (e.key === "Escape" && !lbOpen && !$("#catView").hidden) leaveCategoryView();
     });
+    routeFromHash();   // فتح رابط قسم مباشرة
   }
 
   /* ---------- 3. الفلاتر والمنتجات ---------- */
@@ -437,11 +481,8 @@
     const fc = $("#footerCats");
     if (fc) {
       fc.innerHTML = CATEGORIES.map(
-        (c) => '<a href="#products" data-cat-jump="' + esc(c.id) + '">' + esc(c.name) + "</a>"
+        (c) => '<a href="#c-' + encodeURIComponent(c.id) + '">' + esc(c.name) + "</a>"
       ).join("");
-      $$("[data-cat-jump]", fc).forEach((a) =>
-        a.addEventListener("click", () => applyFilter(a.dataset.catJump))
-      );
     }
 
     // أوقات الدوام في التذييل
@@ -526,7 +567,8 @@
   function closeLightbox() {
     if (!lb.el) return;
     lb.el.classList.remove("is-open");
-    document.body.style.overflow = "";
+    const cv = $("#catView");
+    document.body.style.overflow = cv && !cv.hidden ? "hidden" : "";
     lb.media.innerHTML = ""; // يوقف أي فيديو قيد التشغيل
   }
 
@@ -678,7 +720,6 @@
 
   function init() {
     renderCategories();
-    renderFilters();
     renderProducts();
     renderGallery();
     renderReviews();
@@ -688,6 +729,7 @@
     bindWhatsApp();
     bindForm();
     bindLoadMore();
+    bindCategoryView();
     bindLightbox();
     bindNav();
     bindReveal();
