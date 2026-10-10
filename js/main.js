@@ -110,7 +110,7 @@
         '<a href="#products" class="cat' + (c.wide ? " cat--wide" : "") + fill +
         (count ? "" : " cat--soon") +
         ' reveal" data-d="' + ((i % 4) + 1) + '" data-cat-jump="' + esc(c.id) + '">' +
-          '<div class="cat__media">' + img(c.img, c.name, c.name) + "</div>" +
+          '<div class="cat__icon">' + categoryIconSvg(c) + "</div>" +
           countTag +
           '<div class="cat__body">' +
             "<h3>" + esc(c.name) + "</h3>" +

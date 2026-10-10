@@ -37,6 +37,7 @@ const CATEGORIES = [
   {
     "id": "sofas",
     "name": "كنب",
+    "icon": "sofa",
     "desc": "كنب وديوانيات وأطقم صالات بأقمشة فاخرة",
     "img": "assets/images/products/sofa-olive-2.jpg",
     "wide": true
@@ -44,48 +45,56 @@ const CATEGORIES = [
   {
     "id": "chairs",
     "name": "كراسي",
+    "icon": "armchair",
     "desc": "فوتيهات وكراسي مفردة تكمّل مجلسك",
     "img": "assets/images/products/chair-walnut.jpg"
   },
   {
     "id": "coffeecorner",
     "name": "ركنات القهوة",
+    "icon": "coffee",
     "desc": "وحدات قهوة متكاملة بتخزين ومساحة للأجهزة",
     "img": "assets/images/products/coffee-corner-bun.jpg"
   },
   {
     "id": "console",
     "name": "كونسولات",
+    "icon": "console",
     "desc": "كونسولات أنيقة للمداخل والممرات",
     "img": "assets/images/products/console-naht.jpg"
   },
   {
     "id": "coffee",
     "name": "طاولات وسط",
+    "icon": "coffeetable",
     "desc": "طاولات وسط تتصدر الصالة",
     "img": "assets/images/products/coffee-tanathur.jpg"
   },
   {
     "id": "serving",
     "name": "طاولات تقديم",
+    "icon": "sidetable",
     "desc": "طاولات جانبية وتقديم للضيافة",
     "img": "assets/images/products/side-qasr.jpg"
   },
   {
     "id": "dining",
     "name": "طاولات طعام",
+    "icon": "dining",
     "desc": "طاولات تجمع العائلة حول مائدة واحدة",
     "img": "assets/images/products/dining-1.jpg"
   },
   {
     "id": "diningchairs",
     "name": "كراسي طعام",
+    "icon": "diningchair",
     "desc": "كراسي طعام مريحة بتصاميم متنوعة",
     "img": "assets/images/products/dining-chair-1.jpg"
   },
   {
     "id": "decor",
     "name": "مرايا وديكور",
+    "icon": "mirror",
     "desc": "مرايا ولوحات خشبية تكمّل الجدار",
     "img": "assets/images/products/decor-mirror-abaad.jpg"
   }

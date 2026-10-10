@@ -568,19 +568,19 @@
     f.elements.wide.checked = !!editingCat.wide;
     $("#deleteCategoryBtn").hidden = !c;
 
-    // اختيار صورة القسم من صور منتجاته
-    const opts = data.PRODUCTS.filter((p) => c && p.cat === c.id).map((p) => ({ v: p.img, t: p.name }));
-    if (editingCat.img && !opts.some((o) => o.v === editingCat.img)) opts.unshift({ v: editingCat.img, t: "الصورة الحالية" });
-    $("#categoryImgPick").innerHTML = '<option value="">— اختر من صور منتجات القسم —</option>' +
-      opts.map((o) => '<option value="' + esc(o.v) + '">' + esc(o.t) + "</option>").join("");
-    $("#categoryImgPick").value = editingCat.img || "";
-    renderCategoryImg();
+    renderIconGrid();
     $("#categoryDlg").showModal();
   }
 
-  function renderCategoryImg() {
-    $("#categoryImgPreview").innerHTML = editingCat.img
-      ? '<img src="' + esc(mediaUrl(editingCat.img)) + '" alt="">' : "";
+  function renderIconGrid() {
+    const current = editingCat.icon || "";
+    const auto = guessCategoryIcon($("#categoryForm").elements.name.value);
+    $("#categoryIconGrid").innerHTML =
+      '<button type="button" class="icon-opt' + (current ? "" : " is-on") + '" data-icon="">' +
+        categoryIconSvg({ icon: auto }) + "<span>تلقائي</span></button>" +
+      Object.keys(CATEGORY_ICONS).filter((k) => k !== "generic").map((k) =>
+        '<button type="button" class="icon-opt' + (current === k ? " is-on" : "") + '" data-icon="' + k + '">' +
+          categoryIconSvg({ icon: k }) + "<span>" + esc(CATEGORY_ICONS[k].label) + "</span></button>").join("");
   }
 
   function saveCategory() {
@@ -588,6 +588,7 @@
     const name = f.elements.name.value.trim();
     if (!name) { f.elements.name.focus(); return false; }
     const c = { id: editingCat.id || "c-" + uid(), name: name, desc: f.elements.desc.value.trim(), img: editingCat.img || "" };
+    if (editingCat.icon) c.icon = editingCat.icon;
     if (f.elements.wide.checked) c.wide = true;
     if (editingCatIsNew) data.CATEGORIES.push(c);
     else data.CATEGORIES[data.CATEGORIES.findIndex((x) => x.id === editingCat.id)] = c;
@@ -711,20 +712,14 @@
       if (b.dataset.act === "up") moveCategory(id, -1);
       if (b.dataset.act === "down") moveCategory(id, 1);
     });
-    $("#categoryImgPick").addEventListener("change", (e) => {
-      if (e.target.value) { editingCat.img = e.target.value; renderCategoryImg(); }
+    $("#categoryIconGrid").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-icon]");
+      if (!b) return;
+      editingCat.icon = b.dataset.icon;
+      renderIconGrid();
     });
-    $("#categoryImgInput").addEventListener("change", async (e) => {
-      const file = e.target.files[0];
-      e.target.value = "";
-      if (!file) return;
-      try {
-        editingCat.img = await addImageFile(file, "cat");
-        renderCategoryImg();
-      } catch (ex) {
-        toast("تعذّرت قراءة الصورة — استخدم JPG أو PNG", "error");
-      }
-    });
+    // «تلقائي» يتبع اسم القسم أثناء الكتابة
+    $("#categoryForm").elements.name.addEventListener("input", () => { if (!editingCat.icon) renderIconGrid(); });
     $("#categoryForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (saveCategory()) $("#categoryDlg").close();
