@@ -68,6 +68,15 @@
     '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.05-1.32A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14' +
     'l-.3-.18-3.1.81.83-3.02-.2-.31A8.2 8.2 0 1 1 12 20.2z"/></svg>';
 
+  const PLAY_ICON =
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+
+  const CAM_ICON =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/>' +
+    '<path d="M8 6l1.5-2h5L16 6"/></svg>';
+
   const ARROW_ICON =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
     'stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
@@ -111,6 +120,39 @@
 
   let activeFilter = "all";
 
+  // عدد المنتجات الظاهرة قبل زر «عرض المزيد»
+  const PAGE_SIZE = 12;
+  let shownCount = PAGE_SIZE;
+
+  // كل وسائط المنتج: الصورة الرئيسية + الزوايا الإضافية + الفيديو
+  function productMedia(p) {
+    const items = [{ img: p.img }]
+      .concat((p.imgs || []).map((src) => ({ img: src })));
+    if (p.video) items.push({ video: p.video });
+    return items.map((m, i, all) =>
+      Object.assign(m, {
+        cap: p.name,
+        sub: all.length > 1
+          ? (m.video ? "فيديو ٣٦٠°" : "صورة " + toArabicNum(i + 1) + " من " + toArabicNum(all.length - (p.video ? 1 : 0)))
+          : p.price
+      })
+    );
+  }
+
+  function interleaveByCategory(items) {
+    const queues = CATEGORIES.map((c) => items.filter((p) => p.cat === c.id));
+    const out = [];
+    while (queues.some((q) => q.length)) {
+      queues.forEach((q) => { if (q.length) out.push(q.shift()); });
+    }
+    // أي منتج بقسم غير معرّف يُضاف في النهاية
+    return out.concat(items.filter((p) => !CATEGORIES.some((c) => c.id === p.cat)));
+  }
+
+  function toArabicNum(n) {
+    return String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  }
+
   function renderFilters() {
     const wrap = $("#filters");
     if (!wrap) return;
@@ -136,6 +178,7 @@
 
   function applyFilter(id) {
     activeFilter = id;
+    shownCount = PAGE_SIZE;
     $$("#filters .filter").forEach(function (b) {
       const on = b.dataset.filter === id;
       b.classList.toggle("is-active", on);
@@ -148,10 +191,20 @@
     const grid = $("#productsGrid");
     if (!grid) return;
 
+    // في عرض «الكل» نتناوب بين الأقسام حتى تظهر التشكيلة كاملة من أول صفحة
     const list =
       activeFilter === "all"
-        ? PRODUCTS
+        ? interleaveByCategory(PRODUCTS)
         : PRODUCTS.filter((p) => p.cat === activeFilter);
+
+    // زر «عرض المزيد»
+    const moreWrap = $("#loadMoreWrap");
+    const moreBtn = $("#loadMore");
+    const remaining = list.length - shownCount;
+    if (moreWrap) moreWrap.hidden = remaining <= 0;
+    if (moreBtn && remaining > 0) {
+      moreBtn.textContent = "عرض المزيد (" + toArabicNum(remaining) + " قطعة أخرى)";
+    }
 
     if (!list.length) {
       const catName = (CATEGORIES.find((c) => c.id === activeFilter) || {}).name || "";
@@ -166,7 +219,16 @@
     }
 
     grid.innerHTML = list
+      .slice(0, shownCount)
       .map(function (p, i) {
+        // مؤشر الوسائط: عدد الصور و/أو وجود فيديو
+        const nImgs = 1 + (p.imgs || []).length;
+        const mediaTag =
+          p.video
+            ? '<span class="card__media-tag">' + PLAY_ICON + "فيديو ٣٦٠°</span>"
+            : nImgs > 1
+              ? '<span class="card__media-tag">' + CAM_ICON + toArabicNum(nImgs) + " صور</span>"
+              : "";
         const catName = (CATEGORIES.find((c) => c.id === p.cat) || {}).name || "";
         const badgeCls =
           p.badgeType === "new" ? " card__tag--new"
@@ -183,7 +245,10 @@
             '<div class="card__media" data-lb-product="' + p.id + '">' +
               (p.badge ? '<span class="card__tag' + badgeCls + '">' + esc(p.badge) + "</span>" : "") +
               img(p.img, p.name, p.name, p.pos) +
-              '<span class="card__zoom"><span>عرض الصورة</span></span>' +
+              mediaTag +
+              '<span class="card__zoom"><span>' +
+                (p.video ? "شاهد الفيديو" : nImgs > 1 ? "شاهد كل الزوايا" : "عرض الصورة") +
+              "</span></span>" +
             "</div>" +
             '<div class="card__body">' +
               '<span class="card__cat">' + esc(catName) + "</span>" +
@@ -203,18 +268,29 @@
       })
       .join("");
 
-    // فتح صورة المنتج في صندوق العرض
+    // فتح المنتج في صندوق العرض:
+    // منتج بعدة زوايا/فيديو → يتنقل بين وسائطه، منتج بصورة واحدة → يتنقل بين المنتجات
     $$("[data-lb-product]", grid).forEach(function (el) {
       el.addEventListener("click", function () {
         const p = PRODUCTS.find((x) => String(x.id) === el.dataset.lbProduct);
         if (!p) return;
-        const items = list.map((x) => ({
-          img: x.img,
-          cap: x.name,
-          sub: x.price
-        }));
-        openLightbox(items, list.indexOf(p));
+        const media = productMedia(p);
+        if (media.length > 1) {
+          openLightbox(media, 0);
+        } else {
+          const items = list.map((x) => ({ img: x.img, cap: x.name, sub: x.price }));
+          openLightbox(items, list.indexOf(p));
+        }
       });
+    });
+  }
+
+  function bindLoadMore() {
+    const btn = $("#loadMore");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      shownCount += PAGE_SIZE;
+      renderProducts();
     });
   }
 
@@ -427,6 +503,7 @@
     if (!lb.el) return;
     lb.el.classList.remove("is-open");
     document.body.style.overflow = "";
+    lb.media.innerHTML = ""; // يوقف أي فيديو قيد التشغيل
   }
 
   function stepLightbox(dir) {
@@ -438,7 +515,11 @@
   function paintLightbox() {
     const it = lb.items[lb.i];
     if (!it) return;
-    lb.media.innerHTML = img(it.img, it.cap, it.cap);
+    lb.media.innerHTML = it.video
+      ? '<video src="' + esc(it.video) + '" autoplay muted loop playsinline controls></video>'
+      : img(it.img, it.cap, it.cap);
+    // أسهم التنقل تختفي إذا كان هناك عنصر واحد فقط
+    $("#lbPrev").hidden = $("#lbNext").hidden = lb.items.length < 2;
     lb.cap.innerHTML =
       esc(it.cap) + (it.sub ? "<small>" + esc(it.sub) + "</small>" : "");
   }
@@ -562,6 +643,7 @@
     fillStaticPlaceholders();
     bindWhatsApp();
     bindForm();
+    bindLoadMore();
     bindLightbox();
     bindNav();
     bindReveal();

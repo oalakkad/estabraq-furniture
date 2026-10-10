@@ -431,12 +431,6 @@ p { margin: 0 0 1em; }
 .hero__visual .ph { width: 100%; height: 100%; object-fit: cover; }
 .hero__visual img { transition: transform 0.7s var(--ease); }
 .hero__visual figure:hover img { transform: scale(1.06); }
-/* الصورة الطولية: تكبير نحو الأسفل حيث تقع القطعة في الصورة */
-.hero__visual figure:nth-child(1) > img {
-  inset: auto 0 0 0;
-  height: 128%;
-  object-position: center bottom;
-}
 .hero__visual figure { background: #fff; }
 
 /* شارة عائمة */
@@ -575,9 +569,10 @@ p { margin: 0 0 1em; }
   position: absolute;
   inset-block-start: 20px;
   inset-inline-end: 20px;
-  background: rgba(255,255,255,0.18);
+  background: rgba(46, 28, 16, 0.62);
+  color: var(--cream-50);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
   padding: 5px 14px;
   border-radius: 99px;
   font-size: 0.76rem;
@@ -603,7 +598,7 @@ p { margin: 0 0 1em; }
   margin-bottom: 44px;
 }
 .filter {
-  padding: 10px 22px;
+  padding: 9px 18px;
   border-radius: 99px;
   border: 1.5px solid var(--line);
   background: rgba(255,255,255,0.6);
@@ -669,6 +664,25 @@ p { margin: 0 0 1em; }
   z-index: 2;
 }
 .card__tag--new { background: var(--olive); color: #fff; }
+
+/* مؤشر الوسائط (عدد الصور / فيديو) أسفل الصورة */
+.card__media-tag {
+  position: absolute;
+  inset-block-end: 12px;
+  inset-inline-start: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(46, 28, 16, 0.78);
+  color: var(--cream-50);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 99px;
+  backdrop-filter: blur(6px);
+}
+.card__media-tag svg { width: 13px; height: 13px; }
 .card__tag--hot { background: var(--clay); color: #fff; }
 
 .card__zoom {
@@ -716,7 +730,7 @@ p { margin: 0 0 1em; }
 }
 .card__price--ask {
   font-family: "Tajawal", sans-serif;
-  font-size: 0.86rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--ink-soft);
   white-space: nowrap;
@@ -1184,6 +1198,15 @@ p { margin: 0 0 1em; }
   object-fit: contain;
 }
 .lightbox__media > .ph { grid-area: 1 / 1; }
+.lightbox__media > video {
+  grid-area: 1 / 1;
+  width: 100%;
+  max-height: 74svh;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+.lightbox__media { background: #fff; }
 
 .ph {
   display: grid;
@@ -1245,9 +1268,27 @@ p { margin: 0 0 1em; }
   .nav__links, .nav__cta { display: none; }
   .nav__burger { display: grid; }
   .section { padding: 68px 0; }
-  .cats { grid-template-columns: 1fr; }
-  .cat--wide { grid-column: span 1; }
-  .cat { min-height: 250px; }
+  /* الأقسام: عمودان ببطاقات مختصرة بدل قائمة طويلة */
+  .cats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cat--wide { grid-column: span 2; }
+  .cat { min-height: 170px; padding: 16px; border-radius: var(--radius); }
+  .cat__body h3 { font-size: 1.15rem; margin-bottom: 2px; }
+  .cat__body p { display: none; }
+  .cat__link { font-size: 0.78rem; }
+  .cat__count { inset-block-start: 12px; inset-inline-end: 12px; padding: 3px 10px; font-size: 0.68rem; }
+
+  /* الفلاتر: صف واحد قابل للسحب أفقياً */
+  .filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-inline: -20px;
+    padding: 4px 20px 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter { flex-shrink: 0; }
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 152px; }
   .gallery figure:nth-child(6) { grid-column: span 2; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
@@ -1280,6 +1321,7 @@ p { margin: 0 0 1em; }
   .lightbox__nav { width: 42px; height: 42px; }
   .lightbox__nav--prev { inset-inline-start: 8px; }
   .lightbox__nav--next { inset-inline-end: 8px; }
+  .filters { margin-inline: -14px; padding-inline: 14px; }
 }
 
 /* ---------- 22. الطباعة ---------- */

@@ -7,3 +7,6 @@ desktop.ini
 __preview.html
 *.tmp
 *.log
+
+# صور واتساب الخام (تُعالج وتُنسخ إلى assets قبل الاستخدام)
+WhatsApp*/
