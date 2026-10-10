@@ -71,6 +71,9 @@
   <nav class="tabs" role="tablist">
     <button class="tab is-active" data-tab="products" role="tab">المنتجات <span class="tab__count" id="countProducts"></span></button>
     <button class="tab" data-tab="categories" role="tab">الأقسام <span class="tab__count" id="countCategories"></span></button>
+    <button class="tab" data-tab="content" role="tab">محتوى الصفحة</button>
+    <button class="tab" data-tab="gallery" role="tab">المعرض <span class="tab__count" id="countGallery"></span></button>
+    <button class="tab" data-tab="reviews" role="tab">آراء العملاء <span class="tab__count" id="countReviews"></span></button>
     <button class="tab" data-tab="store" role="tab">معلومات المحل</button>
   </nav>
 
@@ -91,6 +94,33 @@
       <button class="btn btn--primary" id="addCategoryBtn">+ قسم جديد</button>
     </div>
     <div class="list" id="categoryList"></div>
+  </section>
+
+  <!-- ===== محتوى الصفحة ===== -->
+  <section class="panel" id="tab-content" hidden>
+    <p class="muted panel__intro">كل نصوص وصور أقسام الصفحة الرئيسية. اترك أي حقل فارغاً لإخفاء العنصر المرتبط به (مثل إحصائية أو ميزة).</p>
+    <form class="store-form" id="contentForm" autocomplete="off"></form>
+  </section>
+
+  <!-- ===== المعرض ===== -->
+  <section class="panel" id="tab-gallery" hidden>
+    <div class="toolbar">
+      <p class="muted toolbar__note">صور قسم «لقطات من المعرض». الصورة الأولى تظهر بحجم كبير، والسادسة بعرض مضاعف.</p>
+      <label class="upload">
+        <input type="file" id="galleryInput" accept="image/*" multiple hidden>
+        <span class="btn btn--primary">+ إضافة صور</span>
+      </label>
+    </div>
+    <div class="list" id="galleryList"></div>
+  </section>
+
+  <!-- ===== آراء العملاء ===== -->
+  <section class="panel" id="tab-reviews" hidden>
+    <div class="toolbar">
+      <p class="muted toolbar__note">تظهر في قسم «شنو قالوا عنّا». احذف كل الآراء لإخفاء القسم بالكامل.</p>
+      <button class="btn btn--primary" id="addReviewBtn">+ رأي جديد</button>
+    </div>
+    <div class="list" id="reviewList"></div>
   </section>
 
   <!-- ===== معلومات المحل ===== -->

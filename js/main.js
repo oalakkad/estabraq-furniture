@@ -312,6 +312,8 @@
   function renderGallery() {
     const grid = $("#galleryGrid");
     if (!grid) return;
+    // بدون صور → يختفي القسم ورابطه
+    if (!GALLERY.length) { hideSection(grid, "#gallery"); return; }
 
     grid.innerHTML = GALLERY.map(function (g) {
       return (
@@ -327,13 +329,22 @@
     });
   }
 
+  function hideSection(inner, navHref) {
+    const sec = inner.closest("section");
+    if (sec) sec.hidden = true;
+    if (navHref) $$('a[href="' + navHref + '"]').forEach((a) => (a.hidden = true));
+  }
+
   /* ---------- 5. آراء العملاء ---------- */
 
   function renderReviews() {
     const grid = $("#reviewsGrid");
     if (!grid) return;
+    // الآراء الفارغة (أُضيفت ولم تُكتب بعد) لا تظهر؛ وبدون آراء يختفي القسم
+    const list = REVIEWS.filter((r) => r.text && r.text.trim());
+    if (!list.length) { hideSection(grid); return; }
 
-    grid.innerHTML = REVIEWS.map(function (r, i) {
+    grid.innerHTML = list.map(function (r, i) {
       return (
         '<article class="review reveal" data-d="' + (i + 1) + '">' +
           '<div class="review__stars" aria-label="خمس نجوم">★★★★★</div>' +
@@ -633,10 +644,29 @@
 
   /* ---------- 12. الصور البديلة الثابتة في الصفحة ---------- */
 
+  /* ---------- نصوص الأقسام من CONTENT (تُدار من لوحة التحكم) ---------- */
+  function contentAt(path) {
+    if (typeof CONTENT === "undefined") return undefined;
+    return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), CONTENT);
+  }
+
+  function applyContent() {
+    $$("[data-c]").forEach(function (el) {
+      const v = contentAt(el.dataset.c);
+      if (typeof v === "string") el.textContent = v;
+    });
+    // عنصر يختفي إذا تُرك حقله الأساسي فارغاً (مثل إحصائية أو ميزة محذوفة)
+    $$("[data-c-hide]").forEach(function (el) {
+      const v = contentAt(el.dataset.cHide);
+      if (typeof v === "string" && !v.trim()) el.hidden = true;
+    });
+  }
+
   function fillStaticPlaceholders() {
     $$("[data-ph]").forEach(function (el) {
       if (el.querySelector("img, .ph")) return;
-      const src = "assets/images/" + el.dataset.phFile;
+      const fromContent = el.dataset.ci && contentAt(el.dataset.ci);
+      const src = fromContent || "assets/images/" + el.dataset.phFile;
       const holder = document.createElement("div");
       holder.innerHTML = img(src, el.dataset.ph, el.dataset.ph);
       // الصورة والبديل معاً، قبل أي محتوى آخر داخل العنصر
@@ -653,6 +683,7 @@
     renderGallery();
     renderReviews();
     renderContact();
+    applyContent();
     fillStaticPlaceholders();
     bindWhatsApp();
     bindForm();

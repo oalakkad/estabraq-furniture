@@ -75,14 +75,14 @@
   <div class="container hero__grid">
 
     <div class="hero__copy">
-      <span class="eyebrow reveal">صناعة كويتية · خشب طبيعي</span>
+      <span class="eyebrow reveal" data-c="hero.eyebrow">صناعة كويتية · خشب طبيعي</span>
 
       <h1 class="hero__title reveal" data-d="1">
-        بيتك يستاهل <span class="accent">دفء الخشب</span><br>
-        وراحة التفصيل
+        <span data-c="hero.titleStart">بيتك يستاهل</span> <span class="accent" data-c="hero.titleAccent">دفء الخشب</span><br>
+        <span data-c="hero.titleEnd">وراحة التفصيل</span>
       </h1>
 
-      <p class="hero__lead reveal" data-d="2">
+      <p class="hero__lead reveal" data-d="2" data-c="hero.lead">
         من ركن القهوة إلى ديوانية الضيوف — نصنع ونوفّر أثاثاً
         يجمع بين المتانة والذوق الهادئ، بقياسات تناسب بيتك تماماً.
       </p>
@@ -96,24 +96,24 @@
       </div>
 
       <div class="hero__stats reveal" data-d="4">
-        <div class="hero__stat"><b>+١٢</b><span>سنة خبرة في السوق</span></div>
-        <div class="hero__stat"><b>+٤٠٠</b><span>بيت كويتي أثثناه</span></div>
-        <div class="hero__stat"><b>١٠٠٪</b><span>خشب طبيعي مضمون</span></div>
+        <div class="hero__stat" data-c-hide="hero.stats.0.value"><b data-c="hero.stats.0.value">+١٢</b><span data-c="hero.stats.0.label">سنة خبرة في السوق</span></div>
+        <div class="hero__stat" data-c-hide="hero.stats.1.value"><b data-c="hero.stats.1.value">+٤٠٠</b><span data-c="hero.stats.1.label">بيت كويتي أثثناه</span></div>
+        <div class="hero__stat" data-c-hide="hero.stats.2.value"><b data-c="hero.stats.2.value">١٠٠٪</b><span data-c="hero.stats.2.label">خشب طبيعي مضمون</span></div>
       </div>
     </div>
 
     <div class="hero__visual reveal" data-d="2">
-      <figure data-ph="ركن قهوة" data-ph-file="hero-1.jpg"></figure>
-      <figure data-ph="كنبة زيتون" data-ph-file="hero-2.jpg"></figure>
-      <figure data-ph="كونسول نحت" data-ph-file="hero-3.jpg"></figure>
+      <figure data-ph="الصورة الرئيسية" data-ph-file="hero-1.jpg" data-ci="hero.images.0"></figure>
+      <figure data-ph="الصورة الثانية" data-ph-file="hero-2.jpg" data-ci="hero.images.1"></figure>
+      <figure data-ph="الصورة الثالثة" data-ph-file="hero-3.jpg" data-ci="hero.images.2"></figure>
 
-      <div class="hero__badge">
+      <div class="hero__badge" data-c-hide="hero.badgeTitle">
         <span class="icn" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
         </span>
         <span>
-          <b>ضمان سنتين</b>
-          <span>على الهيكل الخشبي</span>
+          <b data-c="hero.badgeTitle">ضمان سنتين</b>
+          <span data-c="hero.badgeText">على الهيكل الخشبي</span>
         </span>
       </div>
     </div>
@@ -130,24 +130,24 @@
 <section class="strip">
   <div class="container strip__grid">
 
-    <div class="strip__item">
+    <div class="strip__item" data-c-hide="features.0.title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3V8l4-4h7l4 4v3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M9 18h6"/><path d="M19 14h2v4h-2"/></svg>
-      <span><b>توصيل وتركيب مجاني</b><span>داخل الكويت للطلبات فوق ١٠٠ د.ك</span></span>
+      <span><b data-c="features.0.title">توصيل وتركيب مجاني</b><span data-c="features.0.text">داخل الكويت للطلبات فوق ١٠٠ د.ك</span></span>
     </div>
 
-    <div class="strip__item">
+    <div class="strip__item" data-c-hide="features.1.title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"/><path d="M10 12v5M14 12v5"/></svg>
-      <span><b>تفصيل حسب المقاس</b><span>نصنع القطعة بأبعاد بيتك</span></span>
+      <span><b data-c="features.1.title">تفصيل حسب المقاس</b><span data-c="features.1.text">نصنع القطعة بأبعاد بيتك</span></span>
     </div>
 
-    <div class="strip__item">
+    <div class="strip__item" data-c-hide="features.2.title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
-      <span><b>ضمان سنتين</b><span>على الهيكل والصناعة</span></span>
+      <span><b data-c="features.2.title">ضمان سنتين</b><span data-c="features.2.text">على الهيكل والصناعة</span></span>
     </div>
 
-    <div class="strip__item">
+    <div class="strip__item" data-c-hide="features.3.title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-10a7 7 0 0 1 14 0c0 5.6-7 10-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg>
-      <span><b>معرض في الشويخ</b><span>شوف القطعة قبل ما تشتري</span></span>
+      <span><b data-c="features.3.title">معرض في الشويخ</b><span data-c="features.3.text">شوف القطعة قبل ما تشتري</span></span>
     </div>
 
   </div>
@@ -158,9 +158,9 @@
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">تصفّح حسب النوع</span>
-      <h2 class="section-title">أقسام المعرض</h2>
-      <p class="section-sub">كل ما يحتاجه بيتك — من الديوانية إلى غرفة الطعام، بصناعة متقنة وتفصيل حسب الطلب.</p>
+      <span class="eyebrow" data-c="sections.categories.eyebrow">تصفّح حسب النوع</span>
+      <h2 class="section-title" data-c="sections.categories.title">أقسام المعرض</h2>
+      <p class="section-sub" data-c="sections.categories.sub">كل ما يحتاجه بيتك — من الديوانية إلى غرفة الطعام، بصناعة متقنة وتفصيل حسب الطلب.</p>
       <div class="divider"><span></span></div>
     </div>
 
@@ -174,9 +174,9 @@
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">معروضاتنا</span>
-      <h2 class="section-title">قطع مختارة من المعرض</h2>
-      <p class="section-sub">اضغط على «اسأل عن السعر» لترسل لنا استفسارك مباشرة على واتساب مع اسم القطعة.</p>
+      <span class="eyebrow" data-c="sections.products.eyebrow">معروضاتنا</span>
+      <h2 class="section-title" data-c="sections.products.title">قطع مختارة من المعرض</h2>
+      <p class="section-sub" data-c="sections.products.sub">اضغط على «اسأل عن السعر» لترسل لنا استفسارك مباشرة على واتساب مع اسم القطعة.</p>
       <div class="divider"><span></span></div>
     </div>
 
@@ -201,38 +201,38 @@
 <section class="section about" id="about">
   <div class="container about__grid">
 
-    <div class="about__media reveal" data-ph="ورشتنا" data-ph-file="about.jpg">
+    <div class="about__media reveal" data-ph="صورة من نحن" data-ph-file="about.jpg" data-ci="about.image">
       <div class="about__frame"></div>
     </div>
 
     <div class="about__copy">
-      <span class="eyebrow reveal">من نحن</span>
-      <h2 class="about__title reveal" data-d="1">خشب صادق وأيادٍ تعرف شغلها</h2>
-      <p class="about__text reveal" data-d="2">
+      <span class="eyebrow reveal" data-c="about.eyebrow">من نحن</span>
+      <h2 class="about__title reveal" data-d="1" data-c="about.title">خشب صادق وأيادٍ تعرف شغلها</h2>
+      <p class="about__text reveal" data-d="2" data-c="about.text">
         بدأنا قبل أكثر من اثنتي عشرة سنة بورشة صغيرة وفكرة واحدة: أن الأثاث الجيد
         لا يُشترى مرتين. نختار الخشب بأنفسنا، ونشرف على كل مرحلة من القص إلى التلميع،
         ولا تخرج القطعة من الورشة إلا ونحن راضون عنها.
       </p>
 
       <div class="about__points">
-        <div class="about__point reveal" data-d="1">
+        <div class="about__point reveal" data-d="1" data-c-hide="about.points.0.title">
           <span class="icn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.4 6.9 7.1.3-5.6 4.4 2 7-5.9-4.1L6.1 20.6l2-7L2.5 9.2l7.1-.3z"/></svg></span>
-          <div><h4>خامات مختارة</h4><p>خشب زان وبلوط وجوز طبيعي — لا حشو ولا بدائل رخيصة تتفكك بعد سنة.</p></div>
+          <div><h4 data-c="about.points.0.title">خامات مختارة</h4><p data-c="about.points.0.text">خشب زان وبلوط وجوز طبيعي — لا حشو ولا بدائل رخيصة تتفكك بعد سنة.</p></div>
         </div>
 
-        <div class="about__point reveal" data-d="2">
+        <div class="about__point reveal" data-d="2" data-c-hide="about.points.1.title">
           <span class="icn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9.6 9.6a2 2 0 0 1-2.8 0l-2.2-2.2a2 2 0 0 1 0-2.8z"/><path d="m16 8 3-3"/></svg></span>
-          <div><h4>تفصيل حسب طلبك</h4><p>أرسل لنا مقاس المساحة واللون المفضل، ونرسم لك القطعة قبل التصنيع.</p></div>
+          <div><h4 data-c="about.points.1.title">تفصيل حسب طلبك</h4><p data-c="about.points.1.text">أرسل لنا مقاس المساحة واللون المفضل، ونرسم لك القطعة قبل التصنيع.</p></div>
         </div>
 
-        <div class="about__point reveal" data-d="3">
+        <div class="about__point reveal" data-d="3" data-c-hide="about.points.2.title">
           <span class="icn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l2.5 2.5"/><circle cx="12" cy="12" r="9"/></svg></span>
-          <div><h4>التزام بالموعد</h4><p>نحدد لك تاريخ تسليم واقعياً ونلتزم به — ونخبرك فوراً إن طرأ أي تأخير.</p></div>
+          <div><h4 data-c="about.points.2.title">التزام بالموعد</h4><p data-c="about.points.2.text">نحدد لك تاريخ تسليم واقعياً ونلتزم به — ونخبرك فوراً إن طرأ أي تأخير.</p></div>
         </div>
 
-        <div class="about__point reveal" data-d="4">
+        <div class="about__point reveal" data-d="4" data-c-hide="about.points.3.title">
           <span class="icn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <div><h4>خدمة بعد البيع</h4><p>أي شدّة برغي أو تعديل بسيط خلال فترة الضمان — نجي لك بدون رسوم.</p></div>
+          <div><h4 data-c="about.points.3.title">خدمة بعد البيع</h4><p data-c="about.points.3.text">أي شدّة برغي أو تعديل بسيط خلال فترة الضمان — نجي لك بدون رسوم.</p></div>
         </div>
       </div>
 
@@ -247,9 +247,9 @@
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">من أعمالنا</span>
-      <h2 class="section-title">لقطات من المعرض</h2>
-      <p class="section-sub">اضغط على أي صورة لعرضها بالحجم الكامل.</p>
+      <span class="eyebrow" data-c="sections.gallery.eyebrow">من أعمالنا</span>
+      <h2 class="section-title" data-c="sections.gallery.title">لقطات من المعرض</h2>
+      <p class="section-sub" data-c="sections.gallery.sub">اضغط على أي صورة لعرضها بالحجم الكامل.</p>
       <div class="divider"><span></span></div>
     </div>
 
@@ -263,9 +263,9 @@
   <div class="container">
 
     <div class="section-head reveal">
-      <span class="eyebrow">ثقة عملائنا</span>
-      <h2 class="section-title">شنو قالوا عنّا</h2>
-      <p class="section-sub">آراء وصلتنا من عملاء أثّثنا بيوتهم.</p>
+      <span class="eyebrow" data-c="sections.reviews.eyebrow">ثقة عملائنا</span>
+      <h2 class="section-title" data-c="sections.reviews.title">شنو قالوا عنّا</h2>
+      <p class="section-sub" data-c="sections.reviews.sub">آراء وصلتنا من عملاء أثّثنا بيوتهم.</p>
     </div>
 
     <div class="reviews__grid" id="reviewsGrid"></div>
@@ -278,8 +278,8 @@
   <div class="container">
     <div class="cta-band reveal">
       <div>
-        <h2>عندك مساحة محتارة فيها؟</h2>
-        <p>أرسل لنا صورة المكان ومقاساته، ونقترح عليك القطعة المناسبة مجاناً وبدون أي التزام.</p>
+        <h2 data-c="cta.title">عندك مساحة محتارة فيها؟</h2>
+        <p data-c="cta.text">أرسل لنا صورة المكان ومقاساته، ونقترح عليك القطعة المناسبة مجاناً وبدون أي التزام.</p>
       </div>
       <div class="cta-band__actions">
         <a href="#" class="btn btn--wa" data-wa data-wa-msg="السلام عليكم، عندي مساحة أبي أستشيركم فيها. بأرسل لكم صورة ومقاسات.">
@@ -297,9 +297,9 @@
   <div class="container" style="padding-top:92px;">
 
     <div class="section-head reveal">
-      <span class="eyebrow">تواصل معنا</span>
-      <h2 class="section-title">نحن بانتظارك</h2>
-      <p class="section-sub">اتصل، راسلنا على واتساب، أو مُر علينا في المعرض — كلها تصل.</p>
+      <span class="eyebrow" data-c="sections.contact.eyebrow">تواصل معنا</span>
+      <h2 class="section-title" data-c="sections.contact.title">نحن بانتظارك</h2>
+      <p class="section-sub" data-c="sections.contact.sub">اتصل، راسلنا على واتساب، أو مُر علينا في المعرض — كلها تصل.</p>
       <div class="divider"><span></span></div>
     </div>
 
@@ -368,7 +368,7 @@
         <div class="brand">
           <img class="brand__logo" src="assets/images/logo.png" alt="ESTBRAQ interiors" width="449" height="137">
         </div>
-        <p>إستبرق للأثاث والتصميم الداخلي — ديوانيات وصالات وطاولات بصناعة متقنة وأسعار منصفة، نخدم البيت الكويتي منذ أكثر من اثنتي عشرة سنة.</p>
+        <p data-c="footer.about">إستبرق للأثاث والتصميم الداخلي — ديوانيات وصالات وطاولات بصناعة متقنة وأسعار منصفة، نخدم البيت الكويتي منذ أكثر من اثنتي عشرة سنة.</p>
       </div>
 
       <div>

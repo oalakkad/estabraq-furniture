@@ -58,7 +58,9 @@
     return "https://raw.githubusercontent.com/" + CFG.owner + "/" + CFG.repo + "/" + CFG.branch + "/" + path;
   }
 
-  function markDirty() {
+  const dirtyKeys = new Set();
+  function markDirty(key) {
+    if (key) { if (dirtyKeys.has(key)) return; dirtyKeys.add(key); }
     changes++;
     $("#publishBtn").disabled = false;
     const c = $("#dirtyCount");
@@ -68,6 +70,7 @@
 
   function clearDirty() {
     changes = 0;
+    dirtyKeys.clear();
     $("#publishBtn").disabled = true;
     $("#dirtyCount").hidden = true;
   }
@@ -117,7 +120,8 @@
     const text = b64ToUtf8(f.content);
     // data.js يعرّف ثوابت عادية — نقرأها بأمان داخل دالة منفصلة
     const parsed = new Function(text + "\n;return { STORE: STORE, CATEGORIES: CATEGORIES, PRODUCTS: PRODUCTS," +
-      " GALLERY: typeof GALLERY !== 'undefined' ? GALLERY : [], REVIEWS: typeof REVIEWS !== 'undefined' ? REVIEWS : [] };")();
+      " GALLERY: typeof GALLERY !== 'undefined' ? GALLERY : [], REVIEWS: typeof REVIEWS !== 'undefined' ? REVIEWS : []," +
+      " CONTENT: typeof CONTENT !== 'undefined' ? CONTENT : {} };")();
     dataSha = f.sha;
     return parsed;
   }
@@ -130,6 +134,8 @@
       "   (علامات تنصيص مزدوجة، وفواصل بين العناصر).\n" +
       "   ========================================================== */\n\n" +
       "const STORE = " + j(d.STORE) + ";\n\n" +
+      "/* نصوص وصور أقسام الصفحة */\n" +
+      "const CONTENT = " + j(d.CONTENT || {}) + ";\n\n" +
       "const CATEGORIES = " + j(d.CATEGORIES) + ";\n\n" +
       "const PRODUCTS = " + j(d.PRODUCTS) + ";\n\n" +
       "const GALLERY = " + j(d.GALLERY) + ";\n\n" +
@@ -203,6 +209,9 @@
     const out = [];
     data.PRODUCTS.forEach((p) => { out.push(p.img); (p.imgs || []).forEach((x) => out.push(x)); if (p.video) out.push(p.video); });
     data.CATEGORIES.forEach((c) => out.push(c.img));
+    (data.GALLERY || []).forEach((g) => out.push(g.img));
+    const walk = (v) => { if (typeof v === "string") out.push(v); else if (v && typeof v === "object") Object.values(v).forEach(walk); };
+    walk(data.CONTENT);
     return out.filter(Boolean);
   }
 
@@ -335,6 +344,9 @@
     renderProducts();
     renderCategories();
     renderStore();
+    renderContent();
+    renderGallery();
+    renderReviews();
   }
 
   const catName = (id) => (data.CATEGORIES.find((c) => c.id === id) || {}).name || "— بدون قسم —";
@@ -631,6 +643,203 @@
       "</div>").join("");
   }
 
+  /* ---------- محتوى الصفحة ---------- */
+  const SECTION_HEAD = (id, label) => [
+    ["sections." + id + ".eyebrow", label + " — السطر الصغير"],
+    ["sections." + id + ".title", label + " — العنوان"],
+    ["sections." + id + ".sub", label + " — الوصف", "textarea"]
+  ];
+  const CONTENT_SCHEMA = [
+    { title: "الواجهة الرئيسية", fields: [
+      ["hero.eyebrow", "السطر الصغير فوق العنوان"],
+      ["hero.titleStart", "العنوان — بداية السطر الأول"],
+      ["hero.titleAccent", "العنوان — الكلمات المميّزة (بخط تحته)"],
+      ["hero.titleEnd", "العنوان — السطر الثاني"],
+      ["hero.lead", "الفقرة تحت العنوان", "textarea"],
+      ["hero.images.0", "الصورة الكبيرة (المقوّسة)", "image"],
+      ["hero.images.1", "الصورة الثانية", "image"],
+      ["hero.images.2", "الصورة الثالثة", "image"],
+      ["hero.badgeTitle", "الشارة العائمة — العنوان (اتركه فارغاً لإخفائها)"],
+      ["hero.badgeText", "الشارة العائمة — النص"],
+      ["hero.stats.0.value", "إحصائية ١ — الرقم"], ["hero.stats.0.label", "إحصائية ١ — الوصف"],
+      ["hero.stats.1.value", "إحصائية ٢ — الرقم"], ["hero.stats.1.label", "إحصائية ٢ — الوصف"],
+      ["hero.stats.2.value", "إحصائية ٣ — الرقم"], ["hero.stats.2.label", "إحصائية ٣ — الوصف"]
+    ] },
+    { title: "شريط المزايا (تحت الواجهة)", fields: [0, 1, 2, 3].flatMap((i) => [
+      ["features." + i + ".title", "ميزة " + (i + 1) + " — العنوان"],
+      ["features." + i + ".text", "ميزة " + (i + 1) + " — النص"]
+    ]) },
+    { title: "قسم «الأقسام»", fields: SECTION_HEAD("categories", "القسم") },
+    { title: "قسم «المنتجات»", fields: SECTION_HEAD("products", "القسم") },
+    { title: "من نحن", fields: [
+      ["about.eyebrow", "السطر الصغير"],
+      ["about.title", "العنوان"],
+      ["about.text", "النص", "textarea"],
+      ["about.image", "الصورة", "image"]
+    ].concat([0, 1, 2, 3].flatMap((i) => [
+      ["about.points." + i + ".title", "نقطة " + (i + 1) + " — العنوان"],
+      ["about.points." + i + ".text", "نقطة " + (i + 1) + " — النص", "textarea"]
+    ])) },
+    { title: "قسم «المعرض»", fields: SECTION_HEAD("gallery", "القسم") },
+    { title: "قسم «آراء العملاء»", fields: SECTION_HEAD("reviews", "القسم") },
+    { title: "شريط الاستشارة", fields: [["cta.title", "العنوان"], ["cta.text", "النص", "textarea"]] },
+    { title: "قسم «تواصل معنا»", fields: SECTION_HEAD("contact", "القسم") },
+    { title: "التذييل", fields: [["footer.about", "النبذة تحت الشعار", "textarea"]] }
+  ];
+
+  const getAt = (obj, path) => path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+  function setAt(obj, path, val) {
+    const keys = path.split(".");
+    let o = obj;
+    keys.forEach((k, i) => {
+      if (i === keys.length - 1) { o[k] = val; return; }
+      if (o[k] == null) o[k] = /^\d+$/.test(keys[i + 1]) ? [] : {};
+      o = o[k];
+    });
+  }
+
+  function renderContent() {
+    data.CONTENT = data.CONTENT || {};
+    $("#contentForm").innerHTML = CONTENT_SCHEMA.map((sec) =>
+      "<fieldset><legend>" + esc(sec.title) + "</legend>" +
+      sec.fields.map(([path, label, type]) => {
+        const v = getAt(data.CONTENT, path) || "";
+        if (type === "image") {
+          return '<div class="field"><span>' + esc(label) + "</span>" +
+            '<div class="img-field">' +
+              (v ? '<img src="' + esc(mediaUrl(v)) + '" alt="">' : '<div class="item__thumb item__thumb--empty">▢</div>') +
+              '<label class="upload"><input type="file" accept="image/*" hidden data-img-upload="' + path + '">' +
+              '<span class="btn btn--ghost btn--sm">تغيير الصورة</span></label>' +
+            "</div></div>";
+        }
+        const input = type === "textarea"
+          ? '<textarea rows="3" data-path="' + path + '">' + esc(v) + "</textarea>"
+          : '<input data-path="' + path + '" value="' + esc(v) + '">';
+        return '<label class="field"><span>' + esc(label) + "</span>" + input + "</label>";
+      }).join("") + "</fieldset>"
+    ).join("");
+  }
+
+  /* ---------- المعرض ---------- */
+  function renderGallery() {
+    data.GALLERY = data.GALLERY || [];
+    $("#countGallery").textContent = "(" + data.GALLERY.length + ")";
+    const box = $("#galleryList");
+    if (!data.GALLERY.length) { box.innerHTML = '<div class="empty">لا توجد صور — القسم مخفي في الموقع.</div>'; return; }
+    box.innerHTML = data.GALLERY.map((g, i) =>
+      '<div class="item gal-item" data-i="' + i + '">' +
+        '<img class="item__thumb" loading="lazy" src="' + esc(mediaUrl(g.img)) + '" alt="">' +
+        '<input data-gal-cap value="' + esc(g.cap || "") + '" placeholder="وصف الصورة (اختياري)">' +
+        '<div class="item__actions">' +
+          '<button class="btn btn--icon" data-gal="up"' + (i === 0 ? " disabled" : "") + ">▲</button>" +
+          '<button class="btn btn--icon" data-gal="down"' + (i === data.GALLERY.length - 1 ? " disabled" : "") + ">▼</button>" +
+          '<button class="btn btn--icon" data-gal="del" title="حذف">✕</button>' +
+        "</div>" +
+      "</div>").join("");
+  }
+
+  /* ---------- آراء العملاء ---------- */
+  function renderReviews() {
+    data.REVIEWS = data.REVIEWS || [];
+    $("#countReviews").textContent = "(" + data.REVIEWS.length + ")";
+    const box = $("#reviewList");
+    if (!data.REVIEWS.length) { box.innerHTML = '<div class="empty">لا توجد آراء — القسم مخفي في الموقع.</div>'; return; }
+    box.innerHTML = data.REVIEWS.map((r, i) =>
+      '<div class="rev" data-i="' + i + '">' +
+        '<div class="rev__head">' +
+          '<input data-rev="name" value="' + esc(r.name || "") + '" placeholder="اسم العميل">' +
+          '<input data-rev="from" value="' + esc(r.from || "") + '" placeholder="المنطقة (مثال: السالمية)">' +
+          '<div class="rev__tools">' +
+            '<button class="btn btn--icon" data-revact="up"' + (i === 0 ? " disabled" : "") + ">▲</button>" +
+            '<button class="btn btn--icon" data-revact="down"' + (i === data.REVIEWS.length - 1 ? " disabled" : "") + ">▼</button>" +
+            '<button class="btn btn--icon" data-revact="del" title="حذف">✕</button>' +
+          "</div>" +
+        "</div>" +
+        '<textarea rows="2" data-rev="text" placeholder="نص الرأي">' + esc(r.text || "") + "</textarea>" +
+      "</div>").join("");
+  }
+
+  function bindExtraTabs() {
+    // محتوى الصفحة: نص
+    $("#contentForm").addEventListener("input", (e) => {
+      const p = e.target.dataset.path;
+      if (!p) return;
+      setAt(data.CONTENT, p, e.target.value.trim());
+      markDirty("content." + p);
+    });
+    // محتوى الصفحة: صورة
+    $("#contentForm").addEventListener("change", async (e) => {
+      const p = e.target.dataset.imgUpload;
+      if (!p || !e.target.files[0]) return;
+      const box = e.target.closest(".img-field");
+      box.classList.add("img-field--busy");
+      try {
+        setAt(data.CONTENT, p, await addImageFile(e.target.files[0], "site"));
+        markDirty();
+        renderContent();
+      } catch (ex) {
+        box.classList.remove("img-field--busy");
+        toast("تعذّرت قراءة الصورة — استخدم JPG أو PNG", "error");
+      }
+    });
+
+    // المعرض
+    $("#galleryInput").addEventListener("change", async (e) => {
+      const files = Array.from(e.target.files);
+      e.target.value = "";
+      for (const f of files) {
+        try {
+          data.GALLERY.push({ img: await addImageFile(f, "g"), cap: "" });
+          markDirty();
+          renderGallery();
+        } catch (ex) { toast("تعذّرت قراءة الصورة " + f.name, "error"); }
+      }
+    });
+    $("#galleryList").addEventListener("input", (e) => {
+      if (!("galCap" in e.target.dataset)) return;
+      const i = Number(e.target.closest(".item").dataset.i);
+      data.GALLERY[i].cap = e.target.value.trim();
+      markDirty("gal.cap." + i);
+    });
+    $("#galleryList").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-gal]");
+      if (!b) return;
+      const i = Number(b.closest(".item").dataset.i), G = data.GALLERY;
+      if (b.dataset.gal === "del") { if (!confirm("حذف هذه الصورة من المعرض؟")) return; G.splice(i, 1); }
+      if (b.dataset.gal === "up" && i > 0) [G[i - 1], G[i]] = [G[i], G[i - 1]];
+      if (b.dataset.gal === "down" && i < G.length - 1) [G[i + 1], G[i]] = [G[i], G[i + 1]];
+      markDirty();
+      renderGallery();
+    });
+
+    // آراء العملاء
+    $("#addReviewBtn").addEventListener("click", () => {
+      data.REVIEWS.unshift({ text: "", name: "", from: "", initial: "" });
+      markDirty();
+      renderReviews();
+      $("#reviewList [data-rev=name]").focus();
+    });
+    $("#reviewList").addEventListener("input", (e) => {
+      const k = e.target.dataset.rev;
+      if (!k) return;
+      const i = Number(e.target.closest(".rev").dataset.i), r = data.REVIEWS[i];
+      r[k] = e.target.value.trim();
+      // الحرف الأول للصورة الرمزية (يتجاوز «أم» و«أبو»)
+      if (k === "name") r.initial = (r.name.replace(/^(أم|ام|أبو|ابو)\s+/, "")[0] || "");
+      markDirty("rev." + i + "." + k);
+    });
+    $("#reviewList").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-revact]");
+      if (!b) return;
+      const i = Number(b.closest(".rev").dataset.i), V = data.REVIEWS;
+      if (b.dataset.revact === "del") { if (!confirm("حذف هذا الرأي؟")) return; V.splice(i, 1); }
+      if (b.dataset.revact === "up" && i > 0) [V[i - 1], V[i]] = [V[i], V[i - 1]];
+      if (b.dataset.revact === "down" && i < V.length - 1) [V[i + 1], V[i]] = [V[i], V[i + 1]];
+      markDirty();
+      renderReviews();
+    });
+  }
+
   /* ---------- الأحداث ---------- */
   function bind() {
     $("#repoName").textContent = CFG.owner + "/" + CFG.repo;
@@ -735,10 +944,11 @@
       if (el.dataset.h) {
         const i = Number(el.closest(".hour-row").dataset.i);
         data.STORE.hours[i][el.dataset.h] = el.value;
+        markDirty("hours." + i + "." + el.dataset.h);
       } else if (STORE_FIELDS.includes(el.name)) {
         data.STORE[el.name] = el.value.trim();
+        markDirty("store." + el.name);
       }
-      markDirty();
     });
     $("#hoursRows").addEventListener("click", (e) => {
       if (e.target.dataset.h !== "del") return;
@@ -759,6 +969,7 @@
 
   /* ---------- التشغيل ---------- */
   bind();
+  bindExtraTabs();
   const saved = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
   if (saved) {
     $("#loginView").hidden = true;

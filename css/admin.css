@@ -213,3 +213,20 @@ textarea { resize: vertical; }
 .icon-opt:hover { border-color: #999; }
 .icon-opt.is-on { border-color: var(--ink); background: var(--ink); color: #fff; }
 .icon-opt.is-on span { color: #ddd; }
+
+/* ---------- محتوى الصفحة / المعرض / الآراء ---------- */
+.panel__intro { margin: 0 0 14px; }
+.img-field { display: flex; gap: 12px; align-items: center; }
+.img-field img { width: 96px; height: 96px; object-fit: contain; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 4px; }
+.img-field--busy img { opacity: .4; }
+.gal-item { grid-template-columns: 64px 1fr auto; }
+.gal-item input { font-size: .9rem; }
+.rev { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 8px; }
+.rev__head { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: center; }
+.rev__tools { display: flex; gap: 4px; }
+.rev__tools .btn--icon { width: 34px; height: 34px; font-size: .7rem; }
+@media (max-width: 640px) {
+  .rev__head { grid-template-columns: 1fr 1fr; }
+  .rev__tools { grid-column: 1 / -1; justify-content: flex-end; }
+  .gal-item { grid-template-columns: 52px 1fr; }
+}

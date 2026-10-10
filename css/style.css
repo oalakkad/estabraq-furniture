@@ -1485,3 +1485,6 @@ body { background: #0A0A0A; color: var(--ink); }
   .cat__icon svg { width: 104px; height: 104px; stroke-width: 1.8; }
   .cat__body h3 { font-size: 1.12rem; }
 }
+
+/* العناصر المخفية (مثلاً حقل محتوى فارغ) تبقى مخفية مهما كان نوع العرض */
+[hidden] { display: none !important; }
