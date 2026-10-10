@@ -355,7 +355,7 @@ const PRODUCTS = [
     "name": "كنبة «عنبر»",
     "desc": "مخمل بلون العنبر الدافئ على إطار جوز طبيعي بخطوط مائلة، مع ثلاث وسائد ساتان كريمية.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-amber.jpg",
+    "img": "assets/images/products/sofa-amber.jpg"
   },
   {
     "id": 2,
@@ -720,18 +720,6 @@ const PRODUCTS = [
 ];
 
 const GALLERY = [
-  {
-    "img": "assets/images/gallery/g1.jpg",
-    "cap": "كنبة «مشربية» بقاعدة خشبية محفورة"
-  },
-  {
-    "img": "assets/images/gallery/g2.jpg",
-    "cap": "تفاصيل قماش الجاكار على فوتيه «نقش»"
-  },
-  {
-    "img": "assets/images/gallery/g3.jpg",
-    "cap": "كنبة «حرير» بالشراشيب الكلاسيكية"
-  },
   {
     "img": "assets/images/gallery/g4.jpg",
     "cap": "فوتيه «حرير» — القطعة المرافقة"
