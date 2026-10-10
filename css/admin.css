@@ -1,0 +1,200 @@
+/* ==========================================================
+   لوحة التحكم — أبيض وأسود مثل الشعار
+   ========================================================== */
+:root {
+  --ink: #111111;
+  --ink-soft: #6B6B6B;
+  --line: #E4E4E4;
+  --bg: #F6F6F6;
+  --surface: #FFFFFF;
+  --danger: #B42318;
+  --ok: #1B7F3B;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+[hidden] { display: none !important; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+h1, h2 { margin: 0 0 .4em; line-height: 1.3; }
+.muted { color: var(--ink-soft); font-size: .88rem; }
+.grow { flex: 1; }
+
+/* ---------- أزرار ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: inherit; font-weight: 700; font-size: .92rem;
+  padding: 10px 18px; border-radius: 99px; border: 1.5px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background-color .2s, color .2s, border-color .2s, opacity .2s;
+}
+.btn:disabled { opacity: .35; cursor: not-allowed; }
+.btn--primary { background: var(--ink); color: #fff; }
+.btn--primary:not(:disabled):hover { background: #333; }
+.btn--ghost { background: #fff; color: var(--ink); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--ink); }
+.btn--danger { background: #fff; color: var(--danger); border-color: #F1C8C4; }
+.btn--danger:hover { background: var(--danger); color: #fff; }
+.btn--icon { width: 40px; height: 40px; padding: 0; background: #fff; border-color: var(--line); color: var(--ink); }
+.btn--icon svg { width: 18px; height: 18px; }
+.btn--sm { padding: 7px 14px; font-size: .84rem; }
+.btn--block { width: 100%; }
+.pill {
+  background: #fff; color: var(--ink); border-radius: 99px;
+  font-size: .75rem; padding: 0 8px; min-width: 22px; line-height: 20px;
+}
+
+/* ---------- الشريط العلوي ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--line);
+}
+.top__brand { display: flex; align-items: center; gap: 14px; }
+.top__logo { height: 30px; width: auto; }
+.top__title { font-weight: 700; color: var(--ink-soft); border-inline-start: 1px solid var(--line); padding-inline-start: 14px; }
+.top__actions { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- تسجيل الدخول ---------- */
+.login { min-height: calc(100vh - 60px); display: grid; place-items: center; padding: 24px; }
+.login__card {
+  width: min(440px, 100%); background: #fff; border: 1px solid var(--line);
+  border-radius: 20px; padding: 32px 28px;
+}
+.help { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px; }
+.help summary { cursor: pointer; font-weight: 700; }
+.help ol { padding-inline-start: 20px; margin: 12px 0; }
+.help li { margin-bottom: 6px; }
+.error { color: var(--danger); font-size: .88rem; margin: 10px 0 0; }
+
+/* ---------- حقول ---------- */
+.field { display: block; margin-bottom: 14px; }
+.field > span { display: block; font-weight: 700; font-size: .88rem; margin-bottom: 6px; }
+.field small { font-weight: 400; color: var(--ink-soft); }
+input:not([type=checkbox]):not([type=file]), select, textarea {
+  width: 100%; font: inherit; color: var(--ink);
+  padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); }
+textarea { resize: vertical; }
+.check { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--ink); }
+.input-row { display: flex; gap: 8px; align-items: center; }
+.input-row > input, .input-row > select { flex: 1; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ---------- التطبيق ---------- */
+.app { max-width: 1100px; margin: 0 auto; padding: 20px 20px 80px; }
+.loading { padding: 60px 0; text-align: center; color: var(--ink-soft); }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); margin-bottom: 18px; overflow-x: auto; }
+.tab {
+  font: inherit; font-weight: 700; background: none; border: none; cursor: pointer;
+  padding: 12px 16px; color: var(--ink-soft); border-bottom: 2.5px solid transparent; white-space: nowrap;
+}
+.tab.is-active { color: var(--ink); border-bottom-color: var(--ink); }
+.tab__count { font-weight: 500; font-size: .8rem; color: var(--ink-soft); }
+
+.toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.toolbar input[type=search] { flex: 1 1 220px; }
+.toolbar select { flex: 0 1 200px; width: auto; }
+.toolbar__note { margin: 0; flex: 1; }
+
+/* ---------- القوائم ---------- */
+.list { display: grid; gap: 8px; }
+.item {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px;
+}
+.item__thumb {
+  width: 64px; height: 64px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  object-fit: contain; padding: 4px;
+}
+.item__thumb--empty { display: grid; place-items: center; color: #BBB; font-size: 1.4rem; }
+.item__main { min-width: 0; }
+.item__name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item__meta { font-size: .83rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.item__meta b { color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; background: var(--bg); }
+.tag--new { background: var(--ink); color: #fff; }
+.tag--warn { background: #FFF4E5; color: #8A4B00; }
+.item__actions { display: flex; gap: 4px; }
+.item__actions .btn--icon { width: 34px; height: 34px; font-size: .7rem; }
+.empty { text-align: center; padding: 40px; color: var(--ink-soft); background: #fff; border: 1px dashed var(--line); border-radius: var(--radius); }
+
+/* ---------- نموذج المحل ---------- */
+.store-form fieldset { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 6px; margin: 0 0 14px; }
+.store-form legend { font-weight: 800; padding: 0 6px; }
+.hour-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 8px; }
+.hour-row .btn--icon { width: 40px; height: 42px; }
+
+/* ---------- النوافذ ---------- */
+.dlg {
+  width: min(640px, calc(100% - 24px)); max-height: calc(100vh - 40px);
+  border: none; border-radius: 20px; padding: 0; color: var(--ink);
+}
+.dlg::backdrop { background: rgba(0,0,0,.45); }
+.dlg__form { display: flex; flex-direction: column; max-height: calc(100vh - 40px); }
+.dlg__head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.dlg__head h2 { margin: 0; font-size: 1.15rem; }
+.dlg__body { padding: 18px 20px; overflow-y: auto; }
+.dlg__foot { display: flex; gap: 8px; align-items: center; padding: 14px 20px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+
+.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-bottom: 10px; }
+.media {
+  position: relative; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff;
+  aspect-ratio: 1;
+}
+.media img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.media--main { border-color: var(--ink); }
+.media__label {
+  position: absolute; top: 6px; inset-inline-start: 6px;
+  background: var(--ink); color: #fff; font-size: .7rem; font-weight: 700; padding: 1px 8px; border-radius: 99px;
+}
+.media__tools { position: absolute; bottom: 6px; inset-inline: 6px; display: flex; justify-content: space-between; gap: 4px; }
+.media__tools button {
+  font: inherit; font-size: .72rem; font-weight: 700; cursor: pointer;
+  background: rgba(255,255,255,.92); border: 1px solid var(--line); border-radius: 8px; padding: 3px 6px;
+}
+.media__tools button:hover { border-color: var(--ink); }
+.media--busy { display: grid; place-items: center; color: var(--ink-soft); font-size: .8rem; }
+.video-box { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.video-box video { width: 160px; border-radius: 10px; border: 1px solid var(--line); background: #fff; }
+.upload { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; flex-wrap: wrap; }
+.upload--inline { flex: 0 0 auto; }
+.cat-img { width: 140px; aspect-ratio: 1; border: 1.5px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: #fff; }
+.cat-img img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+
+/* ---------- الإشعار ---------- */
+.toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translate(-50%, 20px);
+  background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 12px;
+  font-weight: 600; opacity: 0; pointer-events: none; transition: all .25s; z-index: 100;
+  max-width: calc(100% - 32px); text-align: center;
+}
+.toast.is-shown { opacity: 1; transform: translate(-50%, 0); }
+.toast--error { background: var(--danger); }
+.toast--ok { background: var(--ok); }
+
+/* ---------- الجوال ---------- */
+@media (max-width: 640px) {
+  .top { padding: 10px 12px; flex-wrap: wrap; }
+  .top__title { display: none; }
+  .top__actions { gap: 6px; }
+  .top__actions .btn--ghost { display: none; }
+  .app { padding: 14px 12px 80px; }
+  .item { grid-template-columns: 52px 1fr; }
+  .item__thumb { width: 52px; height: 52px; }
+  .item__actions { grid-column: 1 / -1; justify-content: flex-end; }
+  .row2 { grid-template-columns: 1fr; gap: 0; }
+  .hour-row { grid-template-columns: 1fr 1fr 40px; }
+  .dlg { width: 100%; max-width: 100%; max-height: 100%; height: 100%; border-radius: 0; margin: 0; }
+  .dlg__form { max-height: 100%; height: 100%; }
+  .dlg__body { flex: 1; }
+}

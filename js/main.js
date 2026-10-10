@@ -87,14 +87,27 @@
     const grid = $("#catsGrid");
     if (!grid) return;
 
+    // ملء الصف الأخير: آخر بطاقة تتمدد لتغطي أي فراغ (٤ أعمدة على الكمبيوتر، ٢ على الجوال)
+    const spanOf = (c) => (c.wide ? 2 : 1);
+    const cells4 = CATEGORIES.reduce((s, c) => s + spanOf(c), 0);
+    const lastSpan = CATEGORIES.length
+      ? Math.min(4, spanOf(CATEGORIES[CATEGORIES.length - 1]) + ((4 - (cells4 % 4)) % 4))
+      : 1;
+    const cells2 = CATEGORIES.reduce((s, c) => s + (c.wide ? 2 : 1), 0);
+    const lastFull2 = cells2 % 2 === 1;
+
     grid.innerHTML = CATEGORIES.map(function (c, i) {
       const count = PRODUCTS.filter((p) => p.cat === c.id).length;
+      const isLast = i === CATEGORIES.length - 1;
+      const fill =
+        (isLast && lastSpan > 1 ? " cat--span-" + lastSpan : "") +
+        (isLast && lastFull2 ? " cat--m-full" : "");
       // القسم الفارغ يحمل شارة «قريباً» بدل العدد
       const countTag = count
         ? '<div class="cat__count">' + count + " قطعة</div>"
         : '<div class="cat__count cat__count--soon">قريباً</div>';
       return (
-        '<a href="#products" class="cat' + (c.wide ? " cat--wide" : "") +
+        '<a href="#products" class="cat' + (c.wide ? " cat--wide" : "") + fill +
         (count ? "" : " cat--soon") +
         ' reveal" data-d="' + ((i % 4) + 1) + '" data-cat-jump="' + esc(c.id) + '">' +
           '<div class="cat__media">' + img(c.img, c.name, c.name) + "</div>" +

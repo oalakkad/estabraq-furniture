@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة التحكم | ESTBRAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23111111'/><g fill='%23FFFFFF'><rect x='24' y='27' width='52' height='9' rx='2'/><rect x='24' y='45.5' width='40' height='9' rx='2'/><rect x='24' y='64' width='52' height='9' rx='2'/></g></svg>">
+</head>
+<body>
+
+<!-- ==================== الشريط العلوي ==================== -->
+<header class="top">
+  <div class="top__brand">
+    <img src="assets/images/logo.png" alt="ESTBRAQ interiors" class="top__logo">
+    <span class="top__title">لوحة التحكم</span>
+  </div>
+  <div class="top__actions" id="topActions" hidden>
+    <a class="btn btn--ghost" id="viewSite" href="index.html" target="_blank" rel="noopener">عرض الموقع</a>
+    <button class="btn btn--primary" id="publishBtn" disabled>
+      نشر التغييرات <span class="pill" id="dirtyCount" hidden>0</span>
+    </button>
+    <button class="btn btn--icon" id="logoutBtn" title="تسجيل الخروج" aria-label="تسجيل الخروج">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l-5-5 5-5"/><path d="M5 12h12"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ==================== تسجيل الدخول ==================== -->
+<section class="login" id="loginView">
+  <div class="login__card">
+    <h1>تسجيل الدخول</h1>
+    <p class="muted">أدخل مفتاح الدخول (Access Token) لإدارة المنتجات والأقسام والأسعار.</p>
+
+    <form id="loginForm" autocomplete="off">
+      <label class="field">
+        <span>مفتاح الدخول</span>
+        <input type="password" id="tokenInput" dir="ltr" placeholder="github_pat_…" required spellcheck="false">
+      </label>
+      <label class="check">
+        <input type="checkbox" id="rememberInput" checked>
+        <span>تذكّرني على هذا الجهاز</span>
+      </label>
+      <button class="btn btn--primary btn--block" type="submit" id="loginBtn">دخول</button>
+      <p class="error" id="loginError" hidden></p>
+    </form>
+
+    <details class="help">
+      <summary>كيف أحصل على مفتاح الدخول؟</summary>
+      <ol>
+        <li>صاحب حساب GitHub يفتح الرابط:
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" dir="ltr">github.com/settings/personal-access-tokens/new</a></li>
+        <li>في <b>Repository access</b> يختار <b>Only select repositories</b> ثم المستودع <b dir="ltr" id="repoName"></b></li>
+        <li>في <b>Permissions → Contents</b> يختار <b>Read and write</b></li>
+        <li>يضغط <b>Generate token</b> وينسخ المفتاح ويرسله لك</li>
+      </ol>
+      <p class="muted">المفتاح يسمح بتعديل ملفات هذا الموقع فقط. لا تشاركه مع أحد.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ==================== التطبيق ==================== -->
+<main class="app" id="appView" hidden>
+
+  <div class="loading" id="loading">جارٍ تحميل البيانات…</div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="products" role="tab">المنتجات <span class="tab__count" id="countProducts"></span></button>
+    <button class="tab" data-tab="categories" role="tab">الأقسام <span class="tab__count" id="countCategories"></span></button>
+    <button class="tab" data-tab="store" role="tab">معلومات المحل</button>
+  </nav>
+
+  <!-- ===== المنتجات ===== -->
+  <section class="panel" id="tab-products">
+    <div class="toolbar">
+      <input type="search" id="productSearch" placeholder="ابحث باسم المنتج…">
+      <select id="productCatFilter"></select>
+      <button class="btn btn--primary" id="addProductBtn">+ منتج جديد</button>
+    </div>
+    <div class="list" id="productList"></div>
+  </section>
+
+  <!-- ===== الأقسام ===== -->
+  <section class="panel" id="tab-categories" hidden>
+    <div class="toolbar">
+      <p class="muted toolbar__note">ترتيب الأقسام هنا هو ترتيبها في الموقع.</p>
+      <button class="btn btn--primary" id="addCategoryBtn">+ قسم جديد</button>
+    </div>
+    <div class="list" id="categoryList"></div>
+  </section>
+
+  <!-- ===== معلومات المحل ===== -->
+  <section class="panel" id="tab-store" hidden>
+    <form class="store-form" id="storeForm">
+      <fieldset>
+        <legend>التواصل</legend>
+        <label class="field"><span>رقم الواتساب <small>(بالصيغة الدولية بدون + ، مثال: 96512345678)</small></span>
+          <input name="whatsapp" dir="ltr" inputmode="numeric"></label>
+        <label class="field"><span>رقم الهاتف كما يظهر للزائر</span><input name="phoneDisplay" dir="ltr"></label>
+        <label class="field"><span>رقم الاتصال <small>(مثال: +96512345678)</small></span><input name="phoneDial" dir="ltr"></label>
+        <label class="field"><span>البريد الإلكتروني</span><input name="email" dir="ltr" type="email"></label>
+      </fieldset>
+      <fieldset>
+        <legend>العنوان</legend>
+        <label class="field"><span>السطر الأول</span><input name="addressLine1"></label>
+        <label class="field"><span>السطر الثاني</span><input name="addressLine2"></label>
+        <label class="field"><span>رابط خرائط جوجل</span><input name="mapsLink" dir="ltr"></label>
+      </fieldset>
+      <fieldset>
+        <legend>التواصل الاجتماعي</legend>
+        <label class="field"><span>انستقرام</span><input name="instagram" dir="ltr"></label>
+        <label class="field"><span>سناب شات</span><input name="snapchat" dir="ltr"></label>
+        <label class="field"><span>تيك توك</span><input name="tiktok" dir="ltr"></label>
+      </fieldset>
+      <fieldset>
+        <legend>أوقات الدوام</legend>
+        <div id="hoursRows"></div>
+        <button type="button" class="btn btn--ghost btn--sm" id="addHourBtn">+ إضافة سطر</button>
+      </fieldset>
+    </form>
+  </section>
+</main>
+
+<!-- ==================== نافذة المنتج ==================== -->
+<dialog class="dlg" id="productDlg">
+  <form method="dialog" class="dlg__form" id="productForm">
+    <header class="dlg__head">
+      <h2 id="productDlgTitle">منتج جديد</h2>
+      <button type="button" class="btn btn--icon" data-close aria-label="إغلاق">✕</button>
+    </header>
+
+    <div class="dlg__body">
+      <label class="field"><span>اسم المنتج *</span><input name="name" required placeholder="مثال: كنبة «ليوان»"></label>
+
+      <div class="row2">
+        <label class="field"><span>القسم *</span><select name="cat" required></select></label>
+        <label class="field"><span>الشارة</span>
+          <select name="badge">
+            <option value="">بدون</option>
+            <option value="new">جديد</option>
+            <option value="hot">الأكثر طلباً</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="field"><span>السعر</span>
+        <div class="input-row">
+          <input name="price" placeholder="مثال: ٣٢٠ د.ك">
+          <button type="button" class="btn btn--ghost btn--sm" id="priceAskBtn">عند الطلب</button>
+        </div>
+      </label>
+
+      <label class="field"><span>الوصف</span><textarea name="desc" rows="3" placeholder="الخامة، المقاس، الألوان المتوفرة…"></textarea></label>
+
+      <div class="field">
+        <span>الصور <small>— الأولى هي الرئيسية، ويُفضّل أن تكون صورة أمامية مستقيمة</small></span>
+        <div class="media-grid" id="productMedia"></div>
+        <label class="upload">
+          <input type="file" id="productImgInput" accept="image/*" multiple hidden>
+          <span class="btn btn--ghost btn--sm">+ إضافة صور</span>
+          <small class="muted">تُقص الصورة وتوسَّط تلقائياً، وتُزال الخلفية السوداء إن وُجدت.</small>
+        </label>
+      </div>
+
+      <div class="field">
+        <span>فيديو <small>(اختياري — MP4، أقل من ٢٥ ميغابايت)</small></span>
+        <div id="productVideo"></div>
+        <label class="upload">
+          <input type="file" id="productVideoInput" accept="video/mp4,video/*" hidden>
+          <span class="btn btn--ghost btn--sm">+ إضافة فيديو</span>
+        </label>
+      </div>
+    </div>
+
+    <footer class="dlg__foot">
+      <button type="button" class="btn btn--danger" id="deleteProductBtn">حذف المنتج</button>
+      <span class="grow"></span>
+      <button type="button" class="btn btn--ghost" data-close>إلغاء</button>
+      <button type="submit" class="btn btn--primary" value="save">حفظ</button>
+    </footer>
+  </form>
+</dialog>
+
+<!-- ==================== نافذة القسم ==================== -->
+<dialog class="dlg" id="categoryDlg">
+  <form method="dialog" class="dlg__form" id="categoryForm">
+    <header class="dlg__head">
+      <h2 id="categoryDlgTitle">قسم جديد</h2>
+      <button type="button" class="btn btn--icon" data-close aria-label="إغلاق">✕</button>
+    </header>
+    <div class="dlg__body">
+      <label class="field"><span>اسم القسم *</span><input name="name" required placeholder="مثال: كنب"></label>
+      <label class="field"><span>وصف قصير</span><input name="desc" placeholder="يظهر تحت اسم القسم"></label>
+      <label class="check"><input type="checkbox" name="wide"><span>بطاقة عريضة في صفحة الأقسام</span></label>
+
+      <div class="field">
+        <span>صورة القسم</span>
+        <div class="cat-img" id="categoryImgPreview"></div>
+        <div class="input-row">
+          <select id="categoryImgPick"></select>
+          <label class="upload upload--inline">
+            <input type="file" id="categoryImgInput" accept="image/*" hidden>
+            <span class="btn btn--ghost btn--sm">رفع صورة</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <footer class="dlg__foot">
+      <button type="button" class="btn btn--danger" id="deleteCategoryBtn">حذف القسم</button>
+      <span class="grow"></span>
+      <button type="button" class="btn btn--ghost" data-close>إلغاء</button>
+      <button type="submit" class="btn btn--primary" value="save">حفظ</button>
+    </footer>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

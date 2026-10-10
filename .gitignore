@@ -9,4 +9,4 @@ __preview.html
 *.log
 
 # صور واتساب الخام (تُعالج وتُنسخ إلى assets قبل الاستخدام)
-WhatsApp*/
+WhatsApp*
