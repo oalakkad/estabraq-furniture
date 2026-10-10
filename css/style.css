@@ -1551,3 +1551,18 @@ body { background: #0A0A0A; color: var(--ink); }
 
 /* داخل صفحة القسم لا حاجة لتكرار اسم القسم على كل بطاقة */
 .catview .card__cat { display: none; }
+
+/* ==========================================================
+   الأقسام المخصّصة (تُضاف من لوحة التحكم)
+   ========================================================== */
+.custom-text { white-space: pre-line; }              /* الأسطر الجديدة في النص تظهر كما كُتبت */
+.custom-btn { margin-top: 26px; }
+.custom-split .about__copy .btn { margin-top: 8px; }
+.custom-split--flip .about__media { order: 2; }      /* الصورة على الجهة الأخرى */
+.custom-textsec .section-head { margin-bottom: 0; }
+.custom-images .gallery { margin-bottom: 0; }
+.custom-banner .cta-band p { white-space: pre-line; }
+@media (max-width: 1080px) {
+  .custom-split--flip .about__media { order: 0; }
+}
+.custom-banner { padding: 56px 0; }

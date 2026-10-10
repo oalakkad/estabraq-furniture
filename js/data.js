@@ -133,7 +133,34 @@ const CONTENT = {
   },
   "footer": {
     "about": "إستبرق للأثاث والتصميم الداخلي — ديوانيات وصالات وطاولات بصناعة متقنة وأسعار منصفة، نخدم البيت الكويتي منذ أكثر من اثنتي عشرة سنة."
-  }
+  },
+  "layout": [
+    {
+      "key": "categories",
+      "show": true
+    },
+    {
+      "key": "about",
+      "show": true
+    },
+    {
+      "key": "gallery",
+      "show": true
+    },
+    {
+      "key": "reviews",
+      "show": true
+    },
+    {
+      "key": "cta",
+      "show": true
+    },
+    {
+      "key": "contact",
+      "show": true
+    }
+  ],
+  "custom": {}
 };
 
 const CATEGORIES = [

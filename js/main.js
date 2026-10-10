@@ -704,6 +704,114 @@
     });
   }
 
+
+  /* ---------- ترتيب أقسام الصفحة + الأقسام المخصّصة (تُدار من لوحة التحكم) ----------
+     CONTENT.layout: [{ key, show }] — ترتيب الأقسام بعد شريط المزايا
+     CONTENT.custom: { key: { type, menu, eyebrow, title, text, image, side, images, button } } */
+  const BUILTIN_SECTIONS = {
+    categories: "#categories", about: "#about", gallery: "#gallery",
+    reviews: "#reviews", cta: "#cta", contact: "#contact"
+  };
+
+  function sectionButton(b) {
+    if (!b || !b.label) return "";
+    if (b.type === "whatsapp") {
+      return '<a href="#" class="btn btn--wa" data-wa data-wa-msg="' + esc(b.value || "السلام عليكم") + '">' +
+        WA_ICON + esc(b.label) + "</a>";
+    }
+    const ext = /^https?:/i.test(b.value || "");
+    return '<a class="btn btn--primary" href="' + esc(b.value || "#contact") + '"' +
+      (ext ? ' target="_blank" rel="noopener"' : "") + ">" + esc(b.label) + "</a>";
+  }
+
+  function renderCustomSection(key, s) {
+    if (!s) return null;
+    const sec = document.createElement("section");
+    sec.id = key;
+    const head =
+      (s.eyebrow ? '<span class="eyebrow">' + esc(s.eyebrow) + "</span>" : "") +
+      (s.title ? '<h2 class="section-title">' + esc(s.title) + "</h2>" : "");
+    const text = s.text ? '<p class="section-sub custom-text">' + esc(s.text) + "</p>" : "";
+
+    if (s.type === "split") {
+      sec.className = "section about custom-split" + (s.side === "end" ? " custom-split--flip" : "");
+      sec.innerHTML =
+        '<div class="container about__grid">' +
+          '<div class="about__media reveal">' + (s.image ? img(s.image, s.title || "", s.title || "") : "") + "</div>" +
+          '<div class="about__copy reveal">' +
+            (s.eyebrow ? '<span class="eyebrow">' + esc(s.eyebrow) + "</span>" : "") +
+            (s.title ? '<h2 class="about__title">' + esc(s.title) + "</h2>" : "") +
+            (s.text ? '<p class="about__text custom-text">' + esc(s.text) + "</p>" : "") +
+            sectionButton(s.button) +
+          "</div>" +
+        "</div>";
+    } else if (s.type === "images") {
+      const imgs = (s.images || []).filter((x) => x && x.img);
+      sec.className = "section custom-images";
+      sec.innerHTML =
+        '<div class="container">' +
+          (head || text ? '<div class="section-head reveal">' + head + text + '<div class="divider"><span></span></div></div>' : "") +
+          '<div class="gallery reveal">' +
+            imgs.map((g) => "<figure>" + img(g.img, g.cap || "", g.cap || "") +
+              (g.cap ? "<figcaption>" + esc(g.cap) + "</figcaption>" : "") + "</figure>").join("") +
+          "</div>" +
+          (s.button && s.button.label ? '<div class="more-wrap">' + sectionButton(s.button) + "</div>" : "") +
+        "</div>";
+      $$("figure", sec).forEach((fig, i) => fig.addEventListener("click", () =>
+        openLightbox(imgs.map((g) => ({ img: g.img, cap: g.cap || s.title || "" })), i)));
+    } else if (s.type === "banner") {
+      sec.className = "section custom-banner";
+      sec.innerHTML =
+        '<div class="container"><div class="cta-band reveal"><div>' +
+          (s.title ? "<h2>" + esc(s.title) + "</h2>" : "") +
+          (s.text ? '<p class="custom-text">' + esc(s.text) + "</p>" : "") +
+        '</div><div class="cta-band__actions">' + sectionButton(s.button) + "</div></div></div>";
+    } else {
+      sec.className = "section custom-textsec";
+      sec.innerHTML =
+        '<div class="container"><div class="section-head reveal">' + head + text +
+          (s.button && s.button.label ? '<div class="custom-btn">' + sectionButton(s.button) + "</div>" : "") +
+        "</div></div>";
+    }
+    return sec;
+  }
+
+  function buildLayout() {
+    const layout = contentAt("layout");
+    if (!Array.isArray(layout) || !layout.length) return;
+    const custom = contentAt("custom") || {};
+    let after = $(".strip");
+    if (!after) return;
+    const menuItems = [];
+
+    layout.forEach(function (item) {
+      if (!item || !item.key) return;
+      const el = BUILTIN_SECTIONS[item.key] ? $(BUILTIN_SECTIONS[item.key]) : renderCustomSection(item.key, custom[item.key]);
+      if (!el) return;
+      after.after(el);
+      after = el;
+      if (item.show === false) {
+        el.hidden = true;
+        $$('a[href="#' + el.id + '"]').forEach((a) => (a.hidden = true));
+      } else if (custom[item.key] && custom[item.key].menu) {
+        menuItems.push({ id: el.id, label: custom[item.key].menu });
+      }
+    });
+
+    // الأقسام المخصّصة التي لها اسم في القائمة: تُضاف قبل «تواصل معنا»
+    menuItems.forEach(function (m) {
+      [["#navLinks", ""], ["#mobileMenu", ""], [".footer__links", ""]].forEach(function ([sel]) {
+        const box = $(sel);
+        if (!box) return;
+        const a = document.createElement("a");
+        a.href = "#" + m.id;
+        a.textContent = m.label;
+        const contact = box.querySelector('a[href="#contact"]');
+        contact ? box.insertBefore(a, contact) : box.appendChild(a);
+      });
+    });
+  }
+
   function fillStaticPlaceholders() {
     $$("[data-ph]").forEach(function (el) {
       if (el.querySelector("img, .ph")) return;
@@ -725,6 +833,7 @@
     renderReviews();
     renderContact();
     applyContent();
+    buildLayout();
     fillStaticPlaceholders();
     bindWhatsApp();
     bindForm();

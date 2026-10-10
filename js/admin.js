@@ -162,7 +162,7 @@
 
       // الملفات المستخدمة فعلاً فقط (صورة رُفعت ثم حُذفت لا تُنشر)
       const used = new Set(usedPaths());
-      const files = Object.keys(pending).filter((p) => used.has(p));
+      const files = Object.keys(pending).filter((p) => used.has(p) || p === LOCK_PATH);
 
       const tree = [];
       for (let i = 0; i < files.length; i++) {
@@ -347,6 +347,7 @@
     renderContent();
     renderGallery();
     renderReviews();
+    renderLayout();
   }
 
   const catName = (id) => (data.CATEGORIES.find((c) => c.id === id) || {}).name || "— بدون قسم —";
@@ -422,6 +423,7 @@
         '<div class="item__actions">' +
           '<button class="btn btn--icon" data-act="up"' + (i === 0 ? " disabled" : "") + ">▲</button>" +
           '<button class="btn btn--icon" data-act="down"' + (i === data.CATEGORIES.length - 1 ? " disabled" : "") + ">▼</button>" +
+          '<button class="btn btn--icon" data-act="link" title="نسخ رابط القسم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>' +
           '<button class="btn btn--ghost btn--sm" data-act="edit">تعديل</button>' +
         "</div>" +
       "</div>";
@@ -839,9 +841,325 @@
     });
   }
 
+  /* ==========================================================
+     كلمة المرور — مفتاح GitHub محفوظ مشفّراً في js/admin-config.js
+     (PBKDF2-SHA256 لاشتقاق المفتاح من كلمة المرور + AES-GCM للتشفير)
+     ========================================================== */
+  const LOCK_PATH = "js/admin-config.js";
+  const LOCK_ITER = 600000;
+  const b64e = (buf) => btoa(String.fromCharCode.apply(null, new Uint8Array(buf)));
+  const b64d = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+  async function lockKey(password, salt, iter) {
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+    return crypto.subtle.deriveKey({ name: "PBKDF2", salt: salt, iterations: iter, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  }
+
+  async function unlockToken(password) {
+    if (typeof ADMIN_LOCK === "undefined" || !ADMIN_LOCK) throw Object.assign(new Error("nolock"), { code: "nolock" });
+    try {
+      const key = await lockKey(password, b64d(ADMIN_LOCK.salt), ADMIN_LOCK.iter);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64d(ADMIN_LOCK.iv) }, key, b64d(ADMIN_LOCK.data));
+      return new TextDecoder().decode(pt);
+    } catch (e) {
+      throw Object.assign(new Error("badpw"), { code: "badpw" });
+    }
+  }
+
+  async function makeLockFile(secret, password) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await lockKey(password, salt, LOCK_ITER);
+    const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, new TextEncoder().encode(secret));
+    const lock = { v: 1, iter: LOCK_ITER, salt: b64e(salt), iv: b64e(iv), data: b64e(ct) };
+    return "/* قفل لوحة التحكم — مفتاح GitHub مشفّر بكلمة المرور (PBKDF2 + AES-GCM).\n" +
+           "   لا يمكن استخدامه بدون كلمة المرور. يُحدَّث من تبويب «الإعدادات» في لوحة التحكم. */\n" +
+           "const ADMIN_LOCK = " + JSON.stringify(lock) + ";\n";
+  }
+
+  function stageLockFile(text) {
+    pending[LOCK_PATH] = { b64: utf8ToB64(text), url: "" };
+    markDirty("lockfile");
+  }
+
+  /* ==========================================================
+     ترتيب الصفحة والأقسام المخصّصة
+     ========================================================== */
+  const BUILTIN_LABELS = {
+    categories: "أقسام المنتجات",
+    about: "من نحن",
+    gallery: "المعرض / المصنع",
+    reviews: "آراء العملاء",
+    cta: "شريط الاستشارة",
+    contact: "تواصل معنا"
+  };
+  const SECTION_TYPES = { text: "نص", split: "نص وصورة", images: "مجموعة صور", banner: "شريط دعوة" };
+
+  function ensureLayout() {
+    data.CONTENT = data.CONTENT || {};
+    data.CONTENT.custom = data.CONTENT.custom || {};
+    if (!Array.isArray(data.CONTENT.layout) || !data.CONTENT.layout.length) {
+      data.CONTENT.layout = Object.keys(BUILTIN_LABELS).map((key) => ({ key: key, show: true }));
+    }
+    return data.CONTENT.layout;
+  }
+
+  function sectionLabel(key) {
+    if (BUILTIN_LABELS[key]) {
+      const t = getAt(data.CONTENT, "sections." + key + ".title");
+      return BUILTIN_LABELS[key] + (t && key !== "categories" ? " — «" + t + "»" : "");
+    }
+    const s = data.CONTENT.custom[key] || {};
+    return s.title || s.menu || "(قسم بدون عنوان)";
+  }
+
+  function renderLayout() {
+    const layout = ensureLayout();
+    $("#layoutList").innerHTML = layout.map((item, i) => {
+      const custom = !BUILTIN_LABELS[item.key];
+      const s = data.CONTENT.custom[item.key] || {};
+      return '<div class="item layout-item' + (item.show === false ? " is-off" : "") + '" data-i="' + i + '">' +
+        '<label class="switch" title="إظهار / إخفاء"><input type="checkbox" data-lay="toggle"' + (item.show === false ? "" : " checked") + "><span></span></label>" +
+        '<div class="item__main">' +
+          '<div class="item__name">' + esc(sectionLabel(item.key)) + "</div>" +
+          '<div class="item__meta">' +
+            (custom ? '<span class="tag tag--new">قسم مخصّص · ' + esc(SECTION_TYPES[s.type] || "نص") + "</span>" : '<span class="tag">قسم أساسي</span>') +
+            (custom && s.menu ? "<span>في القائمة: " + esc(s.menu) + "</span>" : "") +
+            (item.show === false ? '<span class="tag tag--warn">مخفي</span>' : "") +
+          "</div>" +
+        "</div>" +
+        '<div class="item__actions">' +
+          '<button class="btn btn--icon" data-lay="up"' + (i === 0 ? " disabled" : "") + ">▲</button>" +
+          '<button class="btn btn--icon" data-lay="down"' + (i === layout.length - 1 ? " disabled" : "") + ">▼</button>" +
+          '<button class="btn btn--ghost btn--sm" data-lay="edit">' + (custom ? "تعديل" : "تعديل النصوص") + "</button>" +
+        "</div>" +
+      "</div>";
+    }).join("");
+  }
+
+  /* ----- نافذة القسم المخصّص ----- */
+  let secEditing = null;     // { key, isNew, s }
+
+  function openSection(key) {
+    const isNew = !key;
+    key = key || "x-" + uid();
+    const s = isNew
+      ? { type: "text", menu: "", eyebrow: "", title: "", text: "", image: "", side: "start", images: [], button: { label: "", type: "whatsapp", value: "" } }
+      : JSON.parse(JSON.stringify(data.CONTENT.custom[key] || {}));
+    s.images = s.images || [];
+    s.button = s.button || { label: "", type: "whatsapp", value: "" };
+    secEditing = { key: key, isNew: isNew, s: s };
+
+    const f = $("#sectionForm").elements;
+    $("#sectionDlgTitle").textContent = isNew ? "قسم جديد" : "تعديل القسم";
+    f.eyebrow.value = s.eyebrow || "";
+    f.title.value = s.title || "";
+    f.text.value = s.text || "";
+    f.side.value = s.side || "start";
+    f.menu.value = s.menu || "";
+    f.btnLabel.value = s.button.label || "";
+    f.btnType.value = s.button.type || "whatsapp";
+    f.btnValue.value = s.button.value || "";
+    $("#deleteSectionBtn").hidden = isNew;
+    setSectionType(s.type || "text");
+    renderSecImage();
+    renderSecImages();
+    updateBtnHint();
+    $("#sectionDlg").showModal();
+  }
+
+  function setSectionType(t) {
+    secEditing.s.type = t;
+    $$("#sectionTypes .type-opt").forEach((b) => b.classList.toggle("is-on", b.dataset.type === t));
+    $$("#sectionForm [data-for]").forEach((el) => { el.hidden = !el.dataset.for.split(" ").includes(t); });
+  }
+
+  function updateBtnHint() {
+    const link = $("#sectionForm").elements.btnType.value === "link";
+    $("#btnValueLabel").textContent = link ? "الرابط (مثال: https://instagram.com/… أو #contact)" : "رسالة الواتساب الجاهزة";
+    $("#sectionForm").elements.btnValue.dir = link ? "ltr" : "rtl";
+  }
+
+  function renderSecImage() {
+    const v = secEditing.s.image;
+    $("#secImage").innerHTML =
+      (v ? '<img src="' + esc(mediaUrl(v)) + '" alt="">' : '<div class="item__thumb item__thumb--empty">▢</div>') +
+      '<label class="upload"><input type="file" accept="image/*" hidden id="secImageInput">' +
+      '<span class="btn btn--ghost btn--sm">' + (v ? "تغيير الصورة" : "رفع صورة") + "</span></label>";
+  }
+
+  function renderSecImages() {
+    const list = secEditing.s.images;
+    $("#secImages").innerHTML = list.length ? list.map((g, i) =>
+      '<div class="item gal-item" data-i="' + i + '">' +
+        '<img class="item__thumb" src="' + esc(mediaUrl(g.img)) + '" alt="">' +
+        '<input data-secimg-cap value="' + esc(g.cap || "") + '" placeholder="تعليق (اختياري)">' +
+        '<div class="item__actions"><button type="button" class="btn btn--icon" data-secimg-del title="حذف">✕</button></div>' +
+      "</div>").join("") : '<div class="empty">لم تُضف صور بعد.</div>';
+  }
+
+  function saveSection() {
+    const f = $("#sectionForm").elements, s = secEditing.s;
+    s.eyebrow = f.eyebrow.value.trim();
+    s.title = f.title.value.trim();
+    s.text = f.text.value.trim();
+    s.side = f.side.value;
+    s.menu = f.menu.value.trim();
+    s.button = { label: f.btnLabel.value.trim(), type: f.btnType.value, value: f.btnValue.value.trim() };
+    if (!s.title && !s.text && !(s.type === "images" && s.images.length) && !(s.type === "split" && s.image)) {
+      toast("أضف عنواناً أو نصاً أو صورة للقسم", "error");
+      return false;
+    }
+    if (s.type === "split" && !s.image) { toast("أضف صورة لقسم «نص وصورة»", "error"); return false; }
+    if (s.type === "images" && !s.images.length) { toast("أضف صورة واحدة على الأقل", "error"); return false; }
+    // لا نحفظ الحقول غير المستخدمة لهذا النوع
+    if (s.type !== "split") { delete s.image; delete s.side; }
+    if (s.type !== "images") delete s.images;
+    if (s.type === "banner") delete s.eyebrow;
+    if (!s.button.label) delete s.button;
+
+    data.CONTENT.custom[secEditing.key] = s;
+    const layout = ensureLayout();
+    if (secEditing.isNew) {
+      // الجديد يوضع قبل «تواصل معنا» إن وُجد
+      const ci = layout.findIndex((x) => x.key === "contact");
+      layout.splice(ci < 0 ? layout.length : ci, 0, { key: secEditing.key, show: true });
+    }
+    markDirty();
+    renderLayout();
+    toast(secEditing.isNew ? "أُضيف القسم — اضغط «نشر التغييرات»" : "حُفظ القسم — اضغط «نشر التغييرات»");
+    return true;
+  }
+
+  function deleteSection() {
+    if (!confirm("حذف هذا القسم من الصفحة؟")) return;
+    delete data.CONTENT.custom[secEditing.key];
+    data.CONTENT.layout = ensureLayout().filter((x) => x.key !== secEditing.key);
+    markDirty();
+    $("#sectionDlg").close();
+    renderLayout();
+  }
+
+  /* ----- رابط القسم (أقسام المنتجات) ----- */
+  function siteUrl() {
+    if (/\.github\.io$/i.test(location.hostname)) return "https://" + CFG.owner + ".github.io/" + CFG.repo + "/";
+    return location.href.replace(/admin\.html.*$/, "index.html");
+  }
+
+  async function copyText(t) {
+    try { await navigator.clipboard.writeText(t); }
+    catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+  }
+
+  function bindExtraTabs2() {
+    // ترتيب الصفحة
+    $("#addSectionBtn").addEventListener("click", () => openSection(null));
+    $("#layoutList").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-lay]");
+      if (!b || b.dataset.lay === "toggle") return;
+      const i = Number(b.closest(".item").dataset.i), L = ensureLayout(), item = L[i];
+      if (b.dataset.lay === "up" && i > 0) { [L[i - 1], L[i]] = [L[i], L[i - 1]]; markDirty(); renderLayout(); }
+      if (b.dataset.lay === "down" && i < L.length - 1) { [L[i + 1], L[i]] = [L[i], L[i + 1]]; markDirty(); renderLayout(); }
+      if (b.dataset.lay === "edit") {
+        if (BUILTIN_LABELS[item.key]) {
+          const tab = item.key === "gallery" || item.key === "reviews" ? item.key : item.key === "categories" ? "categories" : "content";
+          $('.tab[data-tab="' + tab + '"]').click();
+        } else openSection(item.key);
+      }
+    });
+    $("#layoutList").addEventListener("change", (e) => {
+      if (e.target.dataset.lay !== "toggle") return;
+      const i = Number(e.target.closest(".item").dataset.i);
+      ensureLayout()[i].show = e.target.checked;
+      markDirty();
+      renderLayout();
+    });
+
+    // نافذة القسم
+    $("#sectionTypes").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-type]");
+      if (b) setSectionType(b.dataset.type);
+    });
+    $("#sectionForm").elements.btnType.addEventListener("change", updateBtnHint);
+    $("#secImage").addEventListener("change", async (e) => {
+      if (e.target.id !== "secImageInput" || !e.target.files[0]) return;
+      try { secEditing.s.image = await addImageFile(e.target.files[0], "sec"); renderSecImage(); }
+      catch (ex) { toast("تعذّرت قراءة الصورة — استخدم JPG أو PNG", "error"); }
+    });
+    $("#secImagesInput").addEventListener("change", async (e) => {
+      const files = Array.from(e.target.files);
+      e.target.value = "";
+      for (const f of files) {
+        try { secEditing.s.images.push({ img: await addImageFile(f, "sec"), cap: "" }); renderSecImages(); }
+        catch (ex) { toast("تعذّرت قراءة الصورة " + f.name, "error"); }
+      }
+    });
+    $("#secImages").addEventListener("input", (e) => {
+      if (!("secimgCap" in e.target.dataset)) return;
+      secEditing.s.images[Number(e.target.closest(".item").dataset.i)].cap = e.target.value.trim();
+    });
+    $("#secImages").addEventListener("click", (e) => {
+      if (!e.target.closest("[data-secimg-del]")) return;
+      secEditing.s.images.splice(Number(e.target.closest(".item").dataset.i), 1);
+      renderSecImages();
+    });
+    $("#sectionForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (saveSection()) $("#sectionDlg").close();
+    });
+    $("#deleteSectionBtn").addEventListener("click", deleteSection);
+
+    // نسخ رابط قسم منتجات
+    $("#categoryList").addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-act=link]");
+      if (!b) return;
+      await copyText(siteUrl() + "#c-" + encodeURIComponent(b.closest(".item").dataset.id));
+      toast("نُسخ رابط القسم — أرسله للعميل مباشرة");
+    });
+
+    // الإعدادات: كلمة المرور
+    $("#passwordForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const p1 = $("#newPassword").value, p2 = $("#newPassword2").value;
+      if (p1.length < 6) { toast("كلمة المرور قصيرة — ٦ أحرف على الأقل", "error"); return; }
+      if (p1 !== p2) { toast("كلمتا المرور غير متطابقتين", "error"); return; }
+      stageLockFile(await makeLockFile(token, p1));
+      $("#passwordForm").reset();
+      toast("جاهزة — اضغط «نشر التغييرات» لتفعيل كلمة المرور الجديدة", "ok");
+    });
+    // الإعدادات: مفتاح جديد
+    $("#tokenForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const t = $("#newToken").value.trim(), pw = $("#tokenPassword").value;
+      if (!t) { toast("أدخل المفتاح الجديد", "error"); return; }
+      if (pw.length < 6) { toast("أدخل كلمة مرور (٦ أحرف على الأقل)", "error"); return; }
+      const old = token;
+      token = t;
+      try {
+        await gh(repoPath("/contents/" + DATA_PATH + "?ref=" + encodeURIComponent(CFG.branch)));
+      } catch (ex) {
+        token = old;
+        toast("المفتاح الجديد لا يعمل: " + friendlyError(ex), "error");
+        return;
+      }
+      stageLockFile(await makeLockFile(t, pw));
+      if (localStorage.getItem(TOKEN_KEY)) localStorage.setItem(TOKEN_KEY, t);
+      else sessionStorage.setItem(TOKEN_KEY, t);
+      $("#tokenForm").reset();
+      toast("جاهز — اضغط «نشر التغييرات» لحفظ المفتاح الجديد", "ok");
+    });
+  }
+
+
   /* ---------- الأحداث ---------- */
   function bind() {
     $("#repoName").textContent = CFG.owner + "/" + CFG.repo;
+    if (typeof ADMIN_LOCK === "undefined" || !ADMIN_LOCK) $("#tokenDetails").open = true;
 
     $("#loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -850,9 +1168,19 @@
       btn.textContent = "جارٍ التحقق…";
       err.hidden = true;
       try {
-        await tryLogin($("#tokenInput").value, $("#rememberInput").checked);
+        const t = $("#tokenInput").value.trim();
+        const pw = $("#passwordInput").value;
+        if (t) await tryLogin(t, $("#rememberInput").checked);
+        else if (pw) {
+          btn.textContent = "جارٍ فتح القفل…";
+          await tryLogin(await unlockToken(pw), $("#rememberInput").checked);
+        } else throw Object.assign(new Error("empty"), { code: "empty" });
       } catch (ex) {
-        err.textContent = friendlyError(ex);
+        err.textContent =
+          ex.code === "badpw" ? "كلمة المرور غير صحيحة" :
+          ex.code === "nolock" ? "لم تُضبط كلمة مرور بعد — استخدم «الدخول بمفتاح GitHub»" :
+          ex.code === "empty" ? "أدخل كلمة المرور" :
+          friendlyError(ex);
         err.hidden = false;
       } finally {
         btn.disabled = false;
@@ -969,6 +1297,7 @@
   /* ---------- التشغيل ---------- */
   bind();
   bindExtraTabs();
+  bindExtraTabs2();
   const saved = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
   if (saved) {
     $("#loginView").hidden = true;
