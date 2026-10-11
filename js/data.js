@@ -281,7 +281,7 @@ const PRODUCTS = [
     "cat": "sofas",
     "name": "كنبة (( أوريليا ))",
     "desc": "تتميز بالأناقة و النعومة واللمسة الهادئة للخشب الزان الطبيعي .",
-    "price": "120 دك / المتر",
+    "price": "125 دك / المتر",
     "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
     "imgs": [
       "assets/images/products/p-mv4d8sz4q7a7.jpg",
@@ -342,16 +342,16 @@ const PRODUCTS = [
     "id": 18,
     "cat": "sofas",
     "name": "كنبة «لؤلؤ»",
-    "desc": "خطوط ناعمة مع لمسة جوز على الذراعين — متوفرة بالأبيض والرمادي.",
-    "price": "السعر عند الطلب",
+    "desc": "خطوط ناعمة مع لمسة خشب على الذراعين — متوفرة بجميع الالوان .",
+    "price": "125 دك / المتر",
     "img": "assets/images/products/sofa-pearl.jpg"
   },
   {
     "id": 14,
     "cat": "sofas",
     "name": "كنبة «زيتون»",
-    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل جوز مخروطية.",
-    "price": "السعر عند الطلب",
+    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل زان مخروطية.",
+    "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-olive-2.jpg",
     "imgs": [
       "assets/images/products/sofa-olive.jpg",
@@ -365,7 +365,7 @@ const PRODUCTS = [
     "cat": "sofas",
     "name": "كنبة «موجة»",
     "desc": "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
-    "price": "السعر عند الطلب",
+    "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-wave.jpg",
     "imgs": [
       "assets/images/products/sofa-wave-2.jpg"
@@ -377,7 +377,7 @@ const PRODUCTS = [
     "cat": "sofas",
     "name": "ديوانية «رمال»",
     "desc": "ديوانية طويلة بقماش شمواه بلون الرمال، مساند عريضة ومجموعة وسائد متدرجة.",
-    "price": "السعر عند الطلب",
+    "price": "100 دك / المتر",
     "img": "assets/images/products/diwan-rimal-2.jpg",
     "imgs": [
       "assets/images/products/diwan-rimal.jpg"
@@ -389,8 +389,8 @@ const PRODUCTS = [
     "id": 21,
     "cat": "sofas",
     "name": "كنبة «ساج»",
-    "desc": "أذرع عريضة من قشرة الخشب الطبيعي تحتضن مقاعد بيضاء مريحة.",
-    "price": "السعر عند الطلب",
+    "desc": "أذرع عريضة من قشرة الخشب الشيبورد الألماني تحتضن مقاعد مريحة.",
+    "price": "125 دك / المتر",
     "img": "assets/images/products/sofa-saj.jpg"
   },
   {
@@ -398,15 +398,15 @@ const PRODUCTS = [
     "cat": "sofas",
     "name": "طقم «فيروز»",
     "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
-    "price": "السعر عند الطلب",
+    "price": "130 دك / المتر",
     "img": "assets/images/products/set-teal.jpg"
   },
   {
     "id": 7,
     "cat": "chairs",
     "name": "فوتيه «نقش»",
-    "desc": "إطار جوز بزوايا حادة يحتضن جانباً منقوشاً بقماش جاكار، ومقعد كتان كريمي مريح.",
-    "price": "السعر عند الطلب",
+    "desc": "إطار من خشب الزان الطبيعي بزوايا حادة يحتضن جانباً منقوشاً بقماش جاكار، ومقعد كتان كريمي مريح.",
+    "price": "150 دك",
     "img": "assets/images/products/chair-walnut.jpg",
     "imgs": [
       "assets/images/products/chair-walnut-2.jpg"
@@ -417,7 +417,7 @@ const PRODUCTS = [
     "cat": "chairs",
     "name": "فوتيه «ديوان»",
     "desc": "كرسي بظهر مقوّس وإطار خشب داكن لامع، مقعد مخمل كريمي وقاعدة بلمسة ذهبية.",
-    "price": "السعر عند الطلب",
+    "price": "130 دك",
     "img": "assets/images/products/chair-tub.jpg",
     "imgs": [
       "assets/images/products/chair-tub-2.jpg"
@@ -440,8 +440,8 @@ const PRODUCTS = [
     "id": 55,
     "cat": "chairs",
     "name": "فوتيه «قمر»",
-    "desc": "كرسي دائري بقاعدة مخددة وحلقة معدنية، بلون رملي هادئ.",
-    "price": "السعر عند الطلب",
+    "desc": "كرسي دائري بقاعدة مخددة من الخشب الطبيعي .",
+    "price": "125 دك",
     "img": "assets/images/products/chair-qamar.jpg",
     "imgs": [
       "assets/images/products/chair-qamar-2.jpg"
@@ -453,8 +453,8 @@ const PRODUCTS = [
     "id": 24,
     "cat": "coffeecorner",
     "name": "ركن قهوة «بُن»",
-    "desc": "محطة قهوة من خشب الجوز بمساحة لماكينة الإسبريسو، رفوف للفناجين وأدراج للتخزين.",
-    "price": "السعر عند الطلب",
+    "desc": "محطة قهوة من خشب الشيبورد الالماني  بمساحة لماكينة الإسبريسو و برادة الماء ،  وأدراج للتخزين.",
+    "price": "500 دك",
     "img": "assets/images/products/coffee-corner-bun.jpg",
     "badge": "جديد",
     "badgeType": "new"
@@ -464,7 +464,7 @@ const PRODUCTS = [
     "cat": "coffeecorner",
     "name": "ركن قهوة «صباح»",
     "desc": "وحدة طولية بقوس علوي ورفوف مفتوحة، سطح عمل بمقبس كهربائي وخزائن سفلية.",
-    "price": "السعر عند الطلب",
+    "price": "450 دك",
     "img": "assets/images/products/coffee-corner-sabah.jpg",
     "badge": "جديد",
     "badgeType": "new"
@@ -473,8 +473,8 @@ const PRODUCTS = [
     "id": 27,
     "cat": "console",
     "name": "كونسول «نحت»",
-    "desc": "أرجل منحوتة من الجوز بخط متموج، وسطح خشبي بإطار زجاجي داكن.",
-    "price": "السعر عند الطلب",
+    "desc": "أرجل منحوتة من قشرة الجوز الطبيعي بخط متموج، وسطح خشبي .",
+    "price": "300 دك",
     "img": "assets/images/products/p-mv4dcufzjx0a.jpg",
     "imgs": [
       "assets/images/products/console-naht.jpg"
@@ -485,7 +485,7 @@ const PRODUCTS = [
     "cat": "console",
     "name": "كونسول «مدار»",
     "desc": "سطح زجاجي شفاف على عمودين أسودين تعلوهما كرتان لامعتان.",
-    "price": "السعر عند الطلب",
+    "price": "280 دك",
     "img": "assets/images/products/console-madar.jpg"
   },
   {
@@ -493,7 +493,7 @@ const PRODUCTS = [
     "cat": "console",
     "name": "كونسول «توازن»",
     "desc": "قاعدتان مشقوقتان ترتكزان على كرتين — يأتي مع مرآة بإطار معدني منحني.",
-    "price": "السعر عند الطلب",
+    "price": "450 دك",
     "img": "assets/images/products/console-tawazun.jpg"
   },
   {
@@ -501,15 +501,15 @@ const PRODUCTS = [
     "cat": "console",
     "name": "كونسول «طبقتين»",
     "desc": "رفّان من الجوز بجوانب سوداء منحنية وسطح زجاجي — للمداخل أو تحت التلفاز.",
-    "price": "السعر عند الطلب",
+    "price": "350 دك",
     "img": "assets/images/products/console-tabaqatain.jpg"
   },
   {
     "id": 56,
     "cat": "console",
     "name": "كونسول «زاوية»",
-    "desc": "لوحان جانبيان من الجوز بزوايا حادة ورف مائل يخترق التصميم.",
-    "price": "السعر عند الطلب",
+    "desc": "لوحان جانبيان من قشرة الجوز بزوايا حادة ورف مائل يخترق التصميم.",
+    "price": "350 دك",
     "img": "assets/images/products/console-zawiya.jpg",
     "badge": "جديد",
     "badgeType": "new"
