@@ -180,20 +180,6 @@ const CATEGORIES = [
     "img": "assets/images/products/chair-walnut.jpg"
   },
   {
-    "id": "coffeecorner",
-    "name": "ركنات القهوة",
-    "icon": "coffee",
-    "desc": "وحدات قهوة متكاملة بتخزين ومساحة للأجهزة",
-    "img": "assets/images/products/coffee-corner-bun.jpg"
-  },
-  {
-    "id": "console",
-    "name": "كونسولات",
-    "icon": "console",
-    "desc": "كونسولات أنيقة للمداخل والممرات",
-    "img": "assets/images/products/console-naht.jpg"
-  },
-  {
     "id": "coffee",
     "name": "طاولات وسط",
     "icon": "coffeetable",
@@ -206,6 +192,20 @@ const CATEGORIES = [
     "icon": "sidetable",
     "desc": "طاولات جانبية وتقديم للضيافة",
     "img": "assets/images/products/side-qasr.jpg"
+  },
+  {
+    "id": "console",
+    "name": "كونسولات",
+    "icon": "console",
+    "desc": "كونسولات أنيقة للمداخل والممرات",
+    "img": "assets/images/products/console-naht.jpg"
+  },
+  {
+    "id": "coffeecorner",
+    "name": "ركنات القهوة",
+    "icon": "coffee",
+    "desc": "وحدات قهوة متكاملة بتخزين ومساحة للأجهزة",
+    "img": "assets/images/products/coffee-corner-bun.jpg"
   },
   {
     "id": "dining",
