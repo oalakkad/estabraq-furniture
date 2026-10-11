@@ -232,37 +232,58 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   {
+    "id": 59,
+    "cat": "coffee",
+    "name": "طاولة (( استبرق ))",
+    "desc": "طاولة استبرق ، تتميز بوجود قاعدة من الخشب الزان الطبيعي ، مع خشب قشرة الجوز الطبيعي مع تداخل اللون الصدفي في وسط الطاولة .",
+    "price": "350 دك",
+    "img": "assets/images/products/p-mv4ehlf2vmqk.jpg",
+    "badge": "الأكثر طلباً",
+    "badgeType": "hot"
+  },
+  {
     "id": 15,
     "cat": "sofas",
     "name": "كنبة «ملكي»",
-    "desc": "طراز كلاسيكي بإطار جوز محفور ولمسات ذهبية، قماش فيروزي ووسائد أسطوانية.",
-    "price": "السعر عند الطلب",
+    "desc": "طراز كلاسيكي بإطار خشب زان محفور ولمسات ذهبية،",
+    "price": "160 دك / المتر",
     "img": "assets/images/products/sofa-royal-2.jpg",
     "imgs": [
-      "assets/images/products/sofa-royal.jpg"
+      "assets/images/products/sofa-royal.jpg",
+      "assets/images/products/p-mv4ekix6vwxv.jpg",
+      "assets/images/products/p-mv4ekiy204uq.jpg"
     ],
-    "video": "assets/videos/sofa-royal.mp4"
+    "video": "assets/videos/sofa-royal.mp4",
+    "badge": "الأكثر طلباً",
+    "badgeType": "hot"
   },
   {
     "id": 19,
     "cat": "sofas",
     "name": "ديوانية «أصالة»",
-    "desc": "إطار جوز رفيع يحيط بالظهر والأذرع، أرجل مخروطية ووسائد أسطوانية جانبية.",
-    "price": "السعر عند الطلب",
+    "desc": "إطار من خشب الزان  الطبيعي يحيط بالظهر والأذرع،",
+    "price": "130 دك / المتر",
     "img": "assets/images/products/diwan-asala-2.jpg",
     "imgs": [
       "assets/images/products/diwan-asala.jpg"
     ]
   },
   {
+    "id": 5,
+    "cat": "sofas",
+    "name": "ديوانية «هلال»",
+    "desc": "خط منحني أنيق بإطار خشبي من الخشب الزان طبيعي يلتف حول الظهر والأذرع،",
+    "price": "130 دك / للمتر",
+    "img": "assets/images/products/sofa-curved.jpg"
+  },
+  {
     "id": 58,
     "cat": "sofas",
-    "name": "كنبة ( ليوان )",
-    "desc": "",
-    "price": "السعر عند الطلب",
+    "name": "كنبة (( أوريليا ))",
+    "desc": "تتميز بالأناقة و النعومة واللمسة الهادئة للخشب الزان الطبيعي .",
+    "price": "120 دك / المتر",
     "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
     "imgs": [
-      "assets/images/products/p-mv4d8sxv26br.jpg",
       "assets/images/products/p-mv4d8sz4q7a7.jpg",
       "assets/images/products/p-mv4d8t16onhg.jpg"
     ]
@@ -271,47 +292,38 @@ const PRODUCTS = [
     "id": 16,
     "cat": "sofas",
     "name": "كنبة «ديباج»",
-    "desc": "أذرع منحنية بقماش جاكار مطرّز، مقعد ناعم وقاعدة خشبية غائرة توحي بالطفو.",
-    "price": "السعر عند الطلب",
+    "desc": "أذرع منحنية بقماش جاكار مطرّز، مقعد ناعم وقاعدة خشبية من قشرة الجوز الطبعي  غائرة توحي بالطفو.",
+    "price": "125 دك / للمتر",
     "img": "assets/images/products/sofa-damask-2.jpg",
     "imgs": [
       "assets/images/products/sofa-damask.jpg"
-    ],
-    "video": "assets/videos/sofa-damask.mp4"
-  },
-  {
-    "id": 5,
-    "cat": "sofas",
-    "name": "ديوانية «هلال»",
-    "desc": "خط منحني أنيق بإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-curved.jpg"
+    ]
   },
   {
     "id": 23,
     "cat": "sofas",
     "name": "كنبة «غيمة»",
-    "desc": "ثلاثة مقاعد بيضاء على قاعدة جوز، مع وسائد أسطوانية بأزرار.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-ghaima.jpg"
+    "desc": "تتميز بقاعدة سفلية بارزة مصنوعة من الخشب الزان الطبيعي  ،  والتي تمتد لتشكل إطاراً يلتف حول الجوانب الخارجية للمساند الذراعية، مما يمنحها ثباتاً بصرياً ولمسة كلاسيكية مودرن",
+    "price": "140 دك / المتر",
+    "img": "assets/images/products/sofa-ghaima.jpg",
+    "imgs": [
+      "assets/images/products/p-mv4exmew8iyg.jpg"
+    ]
   },
   {
     "id": 20,
     "cat": "sofas",
     "name": "كنبة «صندل»",
-    "desc": "جوانب خشبية مستديرة بخطوط محفورة أفقياً، مع مقاعد رمادية فاتحة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-sandal.jpg",
-    "imgs": [
-      "assets/images/products/sofa-sandal-2.jpg"
-    ]
+    "desc": "كنبة عصرية تجمع بين الأناقة والراحة، تتميز بتصميمها الهيكلي الفريد الذي يدمج بين الأقمشة الفاتحة و خشب قشرة الجوز الطبيعي ليعطي لمسة مودرن ودافئة في آن واحد.",
+    "price": "130 دك / المتر",
+    "img": "assets/images/products/sofa-sandal.jpg"
   },
   {
     "id": 17,
     "cat": "sofas",
     "name": "كنبة «نسيم»",
     "desc": "كنبة منحنية غير متماثلة بذراع مكسّر مبطّن، بقماش رمادي دافئ.",
-    "price": "السعر عند الطلب",
+    "price": "140 دك / المتر",
     "img": "assets/images/products/sofa-chaise.jpg",
     "video": "assets/videos/sofa-chaise.mp4"
   },
@@ -319,8 +331,8 @@ const PRODUCTS = [
     "id": 3,
     "cat": "sofas",
     "name": "كنبة «حرير»",
-    "desc": "ظهر منحني بمخمل كريمي ناعم وتنورة شراشيب كلاسيكية، مع وسائد حريرية لامعة.",
-    "price": "السعر عند الطلب",
+    "desc": "تتميز بالشكل الكلاسيكي مع وجود هدب يزيد من فخامة و أناقة الكنبة .",
+    "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-fringe-2.jpg",
     "imgs": [
       "assets/images/products/sofa-fringe.jpg"
