@@ -232,18 +232,17 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   {
-    "id": 14,
+    "id": 58,
     "cat": "sofas",
-    "name": "كنبة «زيتون»",
-    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل جوز مخروطية.",
+    "name": "كنبة ( ليوان )",
+    "desc": "",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-olive-2.jpg",
+    "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
     "imgs": [
-      "assets/images/products/sofa-olive.jpg",
-      "assets/images/products/sofa-olive-3.jpg"
-    ],
-    "badge": "جديد",
-    "badgeType": "new"
+      "assets/images/products/p-mv4d8sxv26br.jpg",
+      "assets/images/products/p-mv4d8sz4q7a7.jpg",
+      "assets/images/products/p-mv4d8t16onhg.jpg"
+    ]
   },
   {
     "id": 15,
@@ -258,16 +257,15 @@ const PRODUCTS = [
     "video": "assets/videos/sofa-royal.mp4"
   },
   {
-    "id": 6,
+    "id": 19,
     "cat": "sofas",
-    "name": "كنبة «موجة»",
-    "desc": "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
+    "name": "ديوانية «أصالة»",
+    "desc": "إطار جوز رفيع يحيط بالظهر والأذرع، أرجل مخروطية ووسائد أسطوانية جانبية.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-wave.jpg",
+    "img": "assets/images/products/diwan-asala-2.jpg",
     "imgs": [
-      "assets/images/products/sofa-wave-2.jpg"
-    ],
-    "video": "assets/videos/sofa-wave.mp4"
+      "assets/images/products/diwan-asala.jpg"
+    ]
   },
   {
     "id": 16,
@@ -280,6 +278,33 @@ const PRODUCTS = [
       "assets/images/products/sofa-damask.jpg"
     ],
     "video": "assets/videos/sofa-damask.mp4"
+  },
+  {
+    "id": 5,
+    "cat": "sofas",
+    "name": "ديوانية «هلال»",
+    "desc": "خط منحني أنيق بإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/sofa-curved.jpg"
+  },
+  {
+    "id": 23,
+    "cat": "sofas",
+    "name": "كنبة «غيمة»",
+    "desc": "ثلاثة مقاعد بيضاء على قاعدة جوز، مع وسائد أسطوانية بأزرار.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/sofa-ghaima.jpg"
+  },
+  {
+    "id": 20,
+    "cat": "sofas",
+    "name": "كنبة «صندل»",
+    "desc": "جوانب خشبية مستديرة بخطوط محفورة أفقياً، مع مقاعد رمادية فاتحة.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/sofa-sandal.jpg",
+    "imgs": [
+      "assets/images/products/sofa-sandal-2.jpg"
+    ]
   },
   {
     "id": 17,
@@ -310,6 +335,32 @@ const PRODUCTS = [
     "img": "assets/images/products/sofa-pearl.jpg"
   },
   {
+    "id": 14,
+    "cat": "sofas",
+    "name": "كنبة «زيتون»",
+    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل جوز مخروطية.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/sofa-olive-2.jpg",
+    "imgs": [
+      "assets/images/products/sofa-olive.jpg",
+      "assets/images/products/sofa-olive-3.jpg"
+    ],
+    "badge": "جديد",
+    "badgeType": "new"
+  },
+  {
+    "id": 6,
+    "cat": "sofas",
+    "name": "كنبة «موجة»",
+    "desc": "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/sofa-wave.jpg",
+    "imgs": [
+      "assets/images/products/sofa-wave-2.jpg"
+    ],
+    "video": "assets/videos/sofa-wave.mp4"
+  },
+  {
     "id": 22,
     "cat": "sofas",
     "name": "ديوانية «رمال»",
@@ -323,36 +374,6 @@ const PRODUCTS = [
     "badgeType": "new"
   },
   {
-    "id": 19,
-    "cat": "sofas",
-    "name": "ديوانية «أصالة»",
-    "desc": "إطار جوز رفيع يحيط بالظهر والأذرع، أرجل مخروطية ووسائد أسطوانية جانبية.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/diwan-asala-2.jpg",
-    "imgs": [
-      "assets/images/products/diwan-asala.jpg"
-    ]
-  },
-  {
-    "id": 5,
-    "cat": "sofas",
-    "name": "ديوانية «هلال»",
-    "desc": "خط منحني أنيق بإطار جوز يلتف حول الظهر والأذرع، بقماش كريمي ووسائد متباينة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-curved.jpg"
-  },
-  {
-    "id": 20,
-    "cat": "sofas",
-    "name": "كنبة «صندل»",
-    "desc": "جوانب خشبية مستديرة بخطوط محفورة أفقياً، مع مقاعد رمادية فاتحة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-sandal.jpg",
-    "imgs": [
-      "assets/images/products/sofa-sandal-2.jpg"
-    ]
-  },
-  {
     "id": 21,
     "cat": "sofas",
     "name": "كنبة «ساج»",
@@ -361,52 +382,12 @@ const PRODUCTS = [
     "img": "assets/images/products/sofa-saj.jpg"
   },
   {
-    "id": 23,
-    "cat": "sofas",
-    "name": "كنبة «غيمة»",
-    "desc": "ثلاثة مقاعد بيضاء على قاعدة جوز، مع وسائد أسطوانية بأزرار.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-ghaima.jpg"
-  },
-  {
     "id": 12,
     "cat": "sofas",
     "name": "طقم «فيروز»",
     "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
     "price": "السعر عند الطلب",
     "img": "assets/images/products/set-teal.jpg"
-  },
-  {
-    "id": 1,
-    "cat": "sofas",
-    "name": "كنبة «عنبر»",
-    "desc": "مخمل بلون العنبر الدافئ على إطار جوز طبيعي بخطوط مائلة، مع ثلاث وسائد ساتان كريمية.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-amber.jpg"
-  },
-  {
-    "id": 2,
-    "cat": "sofas",
-    "name": "كنبة «مشربية»",
-    "desc": "قاعدة خشبية مصمتة بنقش هندسي محفور مستوحى من المشربيات، مع مقاعد مخمل رمادي عريضة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-mashrabiya.jpg"
-  },
-  {
-    "id": 4,
-    "cat": "sofas",
-    "name": "ديوانية «سلطان»",
-    "desc": "ديوانية طويلة بحواف جوز داكنة وظهر مستقيم، تتسع لصف كامل من الوسائد المنقوشة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/sofa-cushions.jpg"
-  },
-  {
-    "id": 13,
-    "cat": "sofas",
-    "name": "ديوانية «مجلس»",
-    "desc": "ديوانية متكاملة من ثلاث قطع كريمية بحواف جوز، مصممة للدواوين والمجالس الواسعة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/set-majlis.jpg"
   },
   {
     "id": 7,
@@ -457,22 +438,6 @@ const PRODUCTS = [
     "badgeType": "new"
   },
   {
-    "id": 9,
-    "cat": "chairs",
-    "name": "فوتيه «حرير»",
-    "desc": "الفوتيه المرافق لكنبة «حرير» — ظهر منحني وتنورة شراشيب بنفس المخمل الكريمي.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/chair-fringe.jpg"
-  },
-  {
-    "id": 10,
-    "cat": "chairs",
-    "name": "فوتيه «حديقة»",
-    "desc": "قماش بنقشة أوراق استوائية بألوان زاهية على إطار بلون الشمبانيا.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/chair-floral.jpg"
-  },
-  {
     "id": 24,
     "cat": "coffeecorner",
     "name": "ركن قهوة «بُن»",
@@ -498,7 +463,10 @@ const PRODUCTS = [
     "name": "كونسول «نحت»",
     "desc": "أرجل منحوتة من الجوز بخط متموج، وسطح خشبي بإطار زجاجي داكن.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/console-naht.jpg"
+    "img": "assets/images/products/p-mv4dcufzjx0a.jpg",
+    "imgs": [
+      "assets/images/products/console-naht.jpg"
+    ]
   },
   {
     "id": 26,
@@ -535,28 +503,12 @@ const PRODUCTS = [
     "badgeType": "new"
   },
   {
-    "id": 32,
+    "id": 33,
     "cat": "coffee",
-    "name": "طاولة وسط «تناظر»",
-    "desc": "كتلة من خشب الجوز بقشرة متناظرة على شكل حرف V — قطعة تتصدر الصالة.",
+    "name": "طاولة وسط «طبقات»",
+    "desc": "طبقات خشبية متراكبة بزوايا متعاكسة وسطح زجاجي علوي.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/coffee-tanathur.jpg"
-  },
-  {
-    "id": 35,
-    "cat": "coffee",
-    "name": "طاولة وسط «رحى»",
-    "desc": "طاولة جوز بحواف دائرية ناعمة وسطح زجاجي، ترتفع فوق قاعدة غائرة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/coffee-raha.jpg"
-  },
-  {
-    "id": 34,
-    "cat": "coffee",
-    "name": "طاولة وسط «تموّج»",
-    "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/coffee-tamawuj.jpg"
+    "img": "assets/images/products/coffee-tabaqat.jpg"
   },
   {
     "id": 31,
@@ -567,6 +519,14 @@ const PRODUCTS = [
     "img": "assets/images/products/coffee-tafw.jpg"
   },
   {
+    "id": 35,
+    "cat": "coffee",
+    "name": "طاولة وسط «رحى»",
+    "desc": "طاولة جوز بحواف دائرية ناعمة وسطح زجاجي، ترتفع فوق قاعدة غائرة.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/coffee-raha.jpg"
+  },
+  {
     "id": 30,
     "cat": "coffee",
     "name": "طاولة وسط «نافذة»",
@@ -575,20 +535,20 @@ const PRODUCTS = [
     "img": "assets/images/products/coffee-nafitha.jpg"
   },
   {
-    "id": 33,
+    "id": 34,
     "cat": "coffee",
-    "name": "طاولة وسط «طبقات»",
-    "desc": "طبقات خشبية متراكبة بزوايا متعاكسة وسطح زجاجي علوي.",
+    "name": "طاولة وسط «تموّج»",
+    "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/coffee-tabaqat.jpg"
+    "img": "assets/images/products/coffee-tamawuj.jpg"
   },
   {
-    "id": 11,
-    "cat": "serving",
-    "name": "طاولة تقديم «صخر»",
-    "desc": "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية.",
+    "id": 32,
+    "cat": "coffee",
+    "name": "طاولة وسط «تناظر»",
+    "desc": "كتلة من خشب الجوز بقشرة متناظرة على شكل حرف V — قطعة تتصدر الصالة.",
     "price": "السعر عند الطلب",
-    "img": "assets/images/products/table-slate.jpg"
+    "img": "assets/images/products/coffee-tanathur.jpg"
   },
   {
     "id": 44,
@@ -613,6 +573,14 @@ const PRODUCTS = [
     "desc": "قاعدة جوز على شكل جرّة وسطح داكن بحواف مستديرة.",
     "price": "السعر عند الطلب",
     "img": "assets/images/products/side-jarra.jpg"
+  },
+  {
+    "id": 11,
+    "cat": "serving",
+    "name": "طاولة تقديم «صخر»",
+    "desc": "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/table-slate.jpg"
   },
   {
     "id": 48,
@@ -680,7 +648,7 @@ const PRODUCTS = [
   },
   {
     "id": 50,
-    "cat": "serving",
+    "cat": "console",
     "name": "طاولة تقديم «شلال»",
     "desc": "خشب جوز ينساب من السطح إلى الأرض، مع لوح زجاجي مدمج.",
     "price": "السعر عند الطلب",
