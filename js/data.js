@@ -232,19 +232,6 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   {
-    "id": 58,
-    "cat": "sofas",
-    "name": "كنبة ( ليوان )",
-    "desc": "",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
-    "imgs": [
-      "assets/images/products/p-mv4d8sxv26br.jpg",
-      "assets/images/products/p-mv4d8sz4q7a7.jpg",
-      "assets/images/products/p-mv4d8t16onhg.jpg"
-    ]
-  },
-  {
     "id": 15,
     "cat": "sofas",
     "name": "كنبة «ملكي»",
@@ -265,6 +252,19 @@ const PRODUCTS = [
     "img": "assets/images/products/diwan-asala-2.jpg",
     "imgs": [
       "assets/images/products/diwan-asala.jpg"
+    ]
+  },
+  {
+    "id": 58,
+    "cat": "sofas",
+    "name": "كنبة ( ليوان )",
+    "desc": "",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
+    "imgs": [
+      "assets/images/products/p-mv4d8sxv26br.jpg",
+      "assets/images/products/p-mv4d8sz4q7a7.jpg",
+      "assets/images/products/p-mv4d8t16onhg.jpg"
     ]
   },
   {
