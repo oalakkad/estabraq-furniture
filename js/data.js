@@ -13,7 +13,7 @@ const STORE = {
   "email": "",
   "addressLine1": "الكويت — الري",
   "addressLine2": "قطعة 1، شارع 3 , خلف الافنيوز",
-  "mapsLink": "https://maps.app.goo.gl/bSE5Q1e6ANSxBtDT9?g_st=ic",
+  "mapsLink": "https://maps.app.goo.gl/1biUQmznJoBo2fyi9?g_st=ic",
   "instagram": "https://www.instagram.com/estbraq_interiors?cplk=MTIwNDFibWZ4Mnh3dA%3D%3D&utm_source=qr",
   "snapchat": "",
   "tiktok": "",
