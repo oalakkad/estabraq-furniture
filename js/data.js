@@ -260,7 +260,7 @@ const PRODUCTS = [
   {
     "id": 19,
     "cat": "sofas",
-    "name": "ديوانية «أصالة»",
+    "name": "كنبة «أصالة»",
     "desc": "إطار من خشب الزان  الطبيعي يحيط بالظهر والأذرع،",
     "price": "130 دك / المتر",
     "img": "assets/images/products/diwan-asala-2.jpg",
@@ -271,7 +271,7 @@ const PRODUCTS = [
   {
     "id": 5,
     "cat": "sofas",
-    "name": "ديوانية «هلال»",
+    "name": "كنبة «هلال»",
     "desc": "خط منحني أنيق بإطار خشبي من الخشب الزان طبيعي يلتف حول الظهر والأذرع،",
     "price": "130 دك / للمتر",
     "img": "assets/images/products/sofa-curved.jpg"
@@ -375,7 +375,7 @@ const PRODUCTS = [
   {
     "id": 22,
     "cat": "sofas",
-    "name": "ديوانية «رمال»",
+    "name": "كنبة «رمال»",
     "desc": "ديوانية طويلة بقماش شمواه بلون الرمال، مساند عريضة ومجموعة وسائد متدرجة.",
     "price": "100 دك / المتر",
     "img": "assets/images/products/diwan-rimal-2.jpg",
@@ -396,7 +396,7 @@ const PRODUCTS = [
   {
     "id": 12,
     "cat": "sofas",
-    "name": "طقم «فيروز»",
+    "name": "كنبة «فيروز»",
     "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
     "price": "130 دك / المتر",
     "img": "assets/images/products/set-teal.jpg"
@@ -428,7 +428,7 @@ const PRODUCTS = [
     "cat": "chairs",
     "name": "فوتيه «ضحى»",
     "desc": "فوتيه أبيض ناعم بإطار رفيع بلون الشمبانيا ووسادة ظهر منفصلة.",
-    "price": "السعر عند الطلب",
+    "price": "125 دك",
     "img": "assets/images/products/chair-duha.jpg",
     "imgs": [
       "assets/images/products/chair-duha-2.jpg"
@@ -519,7 +519,7 @@ const PRODUCTS = [
     "cat": "coffee",
     "name": "طاولة وسط «طبقات»",
     "desc": "طبقات خشبية متراكبة بزوايا متعاكسة وسطح زجاجي علوي.",
-    "price": "السعر عند الطلب",
+    "price": "280 دك",
     "img": "assets/images/products/coffee-tabaqat.jpg"
   },
   {
@@ -527,7 +527,7 @@ const PRODUCTS = [
     "cat": "coffee",
     "name": "طاولة وسط «طفو»",
     "desc": "لوح خشبي سميك يبدو طافياً فوق قاعدة غائرة.",
-    "price": "السعر عند الطلب",
+    "price": "280 دك",
     "img": "assets/images/products/coffee-tafw.jpg"
   },
   {
@@ -543,7 +543,7 @@ const PRODUCTS = [
     "cat": "coffee",
     "name": "طاولة وسط «نافذة»",
     "desc": "إطار جوز رفيع بسطح زجاجي ورف سفلي للكتب والديكور.",
-    "price": "السعر عند الطلب",
+    "price": "320 دك",
     "img": "assets/images/products/coffee-nafitha.jpg"
   },
   {
@@ -551,7 +551,7 @@ const PRODUCTS = [
     "cat": "coffee",
     "name": "طاولة وسط «تموّج»",
     "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
-    "price": "السعر عند الطلب",
+    "price": "300 دك",
     "img": "assets/images/products/coffee-tamawuj.jpg"
   },
   {
@@ -559,7 +559,7 @@ const PRODUCTS = [
     "cat": "coffee",
     "name": "طاولة وسط «تناظر»",
     "desc": "كتلة من خشب الجوز بقشرة متناظرة على شكل حرف V — قطعة تتصدر الصالة.",
-    "price": "السعر عند الطلب",
+    "price": "220 دك",
     "img": "assets/images/products/coffee-tanathur.jpg"
   },
   {
@@ -705,7 +705,7 @@ const PRODUCTS = [
     "cat": "decor",
     "name": "مرآة «أبعاد»",
     "desc": "لوح مرايا بتقسيمات هندسية مع حشوات منسوجة بلون ذهبي دافئ.",
-    "price": "السعر عند الطلب",
+    "price": "850 دك",
     "img": "assets/images/products/decor-mirror-abaad.jpg"
   },
   {
@@ -713,7 +713,7 @@ const PRODUCTS = [
     "cat": "decor",
     "name": "مرآة «إطار»",
     "desc": "مرآة طولية بإطار جوز بحواف مستديرة.",
-    "price": "السعر عند الطلب",
+    "price": "280 دك",
     "img": "assets/images/products/decor-mirror-frame.jpg"
   },
   {
@@ -721,7 +721,7 @@ const PRODUCTS = [
     "cat": "decor",
     "name": "لوحات جدارية «جوز»",
     "desc": "طقم من ثلاث لوحات خشبية بخطوط محفورة وقشرة متناظرة.",
-    "price": "السعر عند الطلب",
+    "price": "600 دك",
     "img": "assets/images/products/decor-wall-panels.jpg"
   }
 ];
