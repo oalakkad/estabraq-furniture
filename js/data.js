@@ -595,12 +595,46 @@ const PRODUCTS = [
     "img": "assets/images/products/side-qasr.jpg"
   },
   {
+    "id": 49,
+    "cat": "serving",
+    "name": "طاولة تقديم «مكعّب»",
+    "desc": "مكعب من خشب قشرة الجوز بسطح محفور بمربعات منتظمة.\nالقياس :\n65x65x65 دك",
+    "price": "75 دك",
+    "img": "assets/images/products/side-mukaab.jpg"
+  },
+  {
     "id": 36,
     "cat": "serving",
     "name": "طاولة تقديم «ملكي»",
     "desc": "زان داكن بتيجان ذهبية محفورة على الأرجل وسطح زجاجي.\nالقياس :\n60x35x50 cm",
     "price": "65 دك",
     "img": "assets/images/products/side-taj.jpg"
+  },
+  {
+    "id": 38,
+    "cat": "serving",
+    "name": "طاولة تقديم «أصالة»",
+    "desc": "أرجل مخددة بلون داكن وسطح حجري بإطار مصقول.\nالقياس :\n60x35x50 cm",
+    "price": "65 دك",
+    "img": "assets/images/products/side-aamida.jpg"
+  },
+  {
+    "id": 57,
+    "cat": "serving",
+    "name": "طاولة تقديم «سدو»",
+    "desc": "صندوق من خشب قشر الجوز بحزام محفور بنقش السدو الكويتي التقليدي.\nالقياس : \n40x40x50 cm",
+    "price": "65 دك",
+    "img": "assets/images/products/side-sadu.jpg",
+    "badge": "جديد",
+    "badgeType": "new"
+  },
+  {
+    "id": 37,
+    "cat": "serving",
+    "name": "طاولة تقديم «أوريليا»",
+    "desc": "أرجل منحنية رشيقة من الخشب الزان وسطح زجاجي داكن.\nالقياس : \n60x35x50 cm",
+    "price": "60 دك",
+    "img": "assets/images/products/side-ghazal.jpg"
   },
   {
     "id": 39,
@@ -611,36 +645,12 @@ const PRODUCTS = [
     "img": "assets/images/products/side-jarra.jpg"
   },
   {
-    "id": 11,
-    "cat": "serving",
-    "name": "طاولة تقديم «صخر»",
-    "desc": "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/table-slate.jpg"
-  },
-  {
     "id": 43,
     "cat": "serving",
     "name": "طاولة تقديم «ضفيرة»",
     "desc": "سطح دائري على عمود مخرّم بشكل ضفيرة وقاعدة دائرية.\nالقياس :\nقطر 35 cm \nالارتفاع 50 cm",
     "price": "50 دك",
     "img": "assets/images/products/side-dafira.jpg"
-  },
-  {
-    "id": 37,
-    "cat": "serving",
-    "name": "طاولة تقديم «أوريليا»",
-    "desc": "أرجل منحنية رشيقة من الجوز وسطح زجاجي داكن.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/side-ghazal.jpg"
-  },
-  {
-    "id": 38,
-    "cat": "serving",
-    "name": "طاولة تقديم «أصالة»",
-    "desc": "أرجل مخددة بلون داكن وسطح حجري بإطار مصقول.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/side-aamida.jpg"
   },
   {
     "id": 40,
@@ -675,14 +685,6 @@ const PRODUCTS = [
     "img": "assets/images/products/side-kutla.jpg"
   },
   {
-    "id": 49,
-    "cat": "serving",
-    "name": "طاولة تقديم «مكعّب»",
-    "desc": "مكعب من خشب قشرة الجوز بسطح محفور بمربعات منتظمة.\nالقياس :\n65x65x65 دك",
-    "price": "75 دك",
-    "img": "assets/images/products/side-mukaab.jpg"
-  },
-  {
     "id": 46,
     "cat": "serving",
     "name": "طاولة تقديم «رقعة»",
@@ -691,14 +693,12 @@ const PRODUCTS = [
     "img": "assets/images/products/side-roqaa.jpg"
   },
   {
-    "id": 57,
+    "id": 11,
     "cat": "serving",
-    "name": "طاولة تقديم «سدو»",
-    "desc": "صندوق من خشب قشر الجوز بحزام محفور بنقش السدو الكويتي التقليدي.\nالقياس : \n40x40x50 cm",
-    "price": "65 دك",
-    "img": "assets/images/products/side-sadu.jpg",
-    "badge": "جديد",
-    "badgeType": "new"
+    "name": "طاولة تقديم «صخر»",
+    "desc": "عمود من حجر الأردواز الطبيعي بسطح زجاجي شفاف وقطعة حجرية علوية.",
+    "price": "السعر عند الطلب",
+    "img": "assets/images/products/table-slate.jpg"
   },
   {
     "id": 52,
@@ -709,20 +709,20 @@ const PRODUCTS = [
     "img": "assets/images/products/decor-mirror-abaad.jpg"
   },
   {
-    "id": 51,
-    "cat": "decor",
-    "name": "مرآة «إطار»",
-    "desc": "مرآة طولية بإطار جوز بحواف مستديرة.",
-    "price": "280 دك",
-    "img": "assets/images/products/decor-mirror-frame.jpg"
-  },
-  {
     "id": 53,
     "cat": "decor",
     "name": "لوحات جدارية «جوز»",
     "desc": "طقم من ثلاث لوحات خشبية بخطوط محفورة وقشرة متناظرة.",
     "price": "600 دك",
     "img": "assets/images/products/decor-wall-panels.jpg"
+  },
+  {
+    "id": 51,
+    "cat": "decor",
+    "name": "مرآة «إطار»",
+    "desc": "مرآة طولية بإطار جوز بحواف مستديرة.",
+    "price": "280 دك",
+    "img": "assets/images/products/decor-mirror-frame.jpg"
   }
 ];
 
