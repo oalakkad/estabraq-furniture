@@ -232,16 +232,6 @@ const CATEGORIES = [
 
 const PRODUCTS = [
   {
-    "id": 59,
-    "cat": "coffee",
-    "name": "طاولة (( استبرق ))",
-    "desc": "طاولة استبرق ، تتميز بوجود قاعدة من الخشب الزان الطبيعي ، مع خشب قشرة الجوز الطبيعي مع تداخل اللون الصدفي في وسط الطاولة .",
-    "price": "350 دك",
-    "img": "assets/images/products/p-mv4ehlf2vmqk.jpg",
-    "badge": "الأكثر طلباً",
-    "badgeType": "hot"
-  },
-  {
     "id": 15,
     "cat": "sofas",
     "name": "كنبة «ملكي»",
@@ -256,6 +246,26 @@ const PRODUCTS = [
     "video": "assets/videos/sofa-royal.mp4",
     "badge": "الأكثر طلباً",
     "badgeType": "hot"
+  },
+  {
+    "id": 23,
+    "cat": "sofas",
+    "name": "كنبة «غيمة»",
+    "desc": "تتميز بقاعدة سفلية بارزة مصنوعة من الخشب الزان الطبيعي  ،  والتي تمتد لتشكل إطاراً يلتف حول الجوانب الخارجية للمساند الذراعية، مما يمنحها ثباتاً بصرياً ولمسة كلاسيكية مودرن",
+    "price": "140 دك / المتر",
+    "img": "assets/images/products/sofa-ghaima.jpg",
+    "imgs": [
+      "assets/images/products/p-mv4exmew8iyg.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "cat": "sofas",
+    "name": "كنبة «نسيم»",
+    "desc": "كنبة منحنية غير متماثلة بذراع مكسّر مبطّن، بقماش رمادي دافئ.",
+    "price": "140 دك / المتر",
+    "img": "assets/images/products/sofa-chaise.jpg",
+    "video": "assets/videos/sofa-chaise.mp4"
   },
   {
     "id": 19,
@@ -275,6 +285,22 @@ const PRODUCTS = [
     "desc": "خط منحني أنيق بإطار خشبي من الخشب الزان طبيعي يلتف حول الظهر والأذرع،",
     "price": "130 دك / للمتر",
     "img": "assets/images/products/sofa-curved.jpg"
+  },
+  {
+    "id": 12,
+    "cat": "sofas",
+    "name": "كنبة «فيروز»",
+    "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
+    "price": "130 دك / المتر",
+    "img": "assets/images/products/set-teal.jpg"
+  },
+  {
+    "id": 20,
+    "cat": "sofas",
+    "name": "كنبة «صندل»",
+    "desc": "كنبة عصرية تجمع بين الأناقة والراحة، تتميز بتصميمها الهيكلي الفريد الذي يدمج بين الأقمشة الفاتحة و خشب قشرة الجوز الطبيعي ليعطي لمسة مودرن ودافئة في آن واحد.",
+    "price": "130 دك / المتر",
+    "img": "assets/images/products/sofa-sandal.jpg"
   },
   {
     "id": 58,
@@ -300,32 +326,20 @@ const PRODUCTS = [
     ]
   },
   {
-    "id": 23,
+    "id": 18,
     "cat": "sofas",
-    "name": "كنبة «غيمة»",
-    "desc": "تتميز بقاعدة سفلية بارزة مصنوعة من الخشب الزان الطبيعي  ،  والتي تمتد لتشكل إطاراً يلتف حول الجوانب الخارجية للمساند الذراعية، مما يمنحها ثباتاً بصرياً ولمسة كلاسيكية مودرن",
-    "price": "140 دك / المتر",
-    "img": "assets/images/products/sofa-ghaima.jpg",
-    "imgs": [
-      "assets/images/products/p-mv4exmew8iyg.jpg"
-    ]
+    "name": "كنبة «لؤلؤ»",
+    "desc": "خطوط ناعمة مع لمسة خشب على الذراعين — متوفرة بجميع الالوان .",
+    "price": "125 دك / المتر",
+    "img": "assets/images/products/sofa-pearl.jpg"
   },
   {
-    "id": 20,
+    "id": 21,
     "cat": "sofas",
-    "name": "كنبة «صندل»",
-    "desc": "كنبة عصرية تجمع بين الأناقة والراحة، تتميز بتصميمها الهيكلي الفريد الذي يدمج بين الأقمشة الفاتحة و خشب قشرة الجوز الطبيعي ليعطي لمسة مودرن ودافئة في آن واحد.",
-    "price": "130 دك / المتر",
-    "img": "assets/images/products/sofa-sandal.jpg"
-  },
-  {
-    "id": 17,
-    "cat": "sofas",
-    "name": "كنبة «نسيم»",
-    "desc": "كنبة منحنية غير متماثلة بذراع مكسّر مبطّن، بقماش رمادي دافئ.",
-    "price": "140 دك / المتر",
-    "img": "assets/images/products/sofa-chaise.jpg",
-    "video": "assets/videos/sofa-chaise.mp4"
+    "name": "كنبة «ساج»",
+    "desc": "أذرع عريضة من قشرة الخشب الشيبورد الألماني تحتضن مقاعد مريحة.",
+    "price": "125 دك / المتر",
+    "img": "assets/images/products/sofa-saj.jpg"
   },
   {
     "id": 3,
@@ -337,14 +351,6 @@ const PRODUCTS = [
     "imgs": [
       "assets/images/products/sofa-fringe.jpg"
     ]
-  },
-  {
-    "id": 18,
-    "cat": "sofas",
-    "name": "كنبة «لؤلؤ»",
-    "desc": "خطوط ناعمة مع لمسة خشب على الذراعين — متوفرة بجميع الالوان .",
-    "price": "125 دك / المتر",
-    "img": "assets/images/products/sofa-pearl.jpg"
   },
   {
     "id": 14,
@@ -384,22 +390,6 @@ const PRODUCTS = [
     ],
     "badge": "جديد",
     "badgeType": "new"
-  },
-  {
-    "id": 21,
-    "cat": "sofas",
-    "name": "كنبة «ساج»",
-    "desc": "أذرع عريضة من قشرة الخشب الشيبورد الألماني تحتضن مقاعد مريحة.",
-    "price": "125 دك / المتر",
-    "img": "assets/images/products/sofa-saj.jpg"
-  },
-  {
-    "id": 12,
-    "cat": "sofas",
-    "name": "كنبة «فيروز»",
-    "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
-    "price": "130 دك / المتر",
-    "img": "assets/images/products/set-teal.jpg"
   },
   {
     "id": 7,
@@ -470,10 +460,36 @@ const PRODUCTS = [
     "badgeType": "new"
   },
   {
+    "id": 28,
+    "cat": "console",
+    "name": "كونسول «توازن»",
+    "desc": "قاعدتان مشقوقتان ترتكزان على كرتين — يأتي مع مرآة بإطار معدني منحني.\nالقياس :\n200x45x90 cm",
+    "price": "450 دك",
+    "img": "assets/images/products/console-tawazun.jpg"
+  },
+  {
+    "id": 56,
+    "cat": "console",
+    "name": "كونسول «زاوية»",
+    "desc": "لوحان جانبيان من قشرة الجوز بزوايا حادة ورف مائل يخترق التصميم.\nالقياس :\n200x45x90 cm",
+    "price": "350 دك",
+    "img": "assets/images/products/console-zawiya.jpg",
+    "badge": "جديد",
+    "badgeType": "new"
+  },
+  {
+    "id": 29,
+    "cat": "console",
+    "name": "كونسول «صندل»",
+    "desc": "رفّان من خشب قشرة الجوز  بجوانب سوداء منحنية وسطح زجاجي — للمداخل أو تحت التلفاز.\nالقياس :\n200x45x90 cm",
+    "price": "350 دك",
+    "img": "assets/images/products/console-tabaqatain.jpg"
+  },
+  {
     "id": 27,
     "cat": "console",
     "name": "كونسول «نحت»",
-    "desc": "أرجل منحوتة من قشرة الجوز الطبيعي بخط متموج، وسطح خشبي .",
+    "desc": "أرجل منحوتة من قشرة الجوز الطبيعي بخط متموج، وسطح خشبي .\nالقياس :\n200x45x90 cm",
     "price": "300 دك",
     "img": "assets/images/products/p-mv4dcufzjx0a.jpg",
     "imgs": [
@@ -484,35 +500,43 @@ const PRODUCTS = [
     "id": 26,
     "cat": "console",
     "name": "كونسول «مدار»",
-    "desc": "سطح زجاجي شفاف على عمودين أسودين تعلوهما كرتان لامعتان.",
+    "desc": "سطح زجاجي شفاف على عمودين أسودين تعلوهما كرتان لامعتان.\nالقياس :\n200x45x90 cm",
     "price": "280 دك",
     "img": "assets/images/products/console-madar.jpg"
   },
   {
-    "id": 28,
+    "id": 50,
     "cat": "console",
-    "name": "كونسول «توازن»",
-    "desc": "قاعدتان مشقوقتان ترتكزان على كرتين — يأتي مع مرآة بإطار معدني منحني.",
-    "price": "450 دك",
-    "img": "assets/images/products/console-tawazun.jpg"
+    "name": "كونسول «شلال»",
+    "desc": "خشب قشرة الجوز ينساب من السطح إلى الأرض، مع لوح زجاجي مدمج.\nالقياس :\n200x45x90 cm",
+    "price": "250 دك",
+    "img": "assets/images/products/side-shallal.jpg"
   },
   {
-    "id": 29,
-    "cat": "console",
-    "name": "كونسول «طبقتين»",
-    "desc": "رفّان من الجوز بجوانب سوداء منحنية وسطح زجاجي — للمداخل أو تحت التلفاز.",
+    "id": 59,
+    "cat": "coffee",
+    "name": "طاولة (( استبرق ))",
+    "desc": "طاولة استبرق ، تتميز بوجود قاعدة من الخشب الزان الطبيعي ، مع خشب قشرة الجوز الطبيعي مع تداخل اللون الصدفي في وسط الطاولة .\nالقياس : \n160x85x50 cm",
     "price": "350 دك",
-    "img": "assets/images/products/console-tabaqatain.jpg"
+    "img": "assets/images/products/p-mv4ehlf2vmqk.jpg",
+    "badge": "الأكثر طلباً",
+    "badgeType": "hot"
   },
   {
-    "id": 56,
-    "cat": "console",
-    "name": "كونسول «زاوية»",
-    "desc": "لوحان جانبيان من قشرة الجوز بزوايا حادة ورف مائل يخترق التصميم.",
-    "price": "350 دك",
-    "img": "assets/images/products/console-zawiya.jpg",
-    "badge": "جديد",
-    "badgeType": "new"
+    "id": 30,
+    "cat": "coffee",
+    "name": "طاولة وسط «نافذة»",
+    "desc": "إطار جوز رفيع بسطح زجاجي ورف سفلي للكتب والديكور.",
+    "price": "320 دك",
+    "img": "assets/images/products/coffee-nafitha.jpg"
+  },
+  {
+    "id": 34,
+    "cat": "coffee",
+    "name": "طاولة وسط «تموّج»",
+    "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
+    "price": "300 دك",
+    "img": "assets/images/products/coffee-tamawuj.jpg"
   },
   {
     "id": 33,
@@ -539,22 +563,6 @@ const PRODUCTS = [
     "img": "assets/images/products/coffee-raha.jpg"
   },
   {
-    "id": 30,
-    "cat": "coffee",
-    "name": "طاولة وسط «نافذة»",
-    "desc": "إطار جوز رفيع بسطح زجاجي ورف سفلي للكتب والديكور.",
-    "price": "320 دك",
-    "img": "assets/images/products/coffee-nafitha.jpg"
-  },
-  {
-    "id": 34,
-    "cat": "coffee",
-    "name": "طاولة وسط «تموّج»",
-    "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
-    "price": "300 دك",
-    "img": "assets/images/products/coffee-tamawuj.jpg"
-  },
-  {
     "id": 32,
     "cat": "coffee",
     "name": "طاولة وسط «تناظر»",
@@ -563,27 +571,43 @@ const PRODUCTS = [
     "img": "assets/images/products/coffee-tanathur.jpg"
   },
   {
+    "id": 48,
+    "cat": "serving",
+    "name": "طاولة تقديم «توأم»",
+    "desc": "سطح بيضاوي على عمودين مستديرين من الخشب الداكن.\nالقياس :\n50x50x65 cm",
+    "price": "85 دك",
+    "img": "assets/images/products/side-tawam.jpg"
+  },
+  {
+    "id": 42,
+    "cat": "serving",
+    "name": "طاولة تقديم «صندل»",
+    "desc": "خشب من قشرة الجوز منحني مع لوح أسود وسطح زجاجي — تنزلق بجانب الكنبة.\nالقياس :\n60x40x50",
+    "price": "85 دك",
+    "img": "assets/images/products/side-inhina.jpg"
+  },
+  {
     "id": 44,
     "cat": "serving",
     "name": "طاولة تقديم «قصر»",
-    "desc": "طراز كلاسيكي بأرجل مخددة وزخارف محفورة يدوياً، وسطح زجاجي.",
-    "price": "السعر عند الطلب",
+    "desc": "طراز كلاسيكي بأرجل مخددة وزخارف محفورة يدوياً، وسطح زجاجي.\nالقياس : \n60x35x50 cm",
+    "price": "75 دك",
     "img": "assets/images/products/side-qasr.jpg"
   },
   {
     "id": 36,
     "cat": "serving",
-    "name": "طاولة تقديم «تاج»",
-    "desc": "جوز داكن بتيجان ذهبية محفورة على الأرجل وسطح زجاجي.",
-    "price": "السعر عند الطلب",
+    "name": "طاولة تقديم «ملكي»",
+    "desc": "زان داكن بتيجان ذهبية محفورة على الأرجل وسطح زجاجي.\nالقياس :\n60x35x50 cm",
+    "price": "65 دك",
     "img": "assets/images/products/side-taj.jpg"
   },
   {
     "id": 39,
     "cat": "serving",
     "name": "طاولة تقديم «جرّة»",
-    "desc": "قاعدة جوز على شكل جرّة وسطح داكن بحواف مستديرة.",
-    "price": "السعر عند الطلب",
+    "desc": "قاعدة خشب على شكل جرّة وسطح داكن بحواف مستديرة.\nالقياس :\n35x35x50 cm",
+    "price": "55 دك",
     "img": "assets/images/products/side-jarra.jpg"
   },
   {
@@ -595,25 +619,17 @@ const PRODUCTS = [
     "img": "assets/images/products/table-slate.jpg"
   },
   {
-    "id": 48,
-    "cat": "serving",
-    "name": "طاولة تقديم «توأم»",
-    "desc": "سطح بيضاوي على عمودين مستديرين من الجوز الداكن.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/side-tawam.jpg"
-  },
-  {
     "id": 43,
     "cat": "serving",
     "name": "طاولة تقديم «ضفيرة»",
-    "desc": "سطح دائري على عمود مخرّم بشكل ضفيرة وقاعدة دائرية.",
-    "price": "السعر عند الطلب",
+    "desc": "سطح دائري على عمود مخرّم بشكل ضفيرة وقاعدة دائرية.\nالقياس :\nقطر 35 cm \nالارتفاع 50 cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-dafira.jpg"
   },
   {
     "id": 37,
     "cat": "serving",
-    "name": "طاولة تقديم «غزال»",
+    "name": "طاولة تقديم «أوريليا»",
     "desc": "أرجل منحنية رشيقة من الجوز وسطح زجاجي داكن.",
     "price": "السعر عند الطلب",
     "img": "assets/images/products/side-ghazal.jpg"
@@ -621,7 +637,7 @@ const PRODUCTS = [
   {
     "id": 38,
     "cat": "serving",
-    "name": "طاولة تقديم «أعمدة»",
+    "name": "طاولة تقديم «أصالة»",
     "desc": "أرجل مخددة بلون داكن وسطح حجري بإطار مصقول.",
     "price": "السعر عند الطلب",
     "img": "assets/images/products/side-aamida.jpg"
@@ -630,72 +646,56 @@ const PRODUCTS = [
     "id": 40,
     "cat": "serving",
     "name": "طاولة تقديم «حلقة»",
-    "desc": "عمود منحوت بفتحة بيضاوية على قاعدة متدرجة.",
-    "price": "السعر عند الطلب",
+    "desc": "عمود منحوت بفتحة بيضاوية على قاعدة متدرجة.\nالقياس :\n35x35x50 cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-halqa.jpg"
   },
   {
     "id": 41,
     "cat": "serving",
     "name": "طاولة تقديم «منصة»",
-    "desc": "عمود جوز على شكل حرف T بسطح غائر داكن.",
-    "price": "السعر عند الطلب",
+    "desc": "عمود من قشرة الجوز على شكل حرف T بسطح غائر داكن.\nالقياس :\n35x35x50cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-minassa.jpg"
-  },
-  {
-    "id": 42,
-    "cat": "serving",
-    "name": "طاولة تقديم «انحناء»",
-    "desc": "خشب جوز منحني مع لوح أسود وسطح زجاجي — تنزلق بجانب الكنبة.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/side-inhina.jpg"
   },
   {
     "id": 45,
     "cat": "serving",
     "name": "طاولة تقديم «جسر»",
-    "desc": "لوحان جانبيان من الجوز يحملان سطحاً زجاجياً داكناً.",
-    "price": "السعر عند الطلب",
+    "desc": "لوحان جانبيان من قشرة الجوز يحملان سطحاً زجاجياً داكناً.\nالقياس :\n60x35x50 cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-jisr.jpg"
-  },
-  {
-    "id": 50,
-    "cat": "console",
-    "name": "طاولة تقديم «شلال»",
-    "desc": "خشب جوز ينساب من السطح إلى الأرض، مع لوح زجاجي مدمج.",
-    "price": "السعر عند الطلب",
-    "img": "assets/images/products/side-shallal.jpg"
   },
   {
     "id": 47,
     "cat": "serving",
     "name": "طاولة تقديم «كتلة»",
-    "desc": "مكعب جوز بحواف مستديرة وسطح داكن مدمج.",
-    "price": "السعر عند الطلب",
+    "desc": "مكعب من خشب قشرة الجوز بحواف مستديرة وسطح داكن مدمج.\nالقياس :\n40x40x50 cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-kutla.jpg"
   },
   {
     "id": 49,
     "cat": "serving",
     "name": "طاولة تقديم «مكعّب»",
-    "desc": "مكعب جوز بسطح محفور بمربعات منتظمة.",
-    "price": "السعر عند الطلب",
+    "desc": "مكعب من خشب قشرة الجوز بسطح محفور بمربعات منتظمة.\nالقياس :\n65x65x65 دك",
+    "price": "75 دك",
     "img": "assets/images/products/side-mukaab.jpg"
   },
   {
     "id": 46,
     "cat": "serving",
     "name": "طاولة تقديم «رقعة»",
-    "desc": "عمود خشبي فاتح بسطح محفور بمربعات كرقعة الشطرنج.",
-    "price": "السعر عند الطلب",
+    "desc": "عمود خشبي فاتح بسطح محفور بمربعات كرقعة الشطرنج.\nالقياس :\n40x40x50 cm",
+    "price": "50 دك",
     "img": "assets/images/products/side-roqaa.jpg"
   },
   {
     "id": 57,
     "cat": "serving",
     "name": "طاولة تقديم «سدو»",
-    "desc": "صندوق من خشب الجوز بحزام محفور بنقش السدو الكويتي التقليدي.",
-    "price": "السعر عند الطلب",
+    "desc": "صندوق من خشب قشر الجوز بحزام محفور بنقش السدو الكويتي التقليدي.\nالقياس : \n40x40x50 cm",
+    "price": "65 دك",
     "img": "assets/images/products/side-sadu.jpg",
     "badge": "جديد",
     "badgeType": "new"
