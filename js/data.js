@@ -7,28 +7,24 @@
 const STORE = {
   "name": "إستبرق",
   "brandLatin": "ESTBRAQ Interiors",
-  "whatsapp": "96500000000",
-  "phoneDisplay": "+965 0000 0000",
-  "phoneDial": "+96500000000",
-  "email": "info@estabraq-kw.com",
-  "addressLine1": "الكويت — الشويخ الصناعية",
-  "addressLine2": "قطعة 1، شارع المعارض، مقابل مجمع الأثاث",
-  "mapsLink": "https://maps.google.com/?q=Shuwaikh+Industrial+Kuwait",
-  "instagram": "https://instagram.com/",
-  "snapchat": "https://snapchat.com/",
-  "tiktok": "https://tiktok.com/",
+  "whatsapp": "96599617559",
+  "phoneDisplay": "+965 99617559",
+  "phoneDial": "+96599617559",
+  "email": "",
+  "addressLine1": "الكويت — الري",
+  "addressLine2": "قطعة 1، شارع 3 , خلف الافنيوز",
+  "mapsLink": "https://maps.app.goo.gl/bSE5Q1e6ANSxBtDT9?g_st=ic",
+  "instagram": "https://www.instagram.com/estbraq_interiors?cplk=MTIwNDFibWZ4Mnh3dA%3D%3D&utm_source=qr",
+  "snapchat": "",
+  "tiktok": "",
   "hours": [
     {
       "day": "السبت — الخميس",
-      "time": "٩:٠٠ ص — ١:٠٠ م"
-    },
-    {
-      "day": "مساءً",
-      "time": "٤:٣٠ م — ١٠:٠٠ م"
+      "time": "١٠.٠٠ ص - ١٠.٠٠ م"
     },
     {
       "day": "الجمعة",
-      "time": "٤:٣٠ م — ١٠:٠٠ م"
+      "time": "عطلة "
     }
   ]
 };
