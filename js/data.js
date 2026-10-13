@@ -54,7 +54,7 @@ const CONTENT = {
     "badgeTitle": "ضمان ١٠ سنوات",
     "badgeText": "على الهيكل الخشبي",
     "images": [
-      "assets/images/products/site-mv568hrf4m8a.jpg",
+      "assets/images/products/site-mv6e0ytehygh.jpg",
       "assets/images/products/site-mv568n7613a2.jpg",
       "assets/images/products/site-mv568rs7dk4u.jpg"
     ]
