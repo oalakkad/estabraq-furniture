@@ -358,9 +358,7 @@ const PRODUCTS = [
     "imgs": [
       "assets/images/products/sofa-olive.jpg",
       "assets/images/products/sofa-olive-3.jpg"
-    ],
-    "badge": "جديد",
-    "badgeType": "new"
+    ]
   },
   {
     "id": 6,
@@ -383,14 +381,12 @@ const PRODUCTS = [
     "img": "assets/images/products/diwan-rimal-2.jpg",
     "imgs": [
       "assets/images/products/diwan-rimal.jpg"
-    ],
-    "badge": "جديد",
-    "badgeType": "new"
+    ]
   },
   {
     "id": 7,
     "cat": "chairs",
-    "name": "فوتيه «نقش»",
+    "name": "كرسي «نقش»",
     "desc": "إطار من خشب الزان الطبيعي بزوايا حادة يحتضن جانباً منقوشاً بقماش جاكار، ومقعد كتان كريمي مريح.",
     "price": "150 دك",
     "img": "assets/images/products/chair-walnut.jpg",
@@ -401,7 +397,7 @@ const PRODUCTS = [
   {
     "id": 8,
     "cat": "chairs",
-    "name": "فوتيه «ديوان»",
+    "name": "كرسي«ديوان»",
     "desc": "كرسي بظهر مقوّس وإطار خشب داكن لامع، مقعد مخمل كريمي وقاعدة بلمسة ذهبية.",
     "price": "130 دك",
     "img": "assets/images/products/chair-tub.jpg",
@@ -412,48 +408,40 @@ const PRODUCTS = [
   {
     "id": 54,
     "cat": "chairs",
-    "name": "فوتيه «ضحى»",
+    "name": "كرسي «أوريليا»",
     "desc": "فوتيه أبيض ناعم بإطار رفيع بلون الشمبانيا ووسادة ظهر منفصلة.",
     "price": "125 دك",
     "img": "assets/images/products/chair-duha.jpg",
     "imgs": [
       "assets/images/products/chair-duha-2.jpg"
-    ],
-    "badge": "جديد",
-    "badgeType": "new"
+    ]
   },
   {
     "id": 55,
     "cat": "chairs",
-    "name": "فوتيه «قمر»",
+    "name": "كرسي «قمر»",
     "desc": "كرسي دائري بقاعدة مخددة من الخشب الطبيعي .",
     "price": "125 دك",
     "img": "assets/images/products/chair-qamar.jpg",
     "imgs": [
       "assets/images/products/chair-qamar-2.jpg"
-    ],
-    "badge": "جديد",
-    "badgeType": "new"
+    ]
   },
   {
     "id": 24,
     "cat": "coffeecorner",
     "name": "ركن قهوة «بُن»",
-    "desc": "محطة قهوة من خشب الشيبورد الالماني  بمساحة لماكينة الإسبريسو و برادة الماء ،  وأدراج للتخزين.",
+    "desc": "محطة قهوة من خشب الشيبورد الالماني  بمساحة لماكينة الإسبريسو و برادة الماء ،  وأدراج للتخزين.\nقياس :\n180x170x90 cm",
     "price": "500 دك",
-    "img": "assets/images/products/coffee-corner-bun.jpg",
-    "badge": "جديد",
-    "badgeType": "new"
+    "img": "assets/images/products/coffee-corner-bun.jpg"
   },
   {
     "id": 25,
     "cat": "coffeecorner",
     "name": "ركن قهوة «صباح»",
-    "desc": "وحدة طولية بقوس علوي ورفوف مفتوحة، سطح عمل بمقبس كهربائي وخزائن سفلية.",
+    "desc": "وحدة طولية بقوس علوي ورفوف مفتوحة، سطح عمل بمقبس كهربائي وخزائن سفلية.\nقياس :\n120x50x220 cm",
     "price": "450 دك",
-    "img": "assets/images/products/coffee-corner-sabah.jpg",
-    "badge": "جديد",
-    "badgeType": "new"
+    "img": "assets/images/products/coffee-corner-sabah.jpg"
   },
   {
     "id": 28,
@@ -469,9 +457,7 @@ const PRODUCTS = [
     "name": "كونسول «زاوية»",
     "desc": "لوحان جانبيان من قشرة الجوز بزوايا حادة ورف مائل يخترق التصميم.\nالقياس :\n200x45x90 cm",
     "price": "350 دك",
-    "img": "assets/images/products/console-zawiya.jpg",
-    "badge": "جديد",
-    "badgeType": "new"
+    "img": "assets/images/products/console-zawiya.jpg"
   },
   {
     "id": 29,
@@ -490,7 +476,9 @@ const PRODUCTS = [
     "img": "assets/images/products/p-mv4dcufzjx0a.jpg",
     "imgs": [
       "assets/images/products/console-naht.jpg"
-    ]
+    ],
+    "badge": "جديد",
+    "badgeType": "new"
   },
   {
     "id": 26,
@@ -530,7 +518,7 @@ const PRODUCTS = [
     "id": 34,
     "cat": "coffee",
     "name": "طاولة وسط «تموّج»",
-    "desc": "زجاج مدخّن على قاعدة جوز منحنية بشكل موجة.",
+    "desc": "زجاج مدخّن على قاعدة من خشب الزان منحنية بشكل موجة.\nالقياس : \n160x85x45 cm",
     "price": "300 دك",
     "img": "assets/images/products/coffee-tamawuj.jpg"
   },
@@ -546,7 +534,7 @@ const PRODUCTS = [
     "id": 31,
     "cat": "coffee",
     "name": "طاولة وسط «طفو»",
-    "desc": "لوح خشبي سميك يبدو طافياً فوق قاعدة غائرة.",
+    "desc": "لوح خشبي سميك يبدو طافياً فوق قاعدة غائرة.\nالقياس : \n160x85x50 cm",
     "price": "280 دك",
     "img": "assets/images/products/coffee-tafw.jpg"
   },
@@ -554,7 +542,7 @@ const PRODUCTS = [
     "id": 35,
     "cat": "coffee",
     "name": "طاولة وسط «رحى»",
-    "desc": "طاولة من خشب قشرة الجوز بحواف دائرية ناعمة وسطح زجاجي، ترتفع فوق قاعدة غائرة.",
+    "desc": "طاولة من خشب قشرة الجوز بحواف دائرية ناعمة وسطح زجاجي، ترتفع فوق قاعدة غائرة.\nالقياس : \n160x85x50 cm",
     "price": "250 دك",
     "img": "assets/images/products/coffee-raha.jpg"
   },
@@ -562,7 +550,7 @@ const PRODUCTS = [
     "id": 32,
     "cat": "coffee",
     "name": "طاولة وسط «تناظر»",
-    "desc": "كتلة من خشب الجوز بقشرة متناظرة على شكل حرف V — قطعة تتصدر الصالة.",
+    "desc": "كتلة من خشب الجوز بقشرة متناظرة على شكل حرف V — قطعة تتصدر الصالة.\nالقياس : \n160x85x50 cm",
     "price": "220 دك",
     "img": "assets/images/products/coffee-tanathur.jpg"
   },
