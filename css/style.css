@@ -1566,3 +1566,11 @@ body { background: #0A0A0A; color: var(--ink); }
   .custom-split--flip .about__media { order: 0; }
 }
 .custom-banner { padding: 56px 0; }
+
+/* صور حقيقية (غرف، مصنع): تملأ الإطار بالكامل بدون حواف بيضاء */
+img.is-photo {
+  object-fit: cover !important;
+  padding: 0 !important;
+  background: #141414 !important;
+}
+.lightbox__media > img.is-photo { object-fit: contain !important; }

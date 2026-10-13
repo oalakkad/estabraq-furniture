@@ -216,103 +216,125 @@
   }
 
   /* ---------- معالجة الصور في المتصفح ----------
-     تقص الصورة حول القطعة وتوسّطها في مربع ١٠٠٠×١٠٠٠ بخلفية بيضاء،
-     وإذا كانت الخلفية سوداء تُزال (تعبئة من الأطراف). */
-  async function processImage(file) {
+     نوعان:
+     • "product" — صورة قطعة أثاث: الخلفية تصبح بيضاء (سوداء أو رمادية أو متدرجة)،
+       وتُوسَّط القطعة نفسها (بدون الظلال الخفيفة) في مربع ١٠٠٠×١٠٠٠.
+     • "photo"   — صورة حقيقية (غرفة، مصنع، معرض): تُصغَّر فقط وتبقى كما هي،
+       وتملأ إطارها في الموقع (اسم الملف يبدأ بـ ph-). */
+  async function loadToCanvas(file, maxSide) {
     const bmp = await createImageBitmap(file);
-    const scale = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
     const w = Math.round(bmp.width * scale), h = Math.round(bmp.height * scale);
-    const src = document.createElement("canvas");
-    src.width = w; src.height = h;
-    const sctx = src.getContext("2d", { willReadFrequently: true });
-    sctx.fillStyle = "#fff";
-    sctx.fillRect(0, 0, w, h);
-    sctx.drawImage(bmp, 0, 0, w, h);
-    const img = sctx.getImageData(0, 0, w, h);
+    const c = document.createElement("canvas");
+    c.width = w; c.height = h;
+    const ctx = c.getContext("2d", { willReadFrequently: true });
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, w, h);
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(bmp, 0, 0, w, h);
+    return { c, ctx, w, h };
+  }
+
+  async function canvasToResult(canvas, quality) {
+    const blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", quality));
+    return { blob: blob, b64: await blobToB64(blob), url: URL.createObjectURL(blob) };
+  }
+
+  async function processPhoto(file) {
+    const { c } = await loadToCanvas(file, 1600);
+    return canvasToResult(c, 0.84);
+  }
+
+  async function processProduct(file) {
+    const { c: src, ctx, w, h } = await loadToCanvas(file, 1600);
+    const img = ctx.getImageData(0, 0, w, h);
     const d = img.data;
 
-    const cornerLum = () => {
-      const p = Math.max(4, Math.round(Math.min(w, h) / 40));
-      let s = 0, n = 0;
-      [[0, 0], [w - p, 0], [0, h - p], [w - p, h - p]].forEach(([cx, cy]) => {
-        for (let y = cy; y < cy + p; y++) for (let x = cx; x < cx + p; x++) {
-          const i = (y * w + x) * 4; s += (d[i] + d[i + 1] + d[i + 2]) / 3; n++;
-        }
-      });
-      return s / n;
-    };
+    // لون الخلفية من الزوايا الأربع
+    const p = Math.max(6, Math.round(Math.min(w, h) / 50));
+    let cr = 0, cg = 0, cb = 0, n = 0;
+    [[0, 0], [w - p, 0], [0, h - p], [w - p, h - p]].forEach(([x0, y0]) => {
+      for (let y = y0; y < y0 + p; y++) for (let x = x0; x < x0 + p; x++) {
+        const i = (y * w + x) * 4; cr += d[i]; cg += d[i + 1]; cb += d[i + 2]; n++;
+      }
+    });
+    cr /= n; cg /= n; cb /= n;
+    const cornerLum = (cr + cg + cb) / 3;
+    const distBg = (i) => Math.max(Math.abs(d[i] - cr), Math.abs(d[i + 1] - cg), Math.abs(d[i + 2] - cb));
+    const spread = (i) => Math.max(d[i], d[i + 1], d[i + 2]) - Math.min(d[i], d[i + 1], d[i + 2]);
 
-    // ١) إزالة الخلفية السوداء
-    if (cornerLum() < 40) {
-      const T = 24;
+    if (cornerLum >= 200 && cornerLum < 248) {
+      // خلفية رمادية فاتحة: تفتيح بسيط يجعلها بيضاء ويحافظ على الأقمشة البيضاء
+      for (let i = 0; i < d.length; i += 4) {
+        d[i] = Math.min(255, d[i] * 255 / Math.max(1, cr));
+        d[i + 1] = Math.min(255, d[i + 1] * 255 / Math.max(1, cg));
+        d[i + 2] = Math.min(255, d[i + 2] * 255 / Math.max(1, cb));
+      }
+    } else if (cornerLum < 200) {
+      // خلفية سوداء أو رمادية متدرجة: تعبئة من الأطراف عبر البكسلات المتقاربة
+      const capDist = cornerLum < 40 ? 26 : 72;
       const bg = new Uint8Array(w * h);
-      const stack = new Int32Array(w * h * 2);
+      const stack = new Int32Array(w * h + 4 * (w + h));
       let sp = 0;
-      const push = (k) => { stack[sp++] = k; };
-      for (let x = 0; x < w; x++) { push(x); push((h - 1) * w + x); }
-      for (let y = 0; y < h; y++) { push(y * w); push(y * w + w - 1); }
-      const mx = (k) => Math.max(d[k * 4], d[k * 4 + 1], d[k * 4 + 2]);
+      const seed = (x, y) => { const k = y * w + x; if (distBg(k * 4) < 30) stack[sp++] = k; };
+      for (let x = 0; x < w; x++) { seed(x, 0); seed(x, h - 1); }
+      for (let y = 0; y < h; y++) { seed(0, y); seed(w - 1, y); }
       while (sp > 0) {
         const k = stack[--sp];
-        if (bg[k] || mx(k) > T) continue;
+        if (bg[k]) continue;
         bg[k] = 1;
-        const x = k % w, y = (k / w) | 0;
-        if (x > 0) push(k - 1);
-        if (x < w - 1) push(k + 1);
-        if (y > 0) push(k - w);
-        if (y < h - 1) push(k + w);
+        const x = k % w, y = (k / w) | 0, ci = k * 4;
+        const tryN = (nk) => {
+          if (bg[nk]) return;
+          const ni = nk * 4;
+          const step = Math.max(Math.abs(d[ni] - d[ci]), Math.abs(d[ni + 1] - d[ci + 1]), Math.abs(d[ni + 2] - d[ci + 2]));
+          if (step <= 6 && distBg(ni) <= capDist && spread(ni) < 30 && sp < stack.length) stack[sp++] = nk;
+        };
+        if (x > 0) tryN(k - 1);
+        if (x < w - 1) tryN(k + 1);
+        if (y > 0) tryN(k - w);
+        if (y < h - 1) tryN(k + w);
       }
+      const orig = new Uint8ClampedArray(d);
       for (let k = 0; k < w * h; k++) {
         const i = k * 4;
         if (bg[k]) { d[i] = d[i + 1] = d[i + 2] = 255; continue; }
         const x = k % w, y = (k / w) | 0;
         const edge = (x > 0 && bg[k - 1]) || (x < w - 1 && bg[k + 1]) || (y > 0 && bg[k - w]) || (y < h - 1 && bg[k + w]);
-        if (edge) {
-          const a = Math.min(1, Math.max(0, (mx(k) - T) / 60));
-          for (let c = 0; c < 3; c++) d[i + c] = d[i + c] * a + 255 * (1 - a);
-        }
+        if (edge) for (let c = 0; c < 3; c++) d[i + c] = (orig[i + c] + 255) / 2;
       }
-      sctx.putImageData(img, 0, 0);
     }
+    ctx.putImageData(img, 0, 0);
 
-    // ٢) حدود القطعة مقارنة بلون الخلفية
-    let br = 0, bgc = 0, bb = 0, n = 0;
-    const p = 12;
-    [[0, 0], [w - p, 0], [0, h - p], [w - p, h - p]].forEach(([cx, cy]) => {
-      for (let y = cy; y < cy + p; y++) for (let x = cx; x < cx + p; x++) {
-        const i = (y * w + x) * 4; br += d[i]; bgc += d[i + 1]; bb += d[i + 2]; n++;
-      }
-    });
-    br /= n; bgc /= n; bb /= n;
+    // حدود القطعة: نتجاهل البكسلات شبه البيضاء (ظلال خفيفة وانعكاسات)
     let minX = w, minY = h, maxX = -1, maxY = -1;
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4;
-      if (Math.max(Math.abs(d[i] - br), Math.abs(d[i + 1] - bgc), Math.abs(d[i + 2] - bb)) > 34) {
+      if (255 - Math.min(d[i], d[i + 1], d[i + 2]) > 60) {
         if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y;
       }
     }
     if (maxX < 0) { minX = 0; minY = 0; maxX = w - 1; maxY = h - 1; }
 
-    // ٣) مربع ١٠٠٠ بكسل والقطعة في المنتصف
-    const SIZE = 1000, PAD = 0.07;
+    // مربع ١٠٠٠ بكسل والقطعة في المنتصف على خلفية بيضاء
+    const SIZE = 1000, PAD = 0.08;
     const side = Math.max(maxX - minX + 1, maxY - minY + 1) * (1 + 2 * PAD);
     const sc = SIZE / side;
     const out = document.createElement("canvas");
     out.width = out.height = SIZE;
     const octx = out.getContext("2d");
-    octx.fillStyle = "rgb(" + Math.round(br) + "," + Math.round(bgc) + "," + Math.round(bb) + ")";
+    octx.fillStyle = "#fff";
     octx.fillRect(0, 0, SIZE, SIZE);
     octx.imageSmoothingQuality = "high";
-    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
-    octx.drawImage(src, SIZE / 2 - cx * sc, SIZE / 2 - cy * sc, w * sc, h * sc);
-
-    const blob = await new Promise((r) => out.toBlob(r, "image/jpeg", 0.85));
-    return { blob: blob, b64: await blobToB64(blob), url: URL.createObjectURL(blob) };
+    octx.drawImage(src, SIZE / 2 - ((minX + maxX) / 2) * sc, SIZE / 2 - ((minY + maxY) / 2) * sc, w * sc, h * sc);
+    return canvasToResult(out, 0.86);
   }
 
-  async function addImageFile(file, prefix) {
-    const res = await processImage(file);
-    const path = IMG_DIR + prefix + "-" + uid() + ".jpg";
+  // kind: "product" (افتراضي) أو "photo"
+  async function addImageFile(file, prefix, kind) {
+    const isPhoto = kind === "photo";
+    const res = isPhoto ? await processPhoto(file) : await processProduct(file);
+    const path = IMG_DIR + (isPhoto ? "ph-" : prefix + "-") + uid() + ".jpg";
     pending[path] = { b64: res.b64, url: res.url };
     return path;
   }
@@ -504,7 +526,7 @@
       editing.busy = true;
       renderMedia();
       try {
-        const path = await addImageFile(file, "p");
+        const path = await addImageFile(file, "p", $("#cleanBgInput").checked ? "product" : "photo");
         editing.media.push(path);
       } catch (e) {
         toast("تعذّرت قراءة الصورة " + file.name + " — استخدم JPG أو PNG", "error");
@@ -775,7 +797,7 @@
       const box = e.target.closest(".img-field");
       box.classList.add("img-field--busy");
       try {
-        setAt(data.CONTENT, p, await addImageFile(e.target.files[0], "site"));
+        setAt(data.CONTENT, p, await addImageFile(e.target.files[0], "site", "photo"));
         markDirty();
         renderContent();
       } catch (ex) {
@@ -790,7 +812,7 @@
       e.target.value = "";
       for (const f of files) {
         try {
-          data.GALLERY.push({ img: await addImageFile(f, "g"), cap: "" });
+          data.GALLERY.push({ img: await addImageFile(f, "g", "photo"), cap: "" });
           markDirty();
           renderGallery();
         } catch (ex) { toast("تعذّرت قراءة الصورة " + f.name, "error"); }
@@ -1088,14 +1110,14 @@
     $("#sectionForm").elements.btnType.addEventListener("change", updateBtnHint);
     $("#secImage").addEventListener("change", async (e) => {
       if (e.target.id !== "secImageInput" || !e.target.files[0]) return;
-      try { secEditing.s.image = await addImageFile(e.target.files[0], "sec"); renderSecImage(); }
+      try { secEditing.s.image = await addImageFile(e.target.files[0], "sec", "photo"); renderSecImage(); }
       catch (ex) { toast("تعذّرت قراءة الصورة — استخدم JPG أو PNG", "error"); }
     });
     $("#secImagesInput").addEventListener("change", async (e) => {
       const files = Array.from(e.target.files);
       e.target.value = "";
       for (const f of files) {
-        try { secEditing.s.images.push({ img: await addImageFile(f, "sec"), cap: "" }); renderSecImages(); }
+        try { secEditing.s.images.push({ img: await addImageFile(f, "sec", "photo"), cap: "" }); renderSecImages(); }
         catch (ex) { toast("تعذّرت قراءة الصورة " + f.name, "error"); }
       }
     });

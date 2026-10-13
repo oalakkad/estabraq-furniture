@@ -45,10 +45,12 @@
   function img(src, alt, label, pos) {
     const file = String(src || "").split("/").pop();
     const style = pos ? ' style="object-position:' + esc(pos) + '"' : "";
+    // صور حقيقية (غرف، مصنع) ملفاتها تبدأ بـ ph- وتملأ الإطار بدل التوسيط على خلفية بيضاء
+    const cls = /^ph-/.test(file) ? ' class="is-photo"' : "";
     return (
       placeholder(label || alt, file) +
       '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async"' +
-      style + ">"
+      cls + style + ">"
     );
   }
 

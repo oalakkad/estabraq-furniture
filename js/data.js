@@ -54,9 +54,9 @@ const CONTENT = {
     "badgeTitle": "ضمان ١٠ سنوات",
     "badgeText": "على الهيكل الخشبي",
     "images": [
-      "assets/images/products/site-mv6e0ytehygh.jpg",
-      "assets/images/products/site-mv568n7613a2.jpg",
-      "assets/images/products/site-mv568rs7dk4u.jpg"
+      "assets/images/products/ph-mv6e0ytehygh.jpg",
+      "assets/images/products/ph-mv568n7613a2.jpg",
+      "assets/images/products/ph-mv568rs7dk4u.jpg"
     ]
   },
   "features": [
@@ -121,7 +121,7 @@ const CONTENT = {
         "text": "أي شدّة برغي أو تعديل بسيط خلال فترة الضمان — نجي لك بدون رسوم."
       }
     ],
-    "image": "assets/images/products/site-mv56ch3r8r9o.jpg"
+    "image": "assets/images/products/ph-mv56ch3r8r9o.jpg"
   },
   "cta": {
     "title": "عندك مساحة محتارة فيها؟",
@@ -307,7 +307,7 @@ const PRODUCTS = [
     "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
     "imgs": [
       "assets/images/products/p-mv4d8sz4q7a7.jpg",
-      "assets/images/products/p-mv4d8t16onhg.jpg"
+      "assets/images/products/ph-mv4d8t16onhg.jpg"
     ]
   },
   {
@@ -712,11 +712,11 @@ const PRODUCTS = [
 
 const GALLERY = [
   {
-    "img": "assets/images/products/g-mv6eoie60928.jpg",
+    "img": "assets/images/products/ph-mv6eoie60928.jpg",
     "cap": ""
   },
   {
-    "img": "assets/images/products/g-mv6eoif58eow.jpg",
+    "img": "assets/images/products/ph-mv6eoif58eow.jpg",
     "cap": ""
   }
 ];
