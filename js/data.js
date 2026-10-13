@@ -712,24 +712,16 @@ const PRODUCTS = [
 
 const GALLERY = [
   {
-    "img": "assets/images/gallery/g4.jpg",
-    "cap": "فوتيه «حرير» — القطعة المرافقة"
+    "img": "assets/images/products/g-mv6elfp7h0f8.jpg",
+    "cap": ""
   },
   {
-    "img": "assets/images/gallery/g5.jpg",
-    "cap": "ملمس حجر الأردواز الطبيعي"
+    "img": "assets/images/products/g-mv6elfqvxn1f.jpg",
+    "cap": ""
   },
   {
-    "img": "assets/images/gallery/g6.jpg",
-    "cap": "كنبة منحنية بقاعدة جوز"
-  },
-  {
-    "img": "assets/images/gallery/g7.jpg",
-    "cap": "فوتيه «حديقة» بنقشة الأوراق"
-  },
-  {
-    "img": "assets/images/gallery/g8.jpg",
-    "cap": "طاولة «صخر» من الأعلى"
+    "img": "assets/images/products/g-mv6elfs4ng2d.jpg",
+    "cap": ""
   }
 ];
 
