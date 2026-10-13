@@ -712,15 +712,11 @@ const PRODUCTS = [
 
 const GALLERY = [
   {
-    "img": "assets/images/products/g-mv6elfp7h0f8.jpg",
+    "img": "assets/images/products/g-mv6eoie60928.jpg",
     "cap": ""
   },
   {
-    "img": "assets/images/products/g-mv6elfqvxn1f.jpg",
-    "cap": ""
-  },
-  {
-    "img": "assets/images/products/g-mv6elfs4ng2d.jpg",
+    "img": "assets/images/products/g-mv6eoif58eow.jpg",
     "cap": ""
   }
 ];
