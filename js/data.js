@@ -231,7 +231,7 @@ const PRODUCTS = [
     "id": 15,
     "cat": "sofas",
     "name": "كنبة «ملكي»",
-    "desc": "طراز كلاسيكي بإطار خشب زان محفور ولمسات ذهبية،",
+    "desc": "طراز كلاسيكي بإطار خشب زان محفور ولمسات ذهبية،\nSize : Customizable\nFabric : Customizable",
     "price": "160 دك / المتر",
     "img": "assets/images/products/sofa-royal-2.jpg",
     "imgs": [
@@ -247,7 +247,7 @@ const PRODUCTS = [
     "id": 23,
     "cat": "sofas",
     "name": "كنبة «غيمة»",
-    "desc": "تتميز بقاعدة سفلية بارزة مصنوعة من الخشب الزان الطبيعي  ،  والتي تمتد لتشكل إطاراً يلتف حول الجوانب الخارجية للمساند الذراعية، مما يمنحها ثباتاً بصرياً ولمسة كلاسيكية مودرن",
+    "desc": "تتميز بقاعدة سفلية بارزة مصنوعة من الخشب الزان الطبيعي  ،  والتي تمتد لتشكل إطاراً يلتف حول الجوانب الخارجية للمساند الذراعية، مما يمنحها ثباتاً بصرياً ولمسة كلاسيكية مودرن\nSize : Customizable\nFabric : Customizable",
     "price": "140 دك / المتر",
     "img": "assets/images/products/sofa-ghaima.jpg",
     "imgs": [
@@ -258,7 +258,7 @@ const PRODUCTS = [
     "id": 17,
     "cat": "sofas",
     "name": "كنبة «نسيم»",
-    "desc": "كنبة منحنية غير متماثلة بذراع مكسّر مبطّن، بقماش رمادي دافئ.",
+    "desc": "كنبة منحنية غير متماثلة بذراع مكسّر مبطّن، بقماش رمادي دافئ.\nSize : Customizable\nFabric : Customizable",
     "price": "140 دك / المتر",
     "img": "assets/images/products/sofa-chaise.jpg",
     "video": "assets/videos/sofa-chaise.mp4"
@@ -267,7 +267,7 @@ const PRODUCTS = [
     "id": 19,
     "cat": "sofas",
     "name": "كنبة «أصالة»",
-    "desc": "إطار من خشب الزان  الطبيعي يحيط بالظهر والأذرع،",
+    "desc": "إطار من خشب الزان  الطبيعي يحيط بالظهر والأذرع،\nSize : Customizable\nFabric : Customizable",
     "price": "130 دك / المتر",
     "img": "assets/images/products/diwan-asala-2.jpg",
     "imgs": [
@@ -278,7 +278,7 @@ const PRODUCTS = [
     "id": 5,
     "cat": "sofas",
     "name": "كنبة «هلال»",
-    "desc": "خط منحني أنيق بإطار خشبي من الخشب الزان طبيعي يلتف حول الظهر والأذرع،",
+    "desc": "خط منحني أنيق بإطار خشبي من الخشب الزان طبيعي يلتف حول الظهر والأذرع،\nSize : Customizable\nFabric : Customizable",
     "price": "130 دك / للمتر",
     "img": "assets/images/products/sofa-curved.jpg"
   },
@@ -286,7 +286,7 @@ const PRODUCTS = [
     "id": 12,
     "cat": "sofas",
     "name": "كنبة «فيروز»",
-    "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.",
+    "desc": "طقم صالة كريمي بقاعدة جوز، مع تشكيلة وسائد فيروزية وبيج منقوشة.\nSize : Customizable\nFabric : Customizable",
     "price": "130 دك / المتر",
     "img": "assets/images/products/set-teal.jpg"
   },
@@ -294,7 +294,7 @@ const PRODUCTS = [
     "id": 20,
     "cat": "sofas",
     "name": "كنبة «صندل»",
-    "desc": "كنبة عصرية تجمع بين الأناقة والراحة، تتميز بتصميمها الهيكلي الفريد الذي يدمج بين الأقمشة الفاتحة و خشب قشرة الجوز الطبيعي ليعطي لمسة مودرن ودافئة في آن واحد.",
+    "desc": "كنبة عصرية تجمع بين الأناقة والراحة، تتميز بتصميمها الهيكلي الفريد الذي يدمج بين الأقمشة الفاتحة و خشب قشرة الجوز الطبيعي ليعطي لمسة مودرن ودافئة في آن واحد.\nSize : Customizable\nFabric : Customizable",
     "price": "130 دك / المتر",
     "img": "assets/images/products/sofa-sandal.jpg"
   },
@@ -302,7 +302,7 @@ const PRODUCTS = [
     "id": 58,
     "cat": "sofas",
     "name": "كنبة (( أوريليا ))",
-    "desc": "تتميز بالأناقة و النعومة واللمسة الهادئة للخشب الزان الطبيعي .",
+    "desc": "تتميز بالأناقة و النعومة واللمسة الهادئة للخشب الزان الطبيعي .\nSize : Customizable\nFabric : Customizable",
     "price": "125 دك / المتر",
     "img": "assets/images/products/p-mv4d8svsl9wl.jpg",
     "imgs": [
@@ -314,7 +314,7 @@ const PRODUCTS = [
     "id": 16,
     "cat": "sofas",
     "name": "كنبة «ديباج»",
-    "desc": "أذرع منحنية بقماش جاكار مطرّز، مقعد ناعم وقاعدة خشبية من قشرة الجوز الطبعي  غائرة توحي بالطفو.",
+    "desc": "أذرع منحنية بقماش جاكار مطرّز، مقعد ناعم وقاعدة خشبية من قشرة الجوز الطبعي  غائرة توحي بالطفو.\nSize : Customizable\nFabric : Customizable",
     "price": "125 دك / للمتر",
     "img": "assets/images/products/sofa-damask-2.jpg",
     "imgs": [
@@ -325,7 +325,7 @@ const PRODUCTS = [
     "id": 18,
     "cat": "sofas",
     "name": "كنبة «لؤلؤ»",
-    "desc": "خطوط ناعمة مع لمسة خشب على الذراعين — متوفرة بجميع الالوان .",
+    "desc": "خطوط ناعمة مع لمسة خشب على الذراعين — متوفرة بجميع الالوان .\nSize : Customizable\nFabric : Customizable",
     "price": "125 دك / المتر",
     "img": "assets/images/products/sofa-pearl.jpg"
   },
@@ -333,7 +333,7 @@ const PRODUCTS = [
     "id": 21,
     "cat": "sofas",
     "name": "كنبة «ساج»",
-    "desc": "أذرع عريضة من قشرة الخشب الشيبورد الألماني تحتضن مقاعد مريحة.",
+    "desc": "أذرع عريضة من قشرة الخشب الشيبورد الألماني تحتضن مقاعد مريحة.\nSize : Customizable\nFabric : Customizable",
     "price": "125 دك / المتر",
     "img": "assets/images/products/sofa-saj.jpg"
   },
@@ -341,7 +341,7 @@ const PRODUCTS = [
     "id": 3,
     "cat": "sofas",
     "name": "كنبة «حرير»",
-    "desc": "تتميز بالشكل الكلاسيكي مع وجود هدب يزيد من فخامة و أناقة الكنبة .",
+    "desc": "تتميز بالشكل الكلاسيكي مع وجود هدب يزيد من فخامة و أناقة الكنبة .\nSize : Customizable\nFabric : Customizable",
     "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-fringe-2.jpg",
     "imgs": [
@@ -352,7 +352,7 @@ const PRODUCTS = [
     "id": 14,
     "cat": "sofas",
     "name": "كنبة «زيتون»",
-    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل زان مخروطية.",
+    "desc": "مخمل زيتوني داكن بأذرع دائرية مكسّرة، على أرجل زان مخروطية.\nSize : Customizable\nFabric : Customizable",
     "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-olive-2.jpg",
     "imgs": [
@@ -364,7 +364,7 @@ const PRODUCTS = [
     "id": 6,
     "cat": "sofas",
     "name": "كنبة «موجة»",
-    "desc": "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.",
+    "desc": "تصميم نحتي عصري بظهر متموج من ثلاث قطع، بقماش بوكليه أبيض ناعم.\nSize : Customizable\nFabric : Customizable",
     "price": "120 دك / المتر",
     "img": "assets/images/products/sofa-wave.jpg",
     "imgs": [
@@ -376,7 +376,7 @@ const PRODUCTS = [
     "id": 22,
     "cat": "sofas",
     "name": "كنبة «رمال»",
-    "desc": "ديوانية طويلة بقماش شمواه بلون الرمال، مساند عريضة ومجموعة وسائد متدرجة.",
+    "desc": "ديوانية طويلة بقماش شمواه بلون الرمال، مساند عريضة ومجموعة وسائد متدرجة.\nSize : Customizable\nFabric : Customizable",
     "price": "100 دك / المتر",
     "img": "assets/images/products/diwan-rimal-2.jpg",
     "imgs": [
